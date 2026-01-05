@@ -14,29 +14,27 @@ public sealed class CombatMath_Test
     /// Attacker data profile with:
     /// - A single model
     /// </summary>
-    public static readonly AttackerDTO ATTACKER_SINGLE_MODEL_NO_ABILITIES = new()
+    public static readonly AttackerDTO ATTACKER_SINGLE_MODEL_NO_ABILITIES = new(1, [new WeaponProfile()
     {
-        NumberOfModels = 1,
-        WeaponFlatAttacks = 8,
+        FlatAttacks = 8,
         WeaponSkill = 2,
-        WeaponStrength = 6,
-        WeaponArmorPierce = 2,
-        WeaponFlatDamage = 3
-    };
+        Strength = 6,
+        ArmorPierce = 2,
+        FlatDamage = 3
+    }]);
 
     /// <summary>
     /// Attacker data profile with:
     /// - Multiple models
     /// </summary>
-    public static readonly AttackerDTO ATTACKER_MULTI_MODEL_NO_ABILITIES = new()
+    public static readonly AttackerDTO ATTACKER_MULTI_MODEL_NO_ABILITIES = new(10, [new WeaponProfile()
     {
-        NumberOfModels = 10,
-        WeaponFlatAttacks = 2,
+        FlatAttacks = 2,
         WeaponSkill = 3,
-        WeaponStrength = 4,
-        WeaponArmorPierce = 1,
-        WeaponFlatDamage = 1
-    };
+        Strength = 4,
+        ArmorPierce = 1,
+        FlatDamage = 1
+    }]);
 
     /// <summary>
     /// Attacker data profile with:

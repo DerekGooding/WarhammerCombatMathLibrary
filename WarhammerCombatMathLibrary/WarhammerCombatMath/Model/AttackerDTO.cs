@@ -3,168 +3,36 @@
 /// <summary>
 /// A data transfer object representing the attacker in a combat scenario.
 /// </summary>
-public sealed record AttackerDTO
+public sealed record AttackerDTO(int NumberOfModels, List<WeaponProfile> Profiles)
 {
-    /// <summary>
-    /// The number of models in the attacker's unit.
-    /// </summary>
-    public int NumberOfModels { get; set; }
+    internal bool WeaponHasTorrent => Profiles[0].Tags.HasFlag(WeaponProfileTags.Torrent);
+    internal bool WeaponHasRerollHitRolls => Profiles[0].Tags.HasFlag(WeaponProfileTags.RerollHits);
+    internal bool WeaponHasRerollHitRollsOf1 => Profiles[0].Tags.HasFlag(WeaponProfileTags.RerollHits1);
+    internal bool WeaponHasRerollWoundRolls => Profiles[0].Tags.HasFlag(WeaponProfileTags.RerollWounds);
+    internal bool WeaponHasRerollWoundRollsOf1 => Profiles[0].Tags.HasFlag(WeaponProfileTags.RerollWounds1);
+    internal bool WeaponHasLethalHits => Profiles[0].Tags.HasFlag(WeaponProfileTags.LethalHits);
+    internal bool WeaponHasSustainedHits => Profiles[0].Tags.HasFlag(WeaponProfileTags.SustainedHits);
+    internal bool WeaponHasDevastatingWounds => Profiles[0].Tags.HasFlag(WeaponProfileTags.DevestatingWounds);
+    internal bool WeaponHasAnti => Profiles[0].Tags.HasFlag(WeaponProfileTags.Anti);
+    internal int WeaponNumberOfAttackDice => Profiles[0].NumberOfAttackDice;
+    internal int HitModifier => Profiles[0].HitModifier;
+    internal int WoundModifier => Profiles[0].WoundModifier;
+    internal int WeaponFlatAttacks => Profiles[0].FlatAttacks;
+    internal int WeaponSkill => Profiles[0].WeaponSkill;
+    internal int WeaponStrength => Profiles[0].Strength;
+    internal int CriticalHitThreshold => Profiles[0].CriticalHitThreshold;
+    internal int CriticalWoundThreshold => Profiles[0].CriticalWoundThreshold;
+    internal int WeaponAntiThreshold => Profiles[0].WeaponAntiThreshold;
+    internal int WeaponNumberOfDamageDice => Profiles[0].NumberOfDamageDice;
+    internal int WeaponFlatDamage => Profiles[0].FlatDamage;
+    internal int WeaponSustainedHitsMultiplier => Profiles[0].SustainedHitsAmount;
+    internal int WeaponArmorPierce => Profiles[0].ArmorPierce;
 
-    /// <summary>
-    /// The number of attacks dice that the weapon gets as part of its attacks stat.
-    /// </summary>
-    public int WeaponNumberOfAttackDice { get; set; }
 
-    /// <summary>
-    /// The attack dice type used to determine the variable number of attacks.
-    /// </summary>
-    public DiceType WeaponAttackDiceType { get; set; }
-
-    /// <summary>
-    /// The number of flat attacks that the attacker gets.
-    /// </summary>
-    public int WeaponFlatAttacks { get; set; }
-
-    /// <summary>
-    /// The ballistic/weapon skill threshold value of the attacker.
-    /// </summary>
-    public int WeaponSkill { get; set; }
-
-    /// <summary>
-    /// The strength of the attacker's weapon.
-    /// </summary>
-    public int WeaponStrength { get; set; }
-
-    /// <summary>
-    /// The armor pierce value of the attacker's weapon.
-    /// </summary>
-    public int WeaponArmorPierce { get; set; }
-
-    /// <summary>
-    /// The number of damage dice that the weapon gets as part of its damage stat.
-    /// </summary>
-    public int WeaponNumberOfDamageDice { get; set; }
-
-    /// <summary>
-    /// The damage dice type used to determine the variable amount of damage.
-    /// </summary>
-    public DiceType WeaponDamageDiceType { get; set; }
-
-    /// <summary>
-    /// The amount of flat damage the weapon deals.
-    /// </summary>
-    public int WeaponFlatDamage { get; set; }
-
-    /// <summary>
-    /// Attacker has Torrent keyword
-    /// </summary>
-    public bool WeaponHasTorrent { get; set; }
-
-    /// <summary>
-    /// Attacker has Lethal Hits keyword
-    /// </summary>
-    public bool WeaponHasLethalHits { get; set; }
-
-    /// <summary>
-    /// Attacker has Sustained Hits keyword
-    /// </summary>
-    public bool WeaponHasSustainedHits { get; set; }
-
-    /// <summary>
-    /// The amount of additional hits the weapon gets when Sustained Hits is triggered.
-    /// </summary>
-    public int WeaponSustainedHitsMultiplier { get; set; }
-
-    /// <summary>
-    /// Attacker has DevastatingWounds keyword
-    /// </summary>
-    public bool WeaponHasDevastatingWounds { get; set; }
-
-    /// <summary>
-    /// Attacker may reroll hit rolls
-    /// </summary>
-    public bool WeaponHasRerollHitRolls { get; set; }
-
-    /// <summary>
-    /// Attacker may reroll hit rolls of 1
-    /// </summary>
-    public bool WeaponHasRerollHitRollsOf1 { get; set; }
-
-    /// <summary>
-    /// Attacker may reroll hit rolls
-    /// </summary>
-    public bool WeaponHasRerollWoundRolls { get; set; }
-
-    /// <summary>
-    /// Attacker may reroll hit rolls of 1
-    /// </summary>
-    public bool WeaponHasRerollWoundRollsOf1 { get; set; }
-
-    /// <summary>
-    /// Attacker may reroll hit rolls
-    /// </summary>
-    public bool WeaponHasRerollDamageRolls { get; set; }
-
-    /// <summary>
-    /// Attacker may reroll hit rolls of 1
-    /// </summary>
-    public bool WeaponHasRerollDamageRollsOf1 { get; set; }
-
-    /// <summary>
-    /// The hit roll result threshold that is considered a critical hit
-    /// </summary>
-    public int CriticalHitThreshold { get; set; }
-
-    /// <summary>
-    /// The wound roll result threshold that is considered a critical wound
-    /// </summary>
-    public int CriticalWoundThreshold { get; set; }
-
-    /// <summary>
-    /// Attacker has Anti [keyword] X+ ability against the target
-    /// </summary>
-    public bool WeaponHasAnti { get; set; }
-
-    /// <summary>
-    /// The wound roll result threshold (X+) at which Anti triggers critical wounds
-    /// </summary>
-    public int WeaponAntiThreshold { get; set; }
-
-    /// <summary>
-    /// Hit modifier applied to the attacker's hit rolls. Positive values make it easier to hit, negative values make it harder.
-    /// Combined with defender's hit modifier, the total is capped at +/- 1.
-    /// </summary>
-    public int HitModifier { get; set; }
-
-    /// <summary>
-    /// Wound modifier applied to the attacker's wound rolls. Positive values make it easier to wound, negative values make it harder.
-    /// Combined with defender's wound modifier, the total is capped at +/- 1.
-    /// </summary>
-    public int WoundModifier { get; set; }
+    internal DiceType WeaponDamageDiceType => Profiles[0].DamageDiceType;
+    internal DiceType WeaponAttackDiceType => Profiles[0].AttackDiceType;
 
     /// <inheritdoc/>
     public override string ToString() =>
-        $"Attacker: [ NumberOfModels: {NumberOfModels}, "
-        + $"Weapon Attacks: {(WeaponNumberOfAttackDice > 0 ? $"{WeaponNumberOfAttackDice} {WeaponAttackDiceType} + {WeaponFlatAttacks}" : WeaponFlatAttacks.ToString())}, "
-        + $"WeaponSkill: {WeaponSkill}, "
-        + $"WeaponStrength: {WeaponStrength}, "
-        + $"WeaponArmorPierce: -{WeaponArmorPierce}, "
-        + $"WeaponDamage: {(WeaponNumberOfDamageDice > 0 ? $"{WeaponNumberOfDamageDice} {WeaponDamageDiceType} + {WeaponFlatDamage}" : WeaponFlatDamage)}, "
-        + $"WeaponHasTorrent: {WeaponHasTorrent}, "
-        + $"WeaponHasLethalHits: {WeaponHasLethalHits}, "
-        + $"WeaponHasSustainedHits: {WeaponHasSustainedHits}, "
-        + $"WeaponSustainedHitsMultiplier: {WeaponSustainedHitsMultiplier}, "
-        + $"WeaponHasRerollHitRolls: {WeaponHasRerollHitRolls}, "
-        + $"WeaponHasRerollHitRollsOf1: {WeaponHasRerollHitRollsOf1}, "
-        + $"WeaponHasDevastatingWounds: {WeaponHasDevastatingWounds}, "
-        + $"WeaponHasRerollWoundRolls: {WeaponHasRerollWoundRolls}, "
-        + $"WeaponHasRerollWoundRollsOf1: {WeaponHasRerollWoundRollsOf1}, "
-        + $"WeaponHasRerollDamageRolls: {WeaponHasRerollDamageRolls}, "
-        + $"WeaponHasRerollDamageRollsOf1: {WeaponHasRerollDamageRollsOf1}, "
-        + $"CriticalHitThreshold: {CriticalHitThreshold}, "
-        + $"CriticalWoundThreshold: {CriticalWoundThreshold}, "
-        + $"WeaponHasAnti: {WeaponHasAnti}, "
-        + $"WeaponAntiThreshold: {WeaponAntiThreshold}, "
-        + $"HitModifier: {HitModifier}, "
-        + $"WoundModifier: {WoundModifier} ]";
+        $"Attacker: [ NumberOfModels: {NumberOfModels}, Profiles: {string.Join(", ", Profiles)} ]";
 }
