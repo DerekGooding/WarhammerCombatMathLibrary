@@ -368,10 +368,7 @@ public sealed class CombatMath_Test
     /// Tests the case where the attacker is null
     /// </summary>
     [TestMethod]
-    public void GetProbabilityOfHit_NullAttacker()
-    {
-        Assert.AreEqual(0, CombatMath.GetProbabilityOfHit(null));
-    }
+    public void GetProbabilityOfHit_NullAttacker() => Assert.AreEqual(0, CombatMath.GetProbabilityOfHit(null));
 
     /// <summary>
     /// Tests the case where the attacker has 0 weapon skill.
@@ -975,10 +972,7 @@ public sealed class CombatMath_Test
     /// Tests the case where the attacker parameter is null.
     /// </summary>
     [TestMethod]
-    public void GetMeanHits_AttackerIsNull()
-    {
-        Assert.AreEqual(0, CombatMath.GetMeanHits(null));
-    }
+    public void GetMeanHits_AttackerIsNull() => Assert.AreEqual(0, CombatMath.GetMeanHits(null));
 
     /// <summary>
     /// Tests the case where the attacker is a single model with no abilities
@@ -1054,10 +1048,7 @@ public sealed class CombatMath_Test
     /// Tests the case where the attacker parameter is null.
     /// </summary>
     [TestMethod]
-    public void GetStandardDeviationHits_AttackerIsNull()
-    {
-        Assert.AreEqual(0, CombatMath.GetStandardDeviationHits(null));
-    }
+    public void GetStandardDeviationHits_AttackerIsNull() => Assert.AreEqual(0, CombatMath.GetStandardDeviationHits(null));
 
     /// <summary>
     /// Tests the case where the attacker is a single model with no abilities

@@ -149,9 +149,7 @@ public class AttackerDTO : IEquatable<AttackerDTO>
     #region Public Methods
 
     /// <inheritdoc/>
-    public override string ToString()
-    {
-        return $"Attacker: [ NumberOfModels: {NumberOfModels}, "
+    public override string ToString() => $"Attacker: [ NumberOfModels: {NumberOfModels}, "
                + $"Weapon Attacks: {(WeaponNumberOfAttackDice > 0 ? $"{WeaponNumberOfAttackDice} {WeaponAttackDiceType} + {WeaponFlatAttacks}" : WeaponFlatAttacks.ToString())}, "
                + $"WeaponSkill: {WeaponSkill}, "
                + $"WeaponStrength: {WeaponStrength}, "
@@ -174,13 +172,9 @@ public class AttackerDTO : IEquatable<AttackerDTO>
                + $"WeaponAntiThreshold: {WeaponAntiThreshold}, "
                + $"HitModifier: {HitModifier}, "
                + $"WoundModifier: {WoundModifier} ]";
-    }
 
     /// <inheritdoc/>
-    public override bool Equals(object? obj)
-    {
-        return Equals(obj as AttackerDTO);
-    }
+    public override bool Equals(object? obj) => Equals(obj as AttackerDTO);
 
     /// <summary>
     /// Checks if the given AttackerDTO object is equal to this one.

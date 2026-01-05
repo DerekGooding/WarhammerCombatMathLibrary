@@ -46,10 +46,7 @@ public class BinomialOutcome
     #region Public Methods
 
     /// <inheritdoc/>
-    public override string ToString()
-    {
-        return $"P({Successes}) = {Probability:F4}";
-    }
+    public override string ToString() => $"P({Successes}) = {Probability:F4}";
 
     /// <inheritdoc/>
     public override bool Equals(object? obj)
@@ -63,10 +60,7 @@ public class BinomialOutcome
     }
 
     /// <inheritdoc/>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(Successes, Probability);
-    }
+    public override int GetHashCode() => HashCode.Combine(Successes, Probability);
 
     #endregion
 }

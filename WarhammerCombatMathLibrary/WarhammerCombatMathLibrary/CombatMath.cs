@@ -223,20 +223,14 @@ public static class CombatMath
     /// </summary>
     /// <param name="probabilityOfHit"></param>
     /// <returns>A double value containing the probability modifier</returns>
-    private static double GetHitModifier_RerollHits(double probabilityOfHit)
-    {
-        return (1 - probabilityOfHit) * probabilityOfHit;
-    }
+    private static double GetHitModifier_RerollHits(double probabilityOfHit) => (1 - probabilityOfHit) * probabilityOfHit;
 
     /// <summary>
     /// Get the hit probability modifier of the Reroll Hits of 1 ability.
     /// </summary>
     /// <param name="probabilityOfHit"></param>
     /// <returns>A double value containing the probability modifier</returns>
-    private static double GetHitModifier_RerollHitsOf1(double probabilityOfHit)
-    {
-        return (1.0 / POSSIBLE_RESULTS_SIX_SIDED_DIE) * probabilityOfHit;
-    }
+    private static double GetHitModifier_RerollHitsOf1(double probabilityOfHit) => (1.0 / POSSIBLE_RESULTS_SIX_SIDED_DIE) * probabilityOfHit;
 
     /// <summary>
     /// Gets the base probability of succeeding on a wound roll, based on the attacker and defender stats.
@@ -289,10 +283,7 @@ public static class CombatMath
     /// </summary>
     /// <param name="threshold">The threshold value to validate</param>
     /// <returns>True if the threshold is valid, false otherwise</returns>
-    private static bool IsValidThreshold(int threshold)
-    {
-        return threshold >= 2 && threshold <= 6;
-    }
+    private static bool IsValidThreshold(int threshold) => threshold >= 2 && threshold <= 6;
 
     /// <summary>
     /// Gets the probability of a critical wound.
@@ -338,21 +329,16 @@ public static class CombatMath
     /// </summary>
     /// <param name="probabilityOfCriticalHit"></param>
     /// <returns>A double value containing the probability modifier</returns>
-    private static double GetWoundModifier_LethalHits(double probabilityOfCriticalHit)
-    {
+    private static double GetWoundModifier_LethalHits(double probabilityOfCriticalHit) =>
         // Lethal hits trigger on a critical hit roll, and auto-succeed the wound roll
-        return probabilityOfCriticalHit;
-    }
+        probabilityOfCriticalHit;
 
     /// <summary>
     /// Get the wound probability modifier of the Sustained Hits ability.
     /// </summary>
     /// <param name="probabilityOfCriticalHit"></param>
     /// <returns>A double value containing the probability modifier</returns>
-    private static double GetWoundModifier_SustainedHits(double probabilityOfCriticalHit, int sustainedHitsMultiplier, double probabilityOfWound)
-    {
-        return sustainedHitsMultiplier * probabilityOfCriticalHit * probabilityOfWound;
-    }
+    private static double GetWoundModifier_SustainedHits(double probabilityOfCriticalHit, int sustainedHitsMultiplier, double probabilityOfWound) => sustainedHitsMultiplier * probabilityOfCriticalHit * probabilityOfWound;
 
     /// <summary>
     /// Get the wound probability modifier of the Reroll Wounds ability.
@@ -360,10 +346,7 @@ public static class CombatMath
     /// <param name="probabilityOfHit"></param>
     /// <param name="probabilityOfWound"></param>
     /// <returns>A double value containing the probability modifier</returns>
-    private static double GetWoundModifier_RerollWounds(double probabilityOfHit, double probabilityOfWound)
-    {
-        return probabilityOfHit * (1 - probabilityOfWound) * probabilityOfWound;
-    }
+    private static double GetWoundModifier_RerollWounds(double probabilityOfHit, double probabilityOfWound) => probabilityOfHit * (1 - probabilityOfWound) * probabilityOfWound;
 
     /// <summary>
     /// Get the wound probability modifier of the Reroll Wounds of 1 ability.
@@ -371,10 +354,7 @@ public static class CombatMath
     /// <param name="probabilityOfHit"></param>
     /// <param name="probabilityOfWound"></param>
     /// <returns>A double value containing the probability modifier</returns>
-    private static double GetWoundModifier_RerollWoundsOf1(double probabilityOfHit, double probabilityOfWound)
-    {
-        return probabilityOfHit * (1.0 / POSSIBLE_RESULTS_SIX_SIDED_DIE) * probabilityOfWound;
-    }
+    private static double GetWoundModifier_RerollWoundsOf1(double probabilityOfHit, double probabilityOfWound) => probabilityOfHit * (1.0 / POSSIBLE_RESULTS_SIX_SIDED_DIE) * probabilityOfWound;
 
     /// <summary>
     /// Gets the base probability of the defender failing a save roll.
@@ -395,10 +375,7 @@ public static class CombatMath
     /// <param name="probabilityOfHit"></param>
     /// <param name="probabilityOfCriticalWound"></param>
     /// <returns>A double value containing the probability modifier</returns>
-    private static double GetFailedSaveModifier_DevastatingWounds(double probabilityOfHit, double probabilityOfCriticalWound)
-    {
-        return probabilityOfHit * probabilityOfCriticalWound;
-    }
+    private static double GetFailedSaveModifier_DevastatingWounds(double probabilityOfHit, double probabilityOfCriticalWound) => probabilityOfHit * probabilityOfCriticalWound;
 
     /// <summary>
     /// Returns the average amount of damage that the attacker's weapon is able to deal.
@@ -734,10 +711,7 @@ public static class CombatMath
     /// </summary>
     /// <param name="attacker">The attacker data object</param>
     /// <returns></returns>
-    public static int GetExpectedHits(AttackerDTO? attacker)
-    {
-        return (int)Math.Floor(GetMeanHits(attacker));
-    }
+    public static int GetExpectedHits(AttackerDTO? attacker) => (int)Math.Floor(GetMeanHits(attacker));
 
     /// <summary>
     /// Returns the standard deviation of the attacker's hit roll distribution.
@@ -938,10 +912,7 @@ public static class CombatMath
     /// </summary>
     /// <param name="attacker"></param>
     /// <returns></returns>
-    public static int GetExpectedWounds(AttackerDTO? attacker, DefenderDTO? defender)
-    {
-        return (int)Math.Floor(GetMeanWounds(attacker, defender));
-    }
+    public static int GetExpectedWounds(AttackerDTO? attacker, DefenderDTO? defender) => (int)Math.Floor(GetMeanWounds(attacker, defender));
 
     /// <summary>
     /// Returns the standard deviation of the attacker's wound roll distribution.
@@ -1103,10 +1074,7 @@ public static class CombatMath
     /// </summary>
     /// <param name="attacker"></param>
     /// <returns></returns>
-    public static int GetExpectedFailedSaves(AttackerDTO? attacker, DefenderDTO? defender)
-    {
-        return (int)Math.Floor(GetMeanFailedSaves(attacker, defender));
-    }
+    public static int GetExpectedFailedSaves(AttackerDTO? attacker, DefenderDTO? defender) => (int)Math.Floor(GetMeanFailedSaves(attacker, defender));
 
     /// <summary>
     /// Returns the standard deviation of the failed save roll distribution.
@@ -1202,10 +1170,7 @@ public static class CombatMath
     /// </summary>
     /// <param name="attacker"></param>
     /// <returns></returns>
-    public static int GetExpectedDamage(AttackerDTO? attacker, DefenderDTO? defender)
-    {
-        return (int)Math.Floor(GetMeanDamage(attacker, defender));
-    }
+    public static int GetExpectedDamage(AttackerDTO? attacker, DefenderDTO? defender) => (int)Math.Floor(GetMeanDamage(attacker, defender));
 
     /// <summary>
     /// Gets the standard deviation of damage done after all hit, wound, and save rolls have been completed.
@@ -1271,10 +1236,7 @@ public static class CombatMath
     /// <param name="attacker"></param>
     /// <param name="defender"></param>
     /// <returns>An integer value containing the expected number of destroyed models</returns>
-    public static int GetExpectedDestroyedModels(AttackerDTO? attacker, DefenderDTO? defender)
-    {
-        return (int)Math.Floor(GetMeanDestroyedModels(attacker, defender));
-    }
+    public static int GetExpectedDestroyedModels(AttackerDTO? attacker, DefenderDTO? defender) => (int)Math.Floor(GetMeanDestroyedModels(attacker, defender));
 
     /// <summary>
     /// Gets the standard deviation of destroyed models.

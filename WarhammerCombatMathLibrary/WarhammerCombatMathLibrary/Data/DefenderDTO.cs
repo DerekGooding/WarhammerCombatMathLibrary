@@ -64,9 +64,7 @@ public class DefenderDTO : IEquatable<DefenderDTO>
     #region Public Methods
 
     /// <inheritdoc/>
-    public override string ToString()
-    {
-        return $"Defender: [NumberOfModels: {NumberOfModels}, " +
+    public override string ToString() => $"Defender: [NumberOfModels: {NumberOfModels}, " +
         $"Toughness: {Toughness}, " +
         $"ArmorSave: {ArmorSave}, " +
         $"InvulnerableSave: {InvulnerableSave}, " +
@@ -75,22 +73,16 @@ public class DefenderDTO : IEquatable<DefenderDTO>
         $"Wounds: {Wounds}, " +
         $"HitModifier: {HitModifier}, " +
         $"WoundModifier: {WoundModifier}]";
-    }
 
     /// <inheritdoc/>
-    public override bool Equals(object? obj)
-    {
-        return Equals(obj as DefenderDTO);
-    }
+    public override bool Equals(object? obj) => Equals(obj as DefenderDTO);
 
     /// <summary>
     /// Checks if the given DefenderDTO object is equal to this one.
     /// </summary>
     /// <param name="other"></param>
     /// <returns>A boolean value. True if the objects are the same, False otherwise.</returns>
-    public bool Equals(DefenderDTO? other)
-    {
-        return other != null
+    public bool Equals(DefenderDTO? other) => other != null
                && string.Equals(Name, other.Name, StringComparison.OrdinalIgnoreCase)
                && NumberOfModels == other.NumberOfModels
                && Toughness == other.Toughness
@@ -101,12 +93,9 @@ public class DefenderDTO : IEquatable<DefenderDTO>
                && Wounds == other.Wounds
                && HitModifier == other.HitModifier
                && WoundModifier == other.WoundModifier;
-    }
 
     /// <inheritdoc/>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(Name,
+    public override int GetHashCode() => HashCode.Combine(Name,
                                 NumberOfModels,
                                 Toughness,
                                 ArmorSave,
@@ -114,7 +103,6 @@ public class DefenderDTO : IEquatable<DefenderDTO>
                                 FeelNoPain,
                                 DamageReduction,
                                 HashCode.Combine(Wounds, HitModifier, WoundModifier));
-    }
 
 
     #endregion

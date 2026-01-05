@@ -482,10 +482,7 @@ public static class Statistics
     /// <param name="numberOfTrials"></param>
     /// <param name="numberOfPossibleResults"></param>
     /// <returns>A double value containing the standard deviation of results for a repeated trial</returns>
-    public static double GetStandardDeviationOfResults(int numberOfTrials, double numberOfPossibleResults)
-    {
-        return Math.Sqrt(GetVarianceOfResults(numberOfTrials, numberOfPossibleResults));
-    }
+    public static double GetStandardDeviationOfResults(int numberOfTrials, double numberOfPossibleResults) => Math.Sqrt(GetVarianceOfResults(numberOfTrials, numberOfPossibleResults));
 
     /// <summary>
     /// Calculates the binomial coefficient, determining the number of combinations of k elements
@@ -1573,10 +1570,7 @@ public static class Statistics
     /// <param name="numberOfTrials"></param>
     /// <param name="probability"></param>
     /// <returns>A double value containing hte standard deviation of a distribution</returns>
-    public static double GetStandardDeviationOfDistribution(int numberOfTrials, double probability)
-    {
-        return Math.Sqrt(GetVarianceOfDistribution(numberOfTrials, probability));
-    }
+    public static double GetStandardDeviationOfDistribution(int numberOfTrials, double probability) => Math.Sqrt(GetVarianceOfDistribution(numberOfTrials, probability));
 
     /// <summary>
     /// Calculates the variance in the number of successes when the number of trials is also variable
@@ -1586,10 +1580,7 @@ public static class Statistics
     /// <param name="varianceOfNumberOfTrials"></param>
     /// <param name="probability"></param>
     /// <returns>A double value contining the combined variance of successes</returns>
-    public static double GetCombinedVarianceOfDistribution(int expectedNumberOfTrials, double varianceOfNumberOfTrials, double probability)
-    {
-        return expectedNumberOfTrials * probability * (1 - probability) + varianceOfNumberOfTrials * Math.Pow(probability, 2);
-    }
+    public static double GetCombinedVarianceOfDistribution(int expectedNumberOfTrials, double varianceOfNumberOfTrials, double probability) => expectedNumberOfTrials * probability * (1 - probability) + varianceOfNumberOfTrials * Math.Pow(probability, 2);
 
     /// <summary>
     /// Calculates the standard deviation of the number of successes when the number of trials is also variable
@@ -1598,10 +1589,7 @@ public static class Statistics
     /// <param name="varianceOfNumberOfTrials"></param>
     /// <param name="probability"></param>
     /// <returns>A double value contining the combined standard deviation of successes</returns>
-    public static double GetCombinedStandardDeviationOfDistribution(int expectedNumberOfTrials, double varianceOfNumberOfTrials, double probability)
-    {
-        return Math.Sqrt(GetCombinedVarianceOfDistribution(expectedNumberOfTrials, varianceOfNumberOfTrials, probability));
-    }
+    public static double GetCombinedStandardDeviationOfDistribution(int expectedNumberOfTrials, double varianceOfNumberOfTrials, double probability) => Math.Sqrt(GetCombinedVarianceOfDistribution(expectedNumberOfTrials, varianceOfNumberOfTrials, probability));
 
     #endregion
 }
