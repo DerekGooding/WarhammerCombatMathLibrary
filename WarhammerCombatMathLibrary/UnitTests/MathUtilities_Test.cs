@@ -60,7 +60,7 @@ namespace UnitTests
         [TestMethod]
         public void Factorial_TestNegativeParameter()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => MathUtilities.Factorial(-1));
+            Assert.Throws<ArgumentOutOfRangeException>(() => MathUtilities.Factorial(-1));
         }
     }
 }
