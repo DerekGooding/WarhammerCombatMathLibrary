@@ -8,7 +8,7 @@ namespace WarhammerCombatMath.Statistics;
 /// </summary>
 public static class Utility
 {
-    internal static readonly BoundedCache<(int, int, double), double> _probabilityMassFunctionCache = new(MAX_CACHE_SIZE);
+    internal static readonly BoundedCache<(int, int, double), double> _probabilityMassFunctionCache = new(MaxCache);
 
     /// <summary>
     /// Calculates the probability of success for a single trial.

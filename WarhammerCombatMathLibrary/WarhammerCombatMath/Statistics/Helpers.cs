@@ -11,7 +11,7 @@ internal static class Helpers
 
         var totalProbability = distribution.Sum(outcome => outcome.Probability);
 
-        if (Math.Abs(totalProbability) < PROBABILITY_TOLERANCE || Math.Abs(totalProbability - 1.0) < PROBABILITY_TOLERANCE)
+        if (Math.Abs(totalProbability) < ProbabilityTollerance || Math.Abs(totalProbability - 1.0) < ProbabilityTollerance)
         {
             return distribution;
         }
@@ -29,7 +29,7 @@ internal static class Helpers
         {
             cumulative += distribution[i].Probability;
 
-            var probability = (i == distribution.Count - 1 && Math.Abs(cumulative - 1.0) < PROBABILITY_TOLERANCE)
+            var probability = (i == distribution.Count - 1 && Math.Abs(cumulative - 1.0) < ProbabilityTollerance)
                 ? 1.0
                 : Math.Min(cumulative, 1.0);
 
@@ -48,7 +48,7 @@ internal static class Helpers
         {
             cumulative += distribution[i].Probability;
 
-            var probability = (i == 0 && Math.Abs(cumulative - 1.0) < PROBABILITY_TOLERANCE)
+            var probability = (i == 0 && Math.Abs(cumulative - 1.0) < ProbabilityTollerance)
                 ? 1.0
                 : Math.Min(cumulative, 1.0);
 

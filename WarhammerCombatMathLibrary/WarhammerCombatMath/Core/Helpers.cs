@@ -24,9 +24,9 @@ internal static class Helpers
 
     internal static int GetNumberOfSuccessfulResults(int successThreshold)
     {
-        if (successThreshold > POSSIBLE_RESULTS_SIX_SIDED_DIE)
+        if (successThreshold > NumberOfSides)
         {
-            Debug.WriteLine($"GetNumberOfSuccessfulResults() | Success threshold is greater than {POSSIBLE_RESULTS_SIX_SIDED_DIE}, returning 0 ...");
+            Debug.WriteLine($"GetNumberOfSuccessfulResults() | Success threshold is greater than {NumberOfSides}, returning 0 ...");
             return 0;
         }
 
@@ -36,7 +36,7 @@ internal static class Helpers
             return 0;
         }
 
-        return Math.Min(POSSIBLE_RESULTS_SIX_SIDED_DIE - (successThreshold - 1), POSSIBLE_RESULTS_SIX_SIDED_DIE - 1);
+        return Math.Min(NumberOfSides - (successThreshold - 1), NumberOfSides - 1);
     }
 
     internal static int GetAverageAttacks(AttackerDTO attacker)
@@ -106,23 +106,23 @@ internal static class Helpers
         }
 
         var adjustedWeaponSkill = attacker.WeaponSkill - hitModifier;
-        var hitSuccessThreshold = adjustedWeaponSkill == AUTOMATIC_FAIL_RESULT ? AUTOMATIC_FAIL_RESULT + 1 : adjustedWeaponSkill;
-        return GetProbabilityOfSuccess(POSSIBLE_RESULTS_SIX_SIDED_DIE, GetNumberOfSuccessfulResults(hitSuccessThreshold));
+        var hitSuccessThreshold = adjustedWeaponSkill == AutomaticFail ? AutomaticFail + 1 : adjustedWeaponSkill;
+        return GetProbabilityOfSuccess(NumberOfSides, GetNumberOfSuccessfulResults(hitSuccessThreshold));
     }
 
     internal static double GetProbabilityOfCriticalHit(AttackerDTO attacker)
     {
         if (attacker.CriticalHitThreshold is <= 1 or >= 7)
         {
-            return GetProbabilityOfSuccess(POSSIBLE_RESULTS_SIX_SIDED_DIE, 1);
+            return GetProbabilityOfSuccess(NumberOfSides, 1);
         }
 
-        var adjustedCriticalHitThreshold = attacker.CriticalHitThreshold == AUTOMATIC_FAIL_RESULT ? AUTOMATIC_FAIL_RESULT + 1 : attacker.CriticalHitThreshold;
-        return GetProbabilityOfSuccess(POSSIBLE_RESULTS_SIX_SIDED_DIE, GetNumberOfSuccessfulResults(adjustedCriticalHitThreshold));
+        var adjustedCriticalHitThreshold = attacker.CriticalHitThreshold == AutomaticFail ? AutomaticFail + 1 : attacker.CriticalHitThreshold;
+        return GetProbabilityOfSuccess(NumberOfSides, GetNumberOfSuccessfulResults(adjustedCriticalHitThreshold));
     }
     internal static double GetHitModifier_RerollHits(double probabilityOfHit) => (1 - probabilityOfHit) * probabilityOfHit;
 
-    internal static double GetHitModifier_RerollHitsOf1(double probabilityOfHit) => (1.0 / POSSIBLE_RESULTS_SIX_SIDED_DIE) * probabilityOfHit;
+    internal static double GetHitModifier_RerollHitsOf1(double probabilityOfHit) => (1.0 / NumberOfSides) * probabilityOfHit;
 
     internal static double GetBaseProbabilityOfWound(AttackerDTO attacker, DefenderDTO defender)
     {
@@ -141,8 +141,8 @@ internal static class Helpers
             finalWoundThreshold = adjustedNormalThreshold;
         }
 
-        var validatedThreshold = finalWoundThreshold == AUTOMATIC_FAIL_RESULT ? AUTOMATIC_FAIL_RESULT + 1 : finalWoundThreshold;
-        return GetProbabilityOfSuccess(POSSIBLE_RESULTS_SIX_SIDED_DIE, GetNumberOfSuccessfulResults(validatedThreshold));
+        var validatedThreshold = finalWoundThreshold == AutomaticFail ? AutomaticFail + 1 : finalWoundThreshold;
+        return GetProbabilityOfSuccess(NumberOfSides, GetNumberOfSuccessfulResults(validatedThreshold));
     }
 
     internal static bool IsValidThreshold(int threshold) => threshold is >= 2 and <= 6;
@@ -170,8 +170,8 @@ internal static class Helpers
             effectiveCriticalWoundThreshold = 6;
         }
 
-        var adjustedCriticalWoundThreshold = effectiveCriticalWoundThreshold == AUTOMATIC_FAIL_RESULT ? AUTOMATIC_FAIL_RESULT + 1 : effectiveCriticalWoundThreshold;
-        return GetProbabilityOfSuccess(POSSIBLE_RESULTS_SIX_SIDED_DIE, GetNumberOfSuccessfulResults(adjustedCriticalWoundThreshold));
+        var adjustedCriticalWoundThreshold = effectiveCriticalWoundThreshold == AutomaticFail ? AutomaticFail + 1 : effectiveCriticalWoundThreshold;
+        return GetProbabilityOfSuccess(NumberOfSides, GetNumberOfSuccessfulResults(adjustedCriticalWoundThreshold));
     }
 
     internal static double GetWoundModifier_LethalHits(double probabilityOfCriticalHit) => probabilityOfCriticalHit;
@@ -186,12 +186,12 @@ internal static class Helpers
         => probabilityOfHit * (1 - probabilityOfWound) * probabilityOfWound;
 
     internal static double GetWoundModifier_RerollWoundsOf1(double probabilityOfHit, double probabilityOfWound)
-        => probabilityOfHit * (1.0 / POSSIBLE_RESULTS_SIX_SIDED_DIE) * probabilityOfWound;
+        => probabilityOfHit * (1.0 / NumberOfSides) * probabilityOfWound;
 
     internal static double GetBaseProbabilityOfFailedSave(AttackerDTO attacker, DefenderDTO defender)
     {
         var adjustedArmorSaveThreshold = GetAdjustedArmorSaveThreshold(attacker, defender);
-        var probabilityOfSuccessfulSave = GetProbabilityOfSuccess(POSSIBLE_RESULTS_SIX_SIDED_DIE, GetNumberOfSuccessfulResults(adjustedArmorSaveThreshold));
+        var probabilityOfSuccessfulSave = GetProbabilityOfSuccess(NumberOfSides, GetNumberOfSuccessfulResults(adjustedArmorSaveThreshold));
         return (double)(1 - probabilityOfSuccessfulSave);
     }
 
@@ -291,7 +291,7 @@ internal static class Helpers
 
         var damageAfterReduction = Math.Max(0, damagePerAttack - defender.DamageReduction);
 
-        var feelNoPainSuccessProbability = GetProbabilityOfSuccess(POSSIBLE_RESULTS_SIX_SIDED_DIE, GetNumberOfSuccessfulResults(defender.FeelNoPain));
+        var feelNoPainSuccessProbability = GetProbabilityOfSuccess(NumberOfSides, GetNumberOfSuccessfulResults(defender.FeelNoPain));
         return damageAfterReduction * (1 - feelNoPainSuccessProbability);
     }
 
