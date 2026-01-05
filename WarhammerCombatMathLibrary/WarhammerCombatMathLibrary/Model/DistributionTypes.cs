@@ -1,4 +1,4 @@
-﻿namespace WarhammerCombatMathLibrary.Data;
+﻿namespace WarhammerCombatMathLibrary.Model;
 
 /// <summary>
 /// Gives the supported distribution types.

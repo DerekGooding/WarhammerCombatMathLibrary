@@ -1,4 +1,4 @@
-﻿namespace WarhammerCombatMathLibrary.Data;
+﻿namespace WarhammerCombatMathLibrary.Model;
 
 /// <summary>
 /// Data object for binomial data.

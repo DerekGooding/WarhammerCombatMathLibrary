@@ -1,12 +1,12 @@
 ﻿using System.Diagnostics;
-using WarhammerCombatMathLibrary.Data;
+using WarhammerCombatMathLibrary.Model;
 
-namespace WarhammerCombatMathLibrary.CombatMath;
+namespace WarhammerCombatMathLibrary.Core;
 
 /// <summary>
 /// Represents a binomial distribution of trials and successes.
 /// </summary>
-public static class Utilities
+public static class Utility
 {
     /// <summary>
     /// Returns the attacker's probability of succeeding any single hit roll.
@@ -67,7 +67,7 @@ public static class Utilities
 
         var averageNumberOfAttacks = GetAverageAttacks(attacker);
         var probabilityOfHit = GetProbabilityOfHit(attacker);
-        return Statistics.GetMeanOfDistribution(averageNumberOfAttacks, probabilityOfHit);
+        return GetMeanOfDistribution(averageNumberOfAttacks, probabilityOfHit);
     }
 
     /// <summary>
@@ -92,14 +92,14 @@ public static class Utilities
         }
 
         var averageAttacks = GetAverageAttacks(attacker);
-        var varianceAttacks = Statistics.GetVarianceOfResults(attacker.WeaponNumberOfAttackDice, (int)attacker.WeaponAttackDiceType);
+        var varianceAttacks = GetVarianceOfResults(attacker.WeaponNumberOfAttackDice, (int)attacker.WeaponAttackDiceType);
         var probabilityOfHit = GetProbabilityOfHit(attacker);
 
         // If the attacker has Torrent, all attacks will hit.
         // Any variance comes from the number of attacks.
         return attacker.WeaponHasTorrent
             ? Math.Sqrt(varianceAttacks)
-            : Statistics.GetCombinedStandardDeviationOfDistribution(averageAttacks, varianceAttacks, probabilityOfHit);
+            : GetCombinedStandardDeviationOfDistribution(averageAttacks, varianceAttacks, probabilityOfHit);
     }
 
     /// <summary>
@@ -122,10 +122,10 @@ public static class Utilities
 
         return distributionType switch
         {
-            DistributionTypes.Binomial => Statistics.GetBinomialDistribution(minimumAttacks, maximumAttacks, probabilityOfHit),
-            DistributionTypes.Cumulative => Statistics.GetCumulativeDistribution(minimumAttacks, maximumAttacks, probabilityOfHit),
-            DistributionTypes.Survivor => Statistics.GetSurvivorDistribution(minimumAttacks, maximumAttacks, probabilityOfHit),
-            _ => Statistics.GetBinomialDistribution(minimumAttacks, maximumAttacks, probabilityOfHit),
+            DistributionTypes.Binomial => GetBinomialDistribution(minimumAttacks, maximumAttacks, probabilityOfHit),
+            DistributionTypes.Cumulative => GetCumulativeDistribution(minimumAttacks, maximumAttacks, probabilityOfHit),
+            DistributionTypes.Survivor => GetSurvivorDistribution(minimumAttacks, maximumAttacks, probabilityOfHit),
+            _ => GetBinomialDistribution(minimumAttacks, maximumAttacks, probabilityOfHit),
         };
     }
 
@@ -244,7 +244,7 @@ public static class Utilities
 
         var averageAttacks = GetAverageAttacks(attacker);
         var probabilityOfHitAndWound = GetProbabilityOfHitAndWound(attacker, defender);
-        return Statistics.GetMeanOfDistribution(averageAttacks, probabilityOfHitAndWound);
+        return GetMeanOfDistribution(averageAttacks, probabilityOfHitAndWound);
     }
 
     /// <summary>
@@ -275,9 +275,9 @@ public static class Utilities
         }
 
         var averageAttacks = GetAverageAttacks(attacker);
-        var varianceAttacks = Statistics.GetVarianceOfResults(attacker.WeaponNumberOfAttackDice, (int)attacker.WeaponAttackDiceType);
+        var varianceAttacks = GetVarianceOfResults(attacker.WeaponNumberOfAttackDice, (int)attacker.WeaponAttackDiceType);
         var probabilityOfHitAndWound = GetProbabilityOfHitAndWound(attacker, defender);
-        return Statistics.GetCombinedStandardDeviationOfDistribution(averageAttacks, varianceAttacks, probabilityOfHitAndWound);
+        return GetCombinedStandardDeviationOfDistribution(averageAttacks, varianceAttacks, probabilityOfHitAndWound);
     }
 
     /// <summary>
@@ -307,10 +307,10 @@ public static class Utilities
 
         return distributionType switch
         {
-            DistributionTypes.Binomial => Statistics.GetBinomialDistribution(minimumAttacks, maximumAttacks, probability),
-            DistributionTypes.Cumulative => Statistics.GetCumulativeDistribution(minimumAttacks, maximumAttacks, probability),
-            DistributionTypes.Survivor => Statistics.GetSurvivorDistribution(minimumAttacks, maximumAttacks, probability),
-            _ => Statistics.GetBinomialDistribution(minimumAttacks, maximumAttacks, probability),
+            DistributionTypes.Binomial => GetBinomialDistribution(minimumAttacks, maximumAttacks, probability),
+            DistributionTypes.Cumulative => GetCumulativeDistribution(minimumAttacks, maximumAttacks, probability),
+            DistributionTypes.Survivor => GetSurvivorDistribution(minimumAttacks, maximumAttacks, probability),
+            _ => GetBinomialDistribution(minimumAttacks, maximumAttacks, probability),
         };
     }
 
@@ -406,7 +406,7 @@ public static class Utilities
 
         var averageAttacks = GetAverageAttacks(attacker);
         var probabilityOfFailedSave = GetProbabilityOfHitAndWoundAndFailedSave(attacker, defender);
-        return Statistics.GetMeanOfDistribution(averageAttacks, probabilityOfFailedSave);
+        return GetMeanOfDistribution(averageAttacks, probabilityOfFailedSave);
     }
 
     /// <summary>
@@ -437,9 +437,9 @@ public static class Utilities
         }
 
         var averageAttacks = GetAverageAttacks(attacker);
-        var varianceAttacks = Statistics.GetVarianceOfResults(attacker.WeaponNumberOfAttackDice, (int)attacker.WeaponAttackDiceType);
+        var varianceAttacks = GetVarianceOfResults(attacker.WeaponNumberOfAttackDice, (int)attacker.WeaponAttackDiceType);
         var probabilityOfHitAndWoundAndFailedSave = GetProbabilityOfHitAndWoundAndFailedSave(attacker, defender);
-        return Statistics.GetCombinedStandardDeviationOfDistribution(averageAttacks, varianceAttacks, probabilityOfHitAndWoundAndFailedSave);
+        return GetCombinedStandardDeviationOfDistribution(averageAttacks, varianceAttacks, probabilityOfHitAndWoundAndFailedSave);
     }
 
     /// <summary>
@@ -469,10 +469,10 @@ public static class Utilities
 
         return distributionType switch
         {
-            DistributionTypes.Binomial => Statistics.GetBinomialDistribution(minimumAttacks, maximumAttacks, probability),
-            DistributionTypes.Cumulative => Statistics.GetCumulativeDistribution(minimumAttacks, maximumAttacks, probability),
-            DistributionTypes.Survivor => Statistics.GetSurvivorDistribution(minimumAttacks, maximumAttacks, probability),
-            _ => Statistics.GetBinomialDistribution(minimumAttacks, maximumAttacks, probability),
+            DistributionTypes.Binomial => GetBinomialDistribution(minimumAttacks, maximumAttacks, probability),
+            DistributionTypes.Cumulative => GetCumulativeDistribution(minimumAttacks, maximumAttacks, probability),
+            DistributionTypes.Survivor => GetSurvivorDistribution(minimumAttacks, maximumAttacks, probability),
+            _ => GetBinomialDistribution(minimumAttacks, maximumAttacks, probability),
         };
     }
 
@@ -532,10 +532,10 @@ public static class Utilities
         }
 
         var averageAttacks = GetAverageAttacks(attacker);
-        var varianceAttacks = Statistics.GetVarianceOfResults(attacker.WeaponNumberOfAttackDice, (int)attacker.WeaponAttackDiceType);
+        var varianceAttacks = GetVarianceOfResults(attacker.WeaponNumberOfAttackDice, (int)attacker.WeaponAttackDiceType);
         var probabilityOfHitAndWoundAndFailedSave = GetProbabilityOfHitAndWoundAndFailedSave(attacker, defender);
         var averageDamagePerAttack = GetAverageDamagePerAttack(attacker);
-        return Statistics.GetCombinedStandardDeviationOfDistribution(averageAttacks, varianceAttacks, probabilityOfHitAndWoundAndFailedSave) * averageDamagePerAttack;
+        return GetCombinedStandardDeviationOfDistribution(averageAttacks, varianceAttacks, probabilityOfHitAndWoundAndFailedSave) * averageDamagePerAttack;
     }
 
     /// <summary>
@@ -597,9 +597,9 @@ public static class Utilities
 
         // Calculate the standard deviation of failed saves
         var averageAttacks = GetAverageAttacks(attacker);
-        var varianceAttacks = Statistics.GetVarianceOfResults(attacker.WeaponNumberOfAttackDice, (int)attacker.WeaponAttackDiceType);
+        var varianceAttacks = GetVarianceOfResults(attacker.WeaponNumberOfAttackDice, (int)attacker.WeaponAttackDiceType);
         var probabilityOfHitAndWoundAndFailedSave = GetProbabilityOfHitAndWoundAndFailedSave(attacker, defender);
-        var standardDeviationSuccessfulAttacks = Statistics.GetCombinedStandardDeviationOfDistribution(averageAttacks, varianceAttacks, probabilityOfHitAndWoundAndFailedSave);
+        var standardDeviationSuccessfulAttacks = GetCombinedStandardDeviationOfDistribution(averageAttacks, varianceAttacks, probabilityOfHitAndWoundAndFailedSave);
 
         // Calculate the average amount of adjusted damage done per failed save
         var averageDamagePerAttack = GetAverageDamagePerAttack(attacker);
@@ -651,10 +651,10 @@ public static class Utilities
         // Get distribution
         return distributionType switch
         {
-            DistributionTypes.Binomial => Statistics.GetBinomialDistribution(minimumAttacks, maximumAttacks, probability, minGroupSuccessCount, maxGroupSuccessCount),
-            DistributionTypes.Cumulative => Statistics.GetCumulativeDistribution(minimumAttacks, maximumAttacks, probability, minGroupSuccessCount, maxGroupSuccessCount),
-            DistributionTypes.Survivor => Statistics.GetSurvivorDistribution(minimumAttacks, maximumAttacks, probability, minGroupSuccessCount, maxGroupSuccessCount),
-            _ => Statistics.GetBinomialDistribution(minimumAttacks, maximumAttacks, probability, minGroupSuccessCount, maxGroupSuccessCount),
+            DistributionTypes.Binomial => GetBinomialDistribution(minimumAttacks, maximumAttacks, probability, minGroupSuccessCount, maxGroupSuccessCount),
+            DistributionTypes.Cumulative => GetCumulativeDistribution(minimumAttacks, maximumAttacks, probability, minGroupSuccessCount, maxGroupSuccessCount),
+            DistributionTypes.Survivor => GetSurvivorDistribution(minimumAttacks, maximumAttacks, probability, minGroupSuccessCount, maxGroupSuccessCount),
+            _ => GetBinomialDistribution(minimumAttacks, maximumAttacks, probability, minGroupSuccessCount, maxGroupSuccessCount),
         };
     }
 }

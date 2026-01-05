@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using WarhammerCombatMathLibrary.Data;
+using WarhammerCombatMathLibrary.Model;
 
 namespace UnitTests;
 
