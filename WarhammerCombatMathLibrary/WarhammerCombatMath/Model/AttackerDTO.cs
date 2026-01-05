@@ -3,7 +3,7 @@
 /// <summary>
 /// A data transfer object representing the attacker in a combat scenario.
 /// </summary>
-public class AttackerDTO : IEquatable<AttackerDTO>
+public sealed record AttackerDTO
 {
     /// <summary>
     /// The number of models in the attacker's unit.
@@ -143,99 +143,28 @@ public class AttackerDTO : IEquatable<AttackerDTO>
     public int WoundModifier { get; set; }
 
     /// <inheritdoc/>
-    public override string ToString()
-    => $"Attacker: [ NumberOfModels: {NumberOfModels}, "
-     + $"Weapon Attacks: {(WeaponNumberOfAttackDice > 0 ? $"{WeaponNumberOfAttackDice} {WeaponAttackDiceType} + {WeaponFlatAttacks}" : WeaponFlatAttacks.ToString())}, "
-     + $"WeaponSkill: {WeaponSkill}, "
-     + $"WeaponStrength: {WeaponStrength}, "
-     + $"WeaponArmorPierce: -{WeaponArmorPierce}, "
-     + $"WeaponDamage: {(WeaponNumberOfDamageDice > 0 ? $"{WeaponNumberOfDamageDice} {WeaponDamageDiceType} + {WeaponFlatDamage}" : WeaponFlatDamage)}, "
-     + $"WeaponHasTorrent: {WeaponHasTorrent}, "
-     + $"WeaponHasLethalHits: {WeaponHasLethalHits}, "
-     + $"WeaponHasSustainedHits: {WeaponHasSustainedHits}, "
-     + $"WeaponSustainedHitsMultiplier: {WeaponSustainedHitsMultiplier}, "
-     + $"WeaponHasRerollHitRolls: {WeaponHasRerollHitRolls}, "
-     + $"WeaponHasRerollHitRollsOf1: {WeaponHasRerollHitRollsOf1}, "
-     + $"WeaponHasDevastatingWounds: {WeaponHasDevastatingWounds}, "
-     + $"WeaponHasRerollWoundRolls: {WeaponHasRerollWoundRolls}, "
-     + $"WeaponHasRerollWoundRollsOf1: {WeaponHasRerollWoundRollsOf1}, "
-     + $"WeaponHasRerollDamageRolls: {WeaponHasRerollDamageRolls}, "
-     + $"WeaponHasRerollDamageRollsOf1: {WeaponHasRerollDamageRollsOf1}, "
-     + $"CriticalHitThreshold: {CriticalHitThreshold}, "
-     + $"CriticalWoundThreshold: {CriticalWoundThreshold}, "
-     + $"WeaponHasAnti: {WeaponHasAnti}, "
-     + $"WeaponAntiThreshold: {WeaponAntiThreshold}, "
-     + $"HitModifier: {HitModifier}, "
-     + $"WoundModifier: {WoundModifier} ]";
-
-    /// <inheritdoc/>
-    public override bool Equals(object? obj) => Equals(obj as AttackerDTO);
-
-    /// <summary>
-    /// Checks if the given AttackerDTO object is equal to this one.
-    /// </summary>
-    /// <param name="other"></param>
-    /// <returns>A boolean value. True if the objects are the same, False otherwise.</returns>
-    public bool Equals(AttackerDTO? other)
-    => other != null
-        && NumberOfModels == other.NumberOfModels
-        && WeaponNumberOfAttackDice == other.WeaponNumberOfAttackDice
-        && WeaponAttackDiceType == other.WeaponAttackDiceType
-        && WeaponFlatAttacks == other.WeaponFlatAttacks
-        && WeaponSkill == other.WeaponSkill
-        && WeaponStrength == other.WeaponStrength
-        && WeaponArmorPierce == other.WeaponArmorPierce
-        && WeaponNumberOfDamageDice == other.WeaponNumberOfDamageDice
-        && WeaponDamageDiceType == other.WeaponDamageDiceType
-        && WeaponFlatDamage == other.WeaponFlatDamage
-        && WeaponHasTorrent == other.WeaponHasTorrent
-        && WeaponHasLethalHits == other.WeaponHasLethalHits
-        && WeaponHasSustainedHits == other.WeaponHasSustainedHits
-        && WeaponSustainedHitsMultiplier == other.WeaponSustainedHitsMultiplier
-        && WeaponHasRerollHitRolls == other.WeaponHasRerollHitRolls
-        && WeaponHasRerollHitRollsOf1 == other.WeaponHasRerollHitRollsOf1
-        && WeaponHasDevastatingWounds == other.WeaponHasDevastatingWounds
-        && WeaponHasRerollWoundRolls == other.WeaponHasRerollWoundRolls
-        && WeaponHasRerollWoundRollsOf1 == other.WeaponHasRerollWoundRollsOf1
-        && WeaponHasRerollDamageRolls == other.WeaponHasRerollDamageRolls
-        && WeaponHasRerollDamageRollsOf1 == other.WeaponHasRerollDamageRollsOf1
-        && CriticalHitThreshold == other.CriticalHitThreshold
-        && CriticalWoundThreshold == other.CriticalWoundThreshold
-        && WeaponHasAnti == other.WeaponHasAnti
-        && WeaponAntiThreshold == other.WeaponAntiThreshold
-        && HitModifier == other.HitModifier
-        && WoundModifier == other.WoundModifier;
-
-    /// <inheritdoc/>
-    public override int GetHashCode()
-    {
-        // Combine the weapon keyword abilities into a single byte
-        var weaponKeywordFlags = ((WeaponHasTorrent ? 1 : 0) << 0)
-                                 | ((WeaponHasLethalHits ? 1 : 0) << 1)
-                                 | ((WeaponHasSustainedHits ? 1 : 0) << 2)
-                                 | ((WeaponHasDevastatingWounds ? 1 : 0) << 3)
-                                 | ((WeaponHasAnti ? 1 : 0) << 4);
-
-        // Combine reroll abilities into a single byte
-        var rerollFlags = ((WeaponHasRerollHitRolls ? 1 : 0) << 0)
-                          | ((WeaponHasRerollHitRollsOf1 ? 1 : 0) << 1)
-                          | ((WeaponHasRerollWoundRolls ? 1 : 0) << 2)
-                          | ((WeaponHasRerollWoundRollsOf1 ? 1 : 0) << 3)
-                          | ((WeaponHasRerollDamageRolls ? 1 : 0) << 4)
-                          | ((WeaponHasRerollDamageRollsOf1 ? 1 : 0) << 5);
-
-        return HashCode.Combine(NumberOfModels,
-                                (WeaponNumberOfAttackDice * (int)WeaponAttackDiceType) + WeaponFlatAttacks,
-                                WeaponSkill + WeaponStrength + WeaponArmorPierce,
-                                (WeaponNumberOfDamageDice * (int)WeaponDamageDiceType) + WeaponFlatDamage,
-                                weaponKeywordFlags,
-                                rerollFlags,
-                                WeaponSustainedHitsMultiplier,
-                                HashCode.Combine(
-                                    CriticalHitThreshold,
-                                    CriticalWoundThreshold,
-                                    WeaponAntiThreshold,
-                                    HitModifier,
-                                    WoundModifier));
-    }
+    public override string ToString() =>
+        $"Attacker: [ NumberOfModels: {NumberOfModels}, "
+        + $"Weapon Attacks: {(WeaponNumberOfAttackDice > 0 ? $"{WeaponNumberOfAttackDice} {WeaponAttackDiceType} + {WeaponFlatAttacks}" : WeaponFlatAttacks.ToString())}, "
+        + $"WeaponSkill: {WeaponSkill}, "
+        + $"WeaponStrength: {WeaponStrength}, "
+        + $"WeaponArmorPierce: -{WeaponArmorPierce}, "
+        + $"WeaponDamage: {(WeaponNumberOfDamageDice > 0 ? $"{WeaponNumberOfDamageDice} {WeaponDamageDiceType} + {WeaponFlatDamage}" : WeaponFlatDamage)}, "
+        + $"WeaponHasTorrent: {WeaponHasTorrent}, "
+        + $"WeaponHasLethalHits: {WeaponHasLethalHits}, "
+        + $"WeaponHasSustainedHits: {WeaponHasSustainedHits}, "
+        + $"WeaponSustainedHitsMultiplier: {WeaponSustainedHitsMultiplier}, "
+        + $"WeaponHasRerollHitRolls: {WeaponHasRerollHitRolls}, "
+        + $"WeaponHasRerollHitRollsOf1: {WeaponHasRerollHitRollsOf1}, "
+        + $"WeaponHasDevastatingWounds: {WeaponHasDevastatingWounds}, "
+        + $"WeaponHasRerollWoundRolls: {WeaponHasRerollWoundRolls}, "
+        + $"WeaponHasRerollWoundRollsOf1: {WeaponHasRerollWoundRollsOf1}, "
+        + $"WeaponHasRerollDamageRolls: {WeaponHasRerollDamageRolls}, "
+        + $"WeaponHasRerollDamageRollsOf1: {WeaponHasRerollDamageRollsOf1}, "
+        + $"CriticalHitThreshold: {CriticalHitThreshold}, "
+        + $"CriticalWoundThreshold: {CriticalWoundThreshold}, "
+        + $"WeaponHasAnti: {WeaponHasAnti}, "
+        + $"WeaponAntiThreshold: {WeaponAntiThreshold}, "
+        + $"HitModifier: {HitModifier}, "
+        + $"WoundModifier: {WoundModifier} ]";
 }

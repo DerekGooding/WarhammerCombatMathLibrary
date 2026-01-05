@@ -3,7 +3,7 @@
 /// <summary>
 /// A data transfer object representing the defender in a combat scenario.
 /// </summary>
-public class DefenderDTO : IEquatable<DefenderDTO>
+public sealed record DefenderDTO
 {
     /// <summary>
     /// The name of the defending unit.
@@ -67,34 +67,4 @@ public class DefenderDTO : IEquatable<DefenderDTO>
         $"Wounds: {Wounds}, " +
         $"HitModifier: {HitModifier}, " +
         $"WoundModifier: {WoundModifier}]";
-
-    /// <inheritdoc/>
-    public override bool Equals(object? obj) => Equals(obj as DefenderDTO);
-
-    /// <summary>
-    /// Checks if the given DefenderDTO object is equal to this one.
-    /// </summary>
-    /// <param name="other"></param>
-    /// <returns>A boolean value. True if the objects are the same, False otherwise.</returns>
-    public bool Equals(DefenderDTO? other) => other != null
-               && string.Equals(Name, other.Name, StringComparison.OrdinalIgnoreCase)
-               && NumberOfModels == other.NumberOfModels
-               && Toughness == other.Toughness
-               && ArmorSave == other.ArmorSave
-               && InvulnerableSave == other.InvulnerableSave
-               && FeelNoPain == other.FeelNoPain
-               && DamageReduction == other.DamageReduction
-               && Wounds == other.Wounds
-               && HitModifier == other.HitModifier
-               && WoundModifier == other.WoundModifier;
-
-    /// <inheritdoc/>
-    public override int GetHashCode() => HashCode.Combine(Name,
-                                NumberOfModels,
-                                Toughness,
-                                ArmorSave,
-                                InvulnerableSave,
-                                FeelNoPain,
-                                DamageReduction,
-                                HashCode.Combine(Wounds, HitModifier, WoundModifier));
 }
