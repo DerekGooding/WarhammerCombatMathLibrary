@@ -1105,7 +1105,7 @@ public sealed class Statistics_Test
     public void BinomialDistribution_Simple_SumsToOne()
     {
         var dist = Statistics.GetBinomialDistribution(10, 0.5);
-        double sum = dist.Sum(x => x.Probability);
+        var sum = dist.Sum(x => x.Probability);
         Assert.AreEqual(1.0, sum, 0.0001, $"Sum was {sum}, expected 1.0");
     }
 
@@ -1116,7 +1116,7 @@ public sealed class Statistics_Test
     public void BinomialDistribution_VariableTrials_SumsToOne()
     {
         var dist = Statistics.GetBinomialDistribution(1, 10, 0.5);
-        double sum = dist.Sum(x => x.Probability);
+        var sum = dist.Sum(x => x.Probability);
         Assert.AreEqual(1.0, sum, 0.0001, $"Sum was {sum}, expected 1.0");
     }
 
@@ -1127,7 +1127,7 @@ public sealed class Statistics_Test
     public void BinomialDistribution_VariableGroupSuccess_SumsToOne()
     {
         var dist = Statistics.GetBinomialDistribution(10, 0.5, 2, 3);
-        double sum = dist.Sum(x => x.Probability);
+        var sum = dist.Sum(x => x.Probability);
         Assert.AreEqual(1.0, sum, 0.0001, $"Sum was {sum}, expected 1.0");
     }
 
@@ -1138,7 +1138,7 @@ public sealed class Statistics_Test
     public void BinomialDistribution_VariableTrialsAndGroup_SumsToOne()
     {
         var dist = Statistics.GetBinomialDistribution(1, 10, 0.5, 2, 3);
-        double sum = dist.Sum(x => x.Probability);
+        var sum = dist.Sum(x => x.Probability);
         Assert.AreEqual(1.0, sum, 0.0001, $"Sum was {sum}, expected 1.0");
     }
 
@@ -1171,7 +1171,7 @@ public sealed class Statistics_Test
     public void BinomialDistribution_SingleGroupSuccessGreaterThan1_SumsToOne()
     {
         var dist = Statistics.GetBinomialDistribution(10, 0.5, 2);
-        double sum = dist.Sum(x => x.Probability);
+        var sum = dist.Sum(x => x.Probability);
         Assert.AreEqual(1.0, sum, 0.0001, $"Sum was {sum}, expected 1.0");
     }
 

@@ -3673,7 +3673,7 @@ public sealed class CombatMath_Test
     }
 
     /// <summary>
-    /// Tests the case where a unit has anti, but no other abilities, and the anti X value 
+    /// Tests the case where a unit has anti, but no other abilities, and the anti X value
     /// equals the normal wound threshold. Without other critical wound abilities like Devastating Wounds,
     /// Anti X should not affect the wound success probability.
     /// Example: Anti 4+, and the wound roll would already wound on a 4+ (S4 vs T4).
@@ -3706,7 +3706,7 @@ public sealed class CombatMath_Test
     }
 
     /// <summary>
-    /// Tests the case where a unit has Anti X, but no other critical wound abilities, and the Anti X value 
+    /// Tests the case where a unit has Anti X, but no other critical wound abilities, and the Anti X value
     /// is greater than the normal wound threshold. Without other critical wound abilities like Devastating Wounds,
     /// Anti X should not affect the wound success probability.
     /// Example: Anti 5+ when wounds are already on 3+ (S6 vs T4), Anti should not increase wound probability.
@@ -3749,11 +3749,11 @@ public sealed class CombatMath_Test
     }
 
     /// <summary>
-    /// Tests the case where a unit has Anti X, but no other abilities, and the Anti X value 
+    /// Tests the case where a unit has Anti X, but no other abilities, and the Anti X value
     /// is less than (better than) the normal wound threshold.
-    /// Example: Normal wound roll requires a 5+ to succeed (S4 vs T5), but the unit has Anti 3+, 
+    /// Example: Normal wound roll requires a 5+ to succeed (S4 vs T5), but the unit has Anti 3+,
     /// so a wound roll of 3+ automatically succeeds as a critical wound.
-    /// 
+    ///
     /// Expected behavior: Anti X+ should cause wound rolls of X+ to automatically succeed as critical wounds,
     /// increasing the overall wound success rate when the Anti threshold is lower than the normal wound threshold.
     /// </summary>
@@ -3779,12 +3779,12 @@ public sealed class CombatMath_Test
 
         // With Anti X+ that is better than the normal wound threshold, wound probability should increase
         // Expected: With Anti = 0.4444, Without Anti = 0.2222
-        Assert.IsTrue(probWithAnti > probWithoutAnti, 
+        Assert.IsTrue(probWithAnti > probWithoutAnti,
             $"Anti 3+ with S4 vs T5 should increase wound probability compared to no Anti. " +
             $"With Anti: {probWithAnti:F4}, Without: {probWithoutAnti:F4}");
-        
+
         // Verify the expected values
-        Assert.AreEqual(0.4444, Math.Round(probWithAnti, 4), 0.0001, 
+        Assert.AreEqual(0.4444, Math.Round(probWithAnti, 4), 0.0001,
             $"Anti 3+ with S4 vs T5 should result in ~0.4444 probability (4/6 wound * 4/6 hit)");
         Assert.AreEqual(0.2222, Math.Round(probWithoutAnti, 4), 0.0001,
             $"Without Anti, S4 vs T5 should result in ~0.2222 probability (2/6 wound * 4/6 hit)");

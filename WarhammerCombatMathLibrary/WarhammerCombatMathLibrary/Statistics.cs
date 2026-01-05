@@ -45,7 +45,7 @@ public static class Statistics
         }
 
         // Calculate the sum of all probabilities
-        double totalProbability = distribution.Sum(outcome => outcome.Probability);
+        var totalProbability = distribution.Sum(outcome => outcome.Probability);
 
         // If the total is 0 or already 1, no normalization needed
         if (Math.Abs(totalProbability) < PROBABILITY_TOLERANCE || Math.Abs(totalProbability - 1.0) < PROBABILITY_TOLERANCE)
@@ -71,15 +71,15 @@ public static class Statistics
         var cumulativeDistribution = new List<BinomialOutcome>();
         double cumulative = 0;
 
-        for (int i = 0; i < distribution.Count; i++)
+        for (var i = 0; i < distribution.Count; i++)
         {
             cumulative += distribution[i].Probability;
-            
+
             // For the last element, set to exactly 1.0 if it's within tolerance to handle floating point precision
-            double probability = (i == distribution.Count - 1 && Math.Abs(cumulative - 1.0) < PROBABILITY_TOLERANCE)
+            var probability = (i == distribution.Count - 1 && Math.Abs(cumulative - 1.0) < PROBABILITY_TOLERANCE)
                 ? 1.0
                 : Math.Min(cumulative, 1.0);
-            
+
             cumulativeDistribution.Add(new BinomialOutcome
             {
                 Successes = distribution[i].Successes,
@@ -101,16 +101,16 @@ public static class Statistics
         var survivorDistribution = new List<BinomialOutcome>();
         double cumulative = 0;
 
-        for (int i = distribution.Count - 1; i >= 0; i--)
+        for (var i = distribution.Count - 1; i >= 0; i--)
         {
             cumulative += distribution[i].Probability;
-            
+
             // For the first element (i == 0), set to exactly 1.0 if it's within tolerance to handle floating point precision
             double probability;
             probability = (i == 0 && Math.Abs(cumulative - 1.0) < PROBABILITY_TOLERANCE)
                 ? 1.0
                 : Math.Min(cumulative, 1.0);
-            
+
             survivorDistribution.Insert(0, new BinomialOutcome
             {
                 Successes = distribution[i].Successes,
@@ -137,7 +137,7 @@ public static class Statistics
         // Determine the max number of successes k based on the minimum group success count
         var maxK = Math.Floor((double)numberOfTrials / groupSuccessCount);
 
-        for (int k = 0; k <= maxK; k++)
+        for (var k = 0; k <= maxK; k++)
         {
             var groupedSuccesses = k * groupSuccessCount;
             var discreteProbability = ProbabilityMassFunction(numberOfTrials, groupedSuccesses, probability);
@@ -191,9 +191,9 @@ public static class Statistics
         var maxK = Math.Floor((double)numberOfTrials / minGroupSuccessCount);
 
         // Calculate the results for each possible group success count
-        for (int g = minGroupSuccessCount; g <= maxGroupSuccessCount; g++)
+        for (var g = minGroupSuccessCount; g <= maxGroupSuccessCount; g++)
         {
-            for (int k = 0; k <= maxK; k++)
+            for (var k = 0; k <= maxK; k++)
             {
                 var groupedSuccesses = k * g;
                 var discreteProbability = ProbabilityMassFunction(numberOfTrials, groupedSuccesses, probability);
@@ -260,12 +260,12 @@ public static class Statistics
         var maxK = Math.Floor((double)maxNumberOfTrials / groupSuccessCount);
 
         // Calculate the binomial results for each success value k, and average the results for each possible value of n
-        for (int k = 0; k <= maxK; k++)
+        for (var k = 0; k <= maxK; k++)
         {
             var groupedSuccesses = k * groupSuccessCount;
             double combinedProbability = 0;
 
-            for (int n = 1; n <= maxNumberOfTrials; n++)
+            for (var n = 1; n <= maxNumberOfTrials; n++)
             {
                 var discreteProbability = ProbabilityMassFunction(n, groupedSuccesses, probability);
                 combinedProbability += discreteProbability;
@@ -343,15 +343,15 @@ public static class Statistics
         var maxK = Math.Floor((double)maxNumberOfTrials / minGroupSuccessCount);
 
         // Calculate the results for each possible group success count
-        for (int g = minGroupSuccessCount; g <= maxGroupSuccessCount; g++)
+        for (var g = minGroupSuccessCount; g <= maxGroupSuccessCount; g++)
         {
             // Calculate the binomial results for each success value k, and average the results for each possible value of n
-            for (int k = 0; k <= maxK; k++)
+            for (var k = 0; k <= maxK; k++)
             {
                 var groupedSuccesses = k * g;
                 double combinedProbability = 0;
 
-                for (int n = 1; n <= maxNumberOfTrials; n++)
+                for (var n = 1; n <= maxNumberOfTrials; n++)
                 {
                     var discreteProbability = ProbabilityMassFunction(n, groupedSuccesses, probability);
                     combinedProbability += discreteProbability;
@@ -471,7 +471,7 @@ public static class Statistics
         }
 
         // Variance of a trial = (results^2 - 1) / 12
-        double singleDieVariance = (Math.Pow(numberOfPossibleResults, 2) - 1) / 12.0;
+        var singleDieVariance = (Math.Pow(numberOfPossibleResults, 2) - 1) / 12.0;
 
         return numberOfTrials * singleDieVariance;
     }
@@ -552,7 +552,7 @@ public static class Statistics
     }
 
     /// <summary>
-    /// Calculates the probability mass function for a given number of successes 
+    /// Calculates the probability mass function for a given number of successes
     /// when a given number of dice are rolled with a given success threshold.
     /// The function can be broken down as a combination of the following:
     /// - The binomial coefficient, describing the number of unique combinations of results that can contain the desired number of successes.
@@ -626,7 +626,7 @@ public static class Statistics
                 new(0, 1)
             };
 
-            for (int k = 1; k <= numberOfTrials; k++)
+            for (var k = 1; k <= numberOfTrials; k++)
             {
                 adjustedDistribution.Add(new BinomialOutcome(k, 0));
             }
@@ -677,7 +677,7 @@ public static class Statistics
                 new(0, 1)
             };
 
-            for (int k = 1; k <= numberOfTrials; k++)
+            for (var k = 1; k <= numberOfTrials; k++)
             {
                 adjustedDistribution.Add(new BinomialOutcome(k, 0));
             }
@@ -750,7 +750,7 @@ public static class Statistics
                 new(0, 1)
             };
 
-            for (int k = 1; k <= maxNumberOfTrials; k++)
+            for (var k = 1; k <= maxNumberOfTrials; k++)
             {
                 adjustedDistribution.Add(new BinomialOutcome(k, 0));
             }
@@ -814,7 +814,7 @@ public static class Statistics
                 new(0, 1)
             };
 
-            for (int k = 1; k <= maxNumberOfTrials; k++)
+            for (var k = 1; k <= maxNumberOfTrials; k++)
             {
                 adjustedDistribution.Add(new BinomialOutcome(k, 0));
             }
@@ -882,7 +882,7 @@ public static class Statistics
                 new(0, 1)
             };
 
-            for (int k = 1; k <= numberOfTrials; k++)
+            for (var k = 1; k <= numberOfTrials; k++)
             {
                 adjustedDistribution.Add(new BinomialOutcome(k, 1));
             }
@@ -897,7 +897,7 @@ public static class Statistics
             // All probabilities should be 0, except the probability of all successes should be 1.
             var adjustedDistribution = new List<BinomialOutcome>();
 
-            for (int k = 0; k <= numberOfTrials - 1; k++)
+            for (var k = 0; k <= numberOfTrials - 1; k++)
             {
                 adjustedDistribution.Add(new BinomialOutcome(k, 0));
             }
@@ -951,7 +951,7 @@ public static class Statistics
                 new(0, 1)
             };
 
-            for (int k = 1; k <= numberOfTrials; k++)
+            for (var k = 1; k <= numberOfTrials; k++)
             {
                 adjustedDistribution.Add(new BinomialOutcome(k, 1));
             }
@@ -966,7 +966,7 @@ public static class Statistics
             // All probabilities should be 0, except the probability of all successes should be 1.
             var adjustedDistribution = new List<BinomialOutcome>();
 
-            for (int k = 0; k <= numberOfTrials - 1; k++)
+            for (var k = 0; k <= numberOfTrials - 1; k++)
             {
                 adjustedDistribution.Add(new BinomialOutcome(k, 0));
             }
@@ -1048,7 +1048,7 @@ public static class Statistics
                 new(0, 1)
             };
 
-            for (int k = 1; k <= maxNumberOfTrials; k++)
+            for (var k = 1; k <= maxNumberOfTrials; k++)
             {
                 adjustedDistribution.Add(new BinomialOutcome(k, 1));
             }
@@ -1063,7 +1063,7 @@ public static class Statistics
             // All probabilities should be 0, except the probability of all successes should be 1.
             var adjustedDistribution = new List<BinomialOutcome>();
 
-            for (int k = 0; k <= maxNumberOfTrials - 1; k++)
+            for (var k = 0; k <= maxNumberOfTrials - 1; k++)
             {
                 adjustedDistribution.Add(new BinomialOutcome(k, 0));
             }
@@ -1130,7 +1130,7 @@ public static class Statistics
                 new(0, 1)
             };
 
-            for (int k = 1; k <= maxNumberOfTrials; k++)
+            for (var k = 1; k <= maxNumberOfTrials; k++)
             {
                 adjustedDistribution.Add(new BinomialOutcome(k, 1));
             }
@@ -1145,7 +1145,7 @@ public static class Statistics
             // All probabilities should be 0, except the probability of all successes should be 1.
             var adjustedDistribution = new List<BinomialOutcome>();
 
-            for (int k = 0; k <= maxNumberOfTrials - 1; k++)
+            for (var k = 0; k <= maxNumberOfTrials - 1; k++)
             {
                 adjustedDistribution.Add(new BinomialOutcome(k, 0));
             }
@@ -1185,7 +1185,7 @@ public static class Statistics
 
     /// <summary>
     /// Gets the survivor function distribution P(X≥k) of trial data.
-    /// Optionally calculates the upper cumulative distribution P(X≥k) of trial data, assuming that a group of a given number of trial successes is considered a single 
+    /// Optionally calculates the upper cumulative distribution P(X≥k) of trial data, assuming that a group of a given number of trial successes is considered a single
     /// success in the context of the distribution.
     /// Example: If 'groupSuccessCount' = 2, then the total number of trials is divided by 2, and any combination of 2 successful trials is considered a single success
     /// in the context of the distribution.
@@ -1214,7 +1214,7 @@ public static class Statistics
             adjustedDistribution.Add(new BinomialOutcome(0, 1));
 
             // Probabilities for all other values of k should be 0.
-            for (int k = 1; k <= numberOfTrials; k++)
+            for (var k = 1; k <= numberOfTrials; k++)
             {
                 adjustedDistribution.Add(new BinomialOutcome(k, 0));
             }
@@ -1230,7 +1230,7 @@ public static class Statistics
             // So the upper cumulative distribution should all be ones.
             var adjustedDistribution = new List<BinomialOutcome>();
 
-            for (int k = 0; k <= numberOfTrials; k++)
+            for (var k = 0; k <= numberOfTrials; k++)
             {
                 adjustedDistribution.Add(new BinomialOutcome(k, 1));
             }
@@ -1283,7 +1283,7 @@ public static class Statistics
             };
 
             // Probabilities for all other values of k should be 0.
-            for (int k = 1; k <= numberOfTrials; k++)
+            for (var k = 1; k <= numberOfTrials; k++)
             {
                 adjustedDistribution.Add(new BinomialOutcome(k, 0));
             }
@@ -1299,7 +1299,7 @@ public static class Statistics
             // So the upper cumulative distribution should all be ones.
             var adjustedDistribution = new List<BinomialOutcome>();
 
-            for (int k = 0; k <= numberOfTrials; k++)
+            for (var k = 0; k <= numberOfTrials; k++)
             {
                 adjustedDistribution.Add(new BinomialOutcome(k, 1));
             }
@@ -1337,7 +1337,7 @@ public static class Statistics
 
     /// <summary>
     /// Gets the combined survivor function distribution P(X≥k) of trial data using a variable number of trials.
-    /// Optionally calculates the upper cumulative distribution P(X≥k) of trial data, assuming that a group of a given number of trial successes is considered a single 
+    /// Optionally calculates the upper cumulative distribution P(X≥k) of trial data, assuming that a group of a given number of trial successes is considered a single
     /// success in the context of the distribution.
     /// Example: If 'groupSuccessCount' = 2, then the total number of trials is divided by 2, and any combination of 2 successful trials is considered a single success
     /// in the context of the distribution.
@@ -1379,7 +1379,7 @@ public static class Statistics
             adjustedDistribution.Add(new BinomialOutcome(0, 1));
 
             // Probabilities for all other values of k should be 0.
-            for (int k = 1; k <= maxNumberOfTrials; k++)
+            for (var k = 1; k <= maxNumberOfTrials; k++)
             {
                 adjustedDistribution.Add(new BinomialOutcome(k, 0));
             }
@@ -1395,7 +1395,7 @@ public static class Statistics
             // So the upper cumulative distribution should all be ones.
             var adjustedDistribution = new List<BinomialOutcome>();
 
-            for (int k = 0; k <= maxNumberOfTrials; k++)
+            for (var k = 0; k <= maxNumberOfTrials; k++)
             {
                 adjustedDistribution.Add(new BinomialOutcome(k, 1));
             }
@@ -1460,7 +1460,7 @@ public static class Statistics
             adjustedDistribution.Add(new BinomialOutcome(0, 1));
 
             // Probabilities for all other values of k should be 0.
-            for (int k = 1; k <= maxNumberOfTrials; k++)
+            for (var k = 1; k <= maxNumberOfTrials; k++)
             {
                 adjustedDistribution.Add(new BinomialOutcome(k, 0));
             }
@@ -1476,7 +1476,7 @@ public static class Statistics
             // So the upper cumulative distribution should all be ones.
             var adjustedDistribution = new List<BinomialOutcome>();
 
-            for (int k = 0; k <= maxNumberOfTrials; k++)
+            for (var k = 0; k <= maxNumberOfTrials; k++)
             {
                 adjustedDistribution.Add(new BinomialOutcome(k, 1));
             }

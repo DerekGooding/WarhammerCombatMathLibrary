@@ -37,9 +37,9 @@ public static class CombatMath
     /// <returns>An integer value containing the combined hit modifier, capped at +/- 1</returns>
     private static int GetCombinedHitModifier(AttackerDTO? attacker, DefenderDTO? defender)
     {
-        int attackerModifier = attacker?.HitModifier ?? 0;
-        int defenderModifier = defender?.HitModifier ?? 0;
-        int combinedModifier = attackerModifier + defenderModifier;
+        var attackerModifier = attacker?.HitModifier ?? 0;
+        var defenderModifier = defender?.HitModifier ?? 0;
+        var combinedModifier = attackerModifier + defenderModifier;
 
         // Cap the combined modifier at +/- 1
         return Math.Clamp(combinedModifier, -1, 1);
@@ -53,9 +53,9 @@ public static class CombatMath
     /// <returns>An integer value containing the combined wound modifier, capped at +/- 1</returns>
     private static int GetCombinedWoundModifier(AttackerDTO? attacker, DefenderDTO? defender)
     {
-        int attackerModifier = attacker?.WoundModifier ?? 0;
-        int defenderModifier = defender?.WoundModifier ?? 0;
-        int combinedModifier = attackerModifier + defenderModifier;
+        var attackerModifier = attacker?.WoundModifier ?? 0;
+        var defenderModifier = defender?.WoundModifier ?? 0;
+        var combinedModifier = attackerModifier + defenderModifier;
 
         // Cap the combined modifier at +/- 1
         return Math.Clamp(combinedModifier, -1, 1);
@@ -246,17 +246,17 @@ public static class CombatMath
     {
         // Get the combined wound modifier
         var combinedWoundModifier = GetCombinedWoundModifier(attacker, defender);
-        
+
         // Get base wound threshold from strength vs toughness
         var normalWoundThreshold = GetSuccessThresholdOfWound(attacker.WeaponStrength, defender.Toughness);
-        
+
         // Apply wound modifier to the normal wound threshold
         // Positive modifiers make it easier to wound (lower threshold), negative modifiers make it harder (higher threshold)
         var adjustedNormalThreshold = normalWoundThreshold - combinedWoundModifier;
-        
+
         // Determine the final wound threshold to use
         int finalWoundThreshold;
-        
+
         // If the attacker has Anti X+ and it's valid, compare it with the adjusted normal threshold
         // and use whichever gives the better (lower) threshold
         if (attacker.WeaponHasAnti && IsValidThreshold(attacker.WeaponAntiThreshold))
@@ -270,11 +270,11 @@ public static class CombatMath
             // No Anti, just use the adjusted normal threshold
             finalWoundThreshold = adjustedNormalThreshold;
         }
-        
+
         // Account for the fact that the smallest possible result on the die is considered an automatic failure,
         // and should not count as part of the success threshold
         var validatedThreshold = finalWoundThreshold == AUTOMATIC_FAIL_RESULT ? AUTOMATIC_FAIL_RESULT + 1 : finalWoundThreshold;
-        
+
         return Statistics.GetProbabilityOfSuccess(POSSIBLE_RESULTS_SIX_SIDED_DIE, GetNumberOfSuccessfulResults(validatedThreshold));
     }
 
@@ -295,9 +295,9 @@ public static class CombatMath
     private static double GetProbabilityOfCriticalWound(AttackerDTO attacker)
     {
         // Determine the effective critical wound threshold
-        bool hasValidAnti = attacker.WeaponHasAnti && IsValidThreshold(attacker.WeaponAntiThreshold);
-        bool hasValidCriticalWound = IsValidThreshold(attacker.CriticalWoundThreshold);
-        
+        var hasValidAnti = attacker.WeaponHasAnti && IsValidThreshold(attacker.WeaponAntiThreshold);
+        var hasValidCriticalWound = IsValidThreshold(attacker.CriticalWoundThreshold);
+
         int effectiveCriticalWoundThreshold;
         if (hasValidAnti && hasValidCriticalWound)
         {
@@ -379,7 +379,7 @@ public static class CombatMath
 
     /// <summary>
     /// Returns the average amount of damage that the attacker's weapon is able to deal.
-    /// This takes into account: 
+    /// This takes into account:
     /// - The average of any variable attacks added to the flat number of attacks.
     /// </summary>
     /// <param name="attacker">The attacker data object</param>
@@ -604,7 +604,7 @@ public static class CombatMath
         }
 
         // Determine the total possible amount of damage
-        double totalDamage = damagePerAttack * numberOfAttacks;
+        var totalDamage = damagePerAttack * numberOfAttacks;
 
         // Determine the divisor based on which value is larger: the defender's wounds per model, or the attacker's weapon damage.
         var damageThreshold = Math.Max(defender.Wounds, damagePerAttack);
