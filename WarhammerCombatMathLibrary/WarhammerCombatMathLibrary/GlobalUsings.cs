@@ -4,3 +4,4 @@ global using static WarhammerCombatMathLibrary.Core.Constants;
 global using static WarhammerCombatMathLibrary.Statistics.Utility;
 global using static WarhammerCombatMathLibrary.Statistics.Helpers;
 global using static WarhammerCombatMathLibrary.Statistics.Constants;
+global using WarhammerCombatMathLibrary.Model;

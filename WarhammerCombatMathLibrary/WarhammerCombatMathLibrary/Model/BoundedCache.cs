@@ -1,4 +1,4 @@
-﻿namespace WarhammerCombatMathLibrary;
+﻿namespace WarhammerCombatMathLibrary.Model;
 
 /// <summary>
 /// A helper class that implements a bounded cache object.
