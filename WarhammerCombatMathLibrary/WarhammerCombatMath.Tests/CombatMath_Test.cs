@@ -14,7 +14,8 @@ public sealed class CombatMath_Test
     /// Attacker data profile with:
     /// - A single model
     /// </summary>
-    public static readonly AttackerDTO ATTACKER_SINGLE_MODEL_NO_ABILITIES = new(1, [new WeaponProfile()
+    public static readonly AttackerDTO ATTACKER_SINGLE_MODEL_NO_ABILITIES
+    = new(1, [new ()
     {
         FlatAttacks = 8,
         WeaponSkill = 2,
@@ -27,7 +28,8 @@ public sealed class CombatMath_Test
     /// Attacker data profile with:
     /// - Multiple models
     /// </summary>
-    public static readonly AttackerDTO ATTACKER_MULTI_MODEL_NO_ABILITIES = new(10, [new WeaponProfile()
+    public static readonly AttackerDTO ATTACKER_MULTI_MODEL_NO_ABILITIES
+    = new(10, [new ()
     {
         FlatAttacks = 2,
         WeaponSkill = 3,
@@ -41,16 +43,16 @@ public sealed class CombatMath_Test
     /// - A single model
     /// - D3 variable attacks
     /// </summary>
-    public static readonly AttackerDTO ATTACKER_SINGLE_MODEL_VARIABLE_D3_ATTACKS = new()
+    public static readonly AttackerDTO ATTACKER_SINGLE_MODEL_VARIABLE_D3_ATTACKS
+    = new(1, [ new ()
     {
-        NumberOfModels = 1,
-        WeaponNumberOfAttackDice = 3,
-        WeaponAttackDiceType = DiceType.D3,
+        NumberOfAttackDice = 3,
+        AttackDiceType = DiceType.D3,
         WeaponSkill = 3,
-        WeaponStrength = 10,
-        WeaponArmorPierce = 3,
-        WeaponFlatDamage = 3
-    };
+        Strength = 10,
+        ArmorPierce = 3,
+        FlatDamage = 3
+    }]);
 
     /// <summary>
     /// Attacker data profile with:
@@ -58,64 +60,64 @@ public sealed class CombatMath_Test
     /// - D6 variable attacks
     /// - Torrent
     /// </summary>
-    public static readonly AttackerDTO ATTACKER_MULTI_MODEL_VARIABLE_D6_ATTACKS_TORRENT = new()
+    public static readonly AttackerDTO ATTACKER_MULTI_MODEL_VARIABLE_D6_ATTACKS_TORRENT
+    = new(5, [ new()
     {
-        NumberOfModels = 5,
-        WeaponNumberOfAttackDice = 1,
-        WeaponAttackDiceType = DiceType.D6,
-        WeaponHasTorrent = true,
-        WeaponStrength = 5,
-        WeaponArmorPierce = 1,
-        WeaponFlatDamage = 1
-    };
+        NumberOfAttackDice = 1,
+        AttackDiceType = DiceType.D6,
+        Tags = WeaponProfileTags.Torrent,
+        Strength = 5,
+        ArmorPierce = 1,
+        FlatDamage = 1
+    }]);
 
     /// <summary>
     /// Attacker data profile with:
     /// - Multiple models
     /// - Reroll Hits
     /// </summary>
-    public static readonly AttackerDTO ATTACKER_MULTI_MODEL_REROLL_HITS = new()
+    public static readonly AttackerDTO ATTACKER_MULTI_MODEL_REROLL_HITS
+    = new(5, [new()
     {
-        NumberOfModels = 5,
-        WeaponFlatAttacks = 3,
+        FlatAttacks = 3,
         WeaponSkill = 3,
-        WeaponHasRerollHitRolls = true,
-        WeaponStrength = 6,
-        WeaponArmorPierce = 2,
-        WeaponFlatDamage = 3
-    };
+        Tags = WeaponProfileTags.RerollHits,
+        Strength = 6,
+        ArmorPierce = 2,
+        FlatDamage = 3
+    }]);
 
     /// <summary>
     /// Attacker data profile with:
     /// - Multiple models
     /// - Reroll Hits of 1
     /// </summary>
-    public static readonly AttackerDTO ATTACKER_MULTI_MODEL_REROLL_HITS_OF_1 = new()
+    public static readonly AttackerDTO ATTACKER_MULTI_MODEL_REROLL_HITS_OF_1
+    = new(5, [new()
     {
-        NumberOfModels = 5,
-        WeaponFlatAttacks = 3,
+        FlatAttacks = 3,
         WeaponSkill = 3,
-        WeaponHasRerollHitRollsOf1 = true,
-        WeaponStrength = 6,
-        WeaponArmorPierce = 2,
-        WeaponFlatDamage = 3
-    };
+        Tags = WeaponProfileTags.RerollHits1,
+        Strength = 6,
+        ArmorPierce = 2,
+        FlatDamage = 3
+    }]);
 
     /// <summary>
     /// Attacker data profile with:
     /// - A single model
     /// - Lethal Hits
     /// </summary>
-    public static readonly AttackerDTO ATTACKER_SINGLE_MODEL_LETHAL_HITS = new()
+    public static readonly AttackerDTO ATTACKER_SINGLE_MODEL_LETHAL_HITS
+    = new(1, [new()
     {
-        NumberOfModels = 1,
-        WeaponFlatAttacks = 5,
+        FlatAttacks = 5,
         WeaponSkill = 2,
-        WeaponHasLethalHits = true,
-        WeaponStrength = 6,
-        WeaponArmorPierce = 2,
-        WeaponFlatDamage = 3
-    };
+        Tags = WeaponProfileTags.LethalHits,
+        Strength = 6,
+        ArmorPierce = 2,
+        FlatDamage = 3
+    }]);
 
     /// <summary>
     /// Attacker data profile with:
