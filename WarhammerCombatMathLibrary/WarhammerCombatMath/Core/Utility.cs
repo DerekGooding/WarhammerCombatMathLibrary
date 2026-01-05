@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
-using WarhammerCombatMathLibrary.Model;
 
-namespace WarhammerCombatMathLibrary.Core;
+namespace WarhammerCombatMath.Core;
 
 /// <summary>
 /// Represents a binomial distribution of trials and successes.

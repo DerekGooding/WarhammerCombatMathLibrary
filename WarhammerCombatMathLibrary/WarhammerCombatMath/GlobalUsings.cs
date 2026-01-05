@@ -1,7 +1,6 @@
-﻿global using static WarhammerCombatMathLibrary.Core.Utility;
-global using static WarhammerCombatMathLibrary.Core.Helpers;
-global using static WarhammerCombatMathLibrary.Core.Constants;
-global using static WarhammerCombatMathLibrary.Statistics.Utility;
-global using static WarhammerCombatMathLibrary.Statistics.Helpers;
-global using static WarhammerCombatMathLibrary.Statistics.Constants;
-global using WarhammerCombatMathLibrary.Model;
+﻿global using static WarhammerCombatMath.Core.Utility;
+global using static WarhammerCombatMath.Core.Helpers;
+global using static WarhammerCombatMath.Constants;
+global using static WarhammerCombatMath.Statistics.Utility;
+global using static WarhammerCombatMath.Statistics.Helpers;
+global using WarhammerCombatMath.Model;

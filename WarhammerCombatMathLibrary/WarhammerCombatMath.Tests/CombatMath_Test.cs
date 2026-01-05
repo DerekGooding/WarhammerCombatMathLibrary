@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
-using WarhammerCombatMathLibrary.Model;
 
-namespace UnitTests;
+namespace WarhammerCombatMath.Tests;
 
 /// <summary>
 /// Tests the CombatMath class.

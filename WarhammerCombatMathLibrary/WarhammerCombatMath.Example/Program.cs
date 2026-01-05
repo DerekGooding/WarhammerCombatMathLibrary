@@ -1,4 +1,4 @@
-﻿namespace WarhammerCombatMathLibrary.Example;
+﻿namespace WarhammerCombatMath.Example;
 
 internal static class Program
 {

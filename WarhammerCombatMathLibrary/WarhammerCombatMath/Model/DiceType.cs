@@ -1,4 +1,4 @@
-﻿namespace WarhammerCombatMathLibrary.Model;
+﻿namespace WarhammerCombatMath.Model;
 
 /// <summary>
 /// Defines the types of dice available for rolls.

@@ -1,3 +1,3 @@
-﻿global using static WarhammerCombatMathLibrary.Core.Utility;
-global using static WarhammerCombatMathLibrary.Statistics.Utility;
-global using WarhammerCombatMathLibrary.Model;
+﻿global using static WarhammerCombatMath.Core.Utility;
+global using static WarhammerCombatMath.Statistics.Utility;
+global using WarhammerCombatMath.Model;

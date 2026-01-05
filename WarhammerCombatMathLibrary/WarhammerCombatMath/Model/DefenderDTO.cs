@@ -1,4 +1,4 @@
-﻿namespace WarhammerCombatMathLibrary.Model;
+﻿namespace WarhammerCombatMath.Model;
 
 /// <summary>
 /// A data transfer object representing the defender in a combat scenario.

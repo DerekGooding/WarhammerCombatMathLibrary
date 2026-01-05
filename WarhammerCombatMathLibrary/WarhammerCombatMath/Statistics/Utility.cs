@@ -1,8 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Numerics;
-using WarhammerCombatMathLibrary.Model;
 
-namespace WarhammerCombatMathLibrary.Statistics;
+namespace WarhammerCombatMath.Statistics;
 
 /// <summary>
 /// A static class that provides statstical math functions.

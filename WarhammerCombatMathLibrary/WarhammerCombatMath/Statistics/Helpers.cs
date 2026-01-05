@@ -1,6 +1,4 @@
-﻿using WarhammerCombatMathLibrary.Model;
-
-namespace WarhammerCombatMathLibrary.Statistics;
+﻿namespace WarhammerCombatMath.Statistics;
 
 internal static class Helpers
 {
@@ -57,7 +55,6 @@ internal static class Helpers
         {
             cumulative += distribution[i].Probability;
 
-            // For the first element (i == 0), set to exactly 1.0 if it's within tolerance to handle floating point precision
             var probability = (i == 0 && Math.Abs(cumulative - 1.0) < PROBABILITY_TOLERANCE)
                 ? 1.0
                 : Math.Min(cumulative, 1.0);

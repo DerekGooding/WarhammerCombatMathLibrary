@@ -1,6 +1,4 @@
-﻿using WarhammerCombatMathLibrary;
-
-namespace UnitTests;
+﻿namespace WarhammerCombatMath.Tests;
 
 /// <summary>
 /// Tests the BoundedCache class.

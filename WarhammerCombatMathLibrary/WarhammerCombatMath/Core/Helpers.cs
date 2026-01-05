@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
-using WarhammerCombatMathLibrary.Model;
 
-namespace WarhammerCombatMathLibrary.Core;
+namespace WarhammerCombatMath.Core;
 
 internal static class Helpers
 {

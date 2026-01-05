@@ -1,7 +1,6 @@
 ﻿using System.Numerics;
-using WarhammerCombatMathLibrary;
 
-namespace UnitTests;
+namespace WarhammerCombatMath.Tests;
 
 /// <summary>
 /// A test class for the MathUtilities class library.
