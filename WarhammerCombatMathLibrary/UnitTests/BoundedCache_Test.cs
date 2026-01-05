@@ -33,7 +33,7 @@ public sealed class BoundedCache_Test
     {
         var cache = new BoundedCache<string, int>(2);
 
-        var result = cache.TryGetValue("missing", out var value);
+        var result = cache.TryGetValue("missing", out var _);
 
         Assert.IsFalse(result);
     }

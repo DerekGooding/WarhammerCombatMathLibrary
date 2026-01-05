@@ -182,37 +182,34 @@ public class AttackerDTO : IEquatable<AttackerDTO>
     /// <param name="other"></param>
     /// <returns>A boolean value. True if the objects are the same, False otherwise.</returns>
     public bool Equals(AttackerDTO? other)
-    {
-        if (other == null) return false;
-
-        return NumberOfModels == other.NumberOfModels
-               && WeaponNumberOfAttackDice == other.WeaponNumberOfAttackDice
-               && WeaponAttackDiceType == other.WeaponAttackDiceType
-               && WeaponFlatAttacks == other.WeaponFlatAttacks
-               && WeaponSkill == other.WeaponSkill
-               && WeaponStrength == other.WeaponStrength
-               && WeaponArmorPierce == other.WeaponArmorPierce
-               && WeaponNumberOfDamageDice == other.WeaponNumberOfDamageDice
-               && WeaponDamageDiceType == other.WeaponDamageDiceType
-               && WeaponFlatDamage == other.WeaponFlatDamage
-               && WeaponHasTorrent == other.WeaponHasTorrent
-               && WeaponHasLethalHits == other.WeaponHasLethalHits
-               && WeaponHasSustainedHits == other.WeaponHasSustainedHits
-               && WeaponSustainedHitsMultiplier == other.WeaponSustainedHitsMultiplier
-               && WeaponHasRerollHitRolls == other.WeaponHasRerollHitRolls
-               && WeaponHasRerollHitRollsOf1 == other.WeaponHasRerollHitRollsOf1
-               && WeaponHasDevastatingWounds == other.WeaponHasDevastatingWounds
-               && WeaponHasRerollWoundRolls == other.WeaponHasRerollWoundRolls
-               && WeaponHasRerollWoundRollsOf1 == other.WeaponHasRerollWoundRollsOf1
-               && WeaponHasRerollDamageRolls == other.WeaponHasRerollDamageRolls
-               && WeaponHasRerollDamageRollsOf1 == other.WeaponHasRerollDamageRollsOf1
-               && CriticalHitThreshold == other.CriticalHitThreshold
-               && CriticalWoundThreshold == other.CriticalWoundThreshold
-               && WeaponHasAnti == other.WeaponHasAnti
-               && WeaponAntiThreshold == other.WeaponAntiThreshold
-               && HitModifier == other.HitModifier
-               && WoundModifier == other.WoundModifier;
-    }
+    => other != null
+        && NumberOfModels == other.NumberOfModels
+        && WeaponNumberOfAttackDice == other.WeaponNumberOfAttackDice
+        && WeaponAttackDiceType == other.WeaponAttackDiceType
+        && WeaponFlatAttacks == other.WeaponFlatAttacks
+        && WeaponSkill == other.WeaponSkill
+        && WeaponStrength == other.WeaponStrength
+        && WeaponArmorPierce == other.WeaponArmorPierce
+        && WeaponNumberOfDamageDice == other.WeaponNumberOfDamageDice
+        && WeaponDamageDiceType == other.WeaponDamageDiceType
+        && WeaponFlatDamage == other.WeaponFlatDamage
+        && WeaponHasTorrent == other.WeaponHasTorrent
+        && WeaponHasLethalHits == other.WeaponHasLethalHits
+        && WeaponHasSustainedHits == other.WeaponHasSustainedHits
+        && WeaponSustainedHitsMultiplier == other.WeaponSustainedHitsMultiplier
+        && WeaponHasRerollHitRolls == other.WeaponHasRerollHitRolls
+        && WeaponHasRerollHitRollsOf1 == other.WeaponHasRerollHitRollsOf1
+        && WeaponHasDevastatingWounds == other.WeaponHasDevastatingWounds
+        && WeaponHasRerollWoundRolls == other.WeaponHasRerollWoundRolls
+        && WeaponHasRerollWoundRollsOf1 == other.WeaponHasRerollWoundRollsOf1
+        && WeaponHasRerollDamageRolls == other.WeaponHasRerollDamageRolls
+        && WeaponHasRerollDamageRollsOf1 == other.WeaponHasRerollDamageRollsOf1
+        && CriticalHitThreshold == other.CriticalHitThreshold
+        && CriticalWoundThreshold == other.CriticalWoundThreshold
+        && WeaponHasAnti == other.WeaponHasAnti
+        && WeaponAntiThreshold == other.WeaponAntiThreshold
+        && HitModifier == other.HitModifier
+        && WoundModifier == other.WoundModifier;
 
     /// <inheritdoc/>
     public override int GetHashCode()

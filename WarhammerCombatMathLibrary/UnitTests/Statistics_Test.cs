@@ -59,7 +59,7 @@ public sealed class Statistics_Test
     [TestMethod]
     public void AverageResult_PossibleResultsLessThanOrEqualTo0()
     {
-        var expected = 0;
+        const int expected = 0;
         var actual = Statistics.GetMeanResult(0);
         Assert.AreEqual(expected, actual);
     }
@@ -70,8 +70,8 @@ public sealed class Statistics_Test
     [TestMethod]
     public void AverageResult_TestParams1()
     {
-        var expected = 2;
-        var numberOfResults = 3;
+        const int expected = 2;
+        const int numberOfResults = 3;
         var actual = Statistics.GetMeanResult(numberOfResults);
         Assert.AreEqual(expected, actual);
     }
@@ -82,8 +82,8 @@ public sealed class Statistics_Test
     [TestMethod]
     public void AverageResult_TestParams2()
     {
-        var expected = 4;
-        var numberOfResults = 6;
+        const int expected = 4;
+        const int numberOfResults = 6;
         var actual = Statistics.GetMeanResult(numberOfResults);
         Assert.AreEqual(expected, actual);
     }
@@ -94,8 +94,8 @@ public sealed class Statistics_Test
     [TestMethod]
     public void AverageResult_TestParams3()
     {
-        var expected = 6;
-        var numberOfResults = 10;
+        const int expected = 6;
+        const int numberOfResults = 10;
         var actual = Statistics.GetMeanResult(numberOfResults);
         Assert.AreEqual(expected, actual);
     }
@@ -314,14 +314,14 @@ public sealed class Statistics_Test
         var actual = Statistics.GetBinomialDistribution(0, 0.5);
 
         // Print expected
-        Debug.WriteLine($"Expected: ");
+        Debug.WriteLine("Expected: ");
         foreach (var value in expected)
         {
             Debug.WriteLine(value);
         }
 
         // Print actual
-        Debug.WriteLine($"Actual: ");
+        Debug.WriteLine("Actual: ");
         foreach (var value in actual)
         {
             Debug.WriteLine(value);
@@ -340,14 +340,14 @@ public sealed class Statistics_Test
         var actual = Statistics.GetBinomialDistribution(0, 1, 0.5);
 
         // Print expected
-        Debug.WriteLine($"Expected: ");
+        Debug.WriteLine("Expected: ");
         foreach (var value in expected)
         {
             Debug.WriteLine(value);
         }
 
         // Print actual
-        Debug.WriteLine($"Actual: ");
+        Debug.WriteLine("Actual: ");
         foreach (var value in actual)
         {
             Debug.WriteLine(value);
@@ -366,14 +366,14 @@ public sealed class Statistics_Test
         var actual = Statistics.GetBinomialDistribution(1, 0, 0.5);
 
         // Print expected
-        Debug.WriteLine($"Expected: ");
+        Debug.WriteLine("Expected: ");
         foreach (var value in expected)
         {
             Debug.WriteLine(value);
         }
 
         // Print actual
-        Debug.WriteLine($"Actual: ");
+        Debug.WriteLine("Actual: ");
         foreach (var value in actual)
         {
             Debug.WriteLine(value);
@@ -398,14 +398,14 @@ public sealed class Statistics_Test
         var actual = Statistics.GetBinomialDistribution(3, -1);
 
         // Print expected
-        Debug.WriteLine($"Expected: ");
+        Debug.WriteLine("Expected: ");
         foreach (var value in expected)
         {
             Debug.WriteLine(value);
         }
 
         // Print actual
-        Debug.WriteLine($"Actual: ");
+        Debug.WriteLine("Actual: ");
         foreach (var value in actual)
         {
             Debug.WriteLine(value);
@@ -431,14 +431,14 @@ public sealed class Statistics_Test
         var actual = Statistics.GetBinomialDistribution(3, 1);
 
         // Print expected
-        Debug.WriteLine($"Expected: ");
+        Debug.WriteLine("Expected: ");
         foreach (var value in expected)
         {
             Debug.WriteLine(value);
         }
 
         // Print actual
-        Debug.WriteLine($"Actual: ");
+        Debug.WriteLine("Actual: ");
         foreach (var value in actual)
         {
             Debug.WriteLine(value);
@@ -453,18 +453,18 @@ public sealed class Statistics_Test
     [TestMethod]
     public void BinomialDistribution_GroupSuccessCountLessThan1()
     {
-        var expected = new List<BinomialOutcome> { new BinomialOutcome(0, 1) };
+        var expected = new List<BinomialOutcome> { new(0, 1) };
         var actual = Statistics.GetBinomialDistribution(3, 0.5, 0);
 
         // Print expected
-        Debug.WriteLine($"Expected: ");
+        Debug.WriteLine("Expected: ");
         foreach (var value in expected)
         {
             Debug.WriteLine(value);
         }
 
         // Print actual
-        Debug.WriteLine($"Actual: ");
+        Debug.WriteLine("Actual: ");
         foreach (var value in actual)
         {
             Debug.WriteLine(value);
@@ -479,18 +479,18 @@ public sealed class Statistics_Test
     [TestMethod]
     public void BinomialDistribution_GroupSuccessCountGreaterThanNumberOfTrials()
     {
-        var expected = new List<BinomialOutcome> { new BinomialOutcome(0, 1) };
+        var expected = new List<BinomialOutcome> { new(0, 1) };
         var actual = Statistics.GetBinomialDistribution(3, 0.5, 5);
 
         // Print expected
-        Debug.WriteLine($"Expected: ");
+        Debug.WriteLine("Expected: ");
         foreach (var value in expected)
         {
             Debug.WriteLine(value);
         }
 
         // Print actual
-        Debug.WriteLine($"Actual: ");
+        Debug.WriteLine("Actual: ");
         foreach (var value in actual)
         {
             Debug.WriteLine(value);
@@ -505,9 +505,9 @@ public sealed class Statistics_Test
     [TestMethod]
     public void BinomialDistribution_VariableTrials()
     {
-        var minNumberOfTrials = 1;
-        var maxNumberOfTrials = 3;
-        var probability = 0.5;
+        const int minNumberOfTrials = 1;
+        const int maxNumberOfTrials = 3;
+        const double probability = 0.5;
         var expected = new List<BinomialOutcome>()
         {
             new(0, 0.2917),
@@ -519,14 +519,14 @@ public sealed class Statistics_Test
         var actual = Statistics.GetBinomialDistribution(minNumberOfTrials, maxNumberOfTrials, probability);
 
         // Print expected
-        Debug.WriteLine($"Expected: ");
+        Debug.WriteLine("Expected: ");
         foreach (var value in expected)
         {
             Debug.WriteLine(value);
         }
 
         // Print actual
-        Debug.WriteLine($"Actual: ");
+        Debug.WriteLine("Actual: ");
         foreach (var value in actual)
         {
             Debug.WriteLine(value);
@@ -549,14 +549,14 @@ public sealed class Statistics_Test
         var actual = Statistics.GetCumulativeDistribution(0, 0.5);
 
         // Print expected
-        Debug.WriteLine($"Expected: ");
+        Debug.WriteLine("Expected: ");
         foreach (var value in expected)
         {
             Debug.WriteLine(value);
         }
 
         // Print actual
-        Debug.WriteLine($"Actual: ");
+        Debug.WriteLine("Actual: ");
         foreach (var value in actual)
         {
             Debug.WriteLine(value);
@@ -575,14 +575,14 @@ public sealed class Statistics_Test
         var actual = Statistics.GetCumulativeDistribution(0, 1, 0.5);
 
         // Print expected
-        Debug.WriteLine($"Expected: ");
+        Debug.WriteLine("Expected: ");
         foreach (var value in expected)
         {
             Debug.WriteLine(value);
         }
 
         // Print actual
-        Debug.WriteLine($"Actual: ");
+        Debug.WriteLine("Actual: ");
         foreach (var value in actual)
         {
             Debug.WriteLine(value);
@@ -601,14 +601,14 @@ public sealed class Statistics_Test
         var actual = Statistics.GetCumulativeDistribution(1, 0, 0.5);
 
         // Print expected
-        Debug.WriteLine($"Expected: ");
+        Debug.WriteLine("Expected: ");
         foreach (var value in expected)
         {
             Debug.WriteLine(value);
         }
 
         // Print actual
-        Debug.WriteLine($"Actual: ");
+        Debug.WriteLine("Actual: ");
         foreach (var value in actual)
         {
             Debug.WriteLine(value);
@@ -633,14 +633,14 @@ public sealed class Statistics_Test
         var actual = Statistics.GetCumulativeDistribution(3, -1);
 
         // Print expected
-        Debug.WriteLine($"Expected: ");
+        Debug.WriteLine("Expected: ");
         foreach (var value in expected)
         {
             Debug.WriteLine(value);
         }
 
         // Print actual
-        Debug.WriteLine($"Actual: ");
+        Debug.WriteLine("Actual: ");
         foreach (var value in actual)
         {
             Debug.WriteLine(value);
@@ -666,14 +666,14 @@ public sealed class Statistics_Test
         var actual = Statistics.GetCumulativeDistribution(3, 1);
 
         // Print expected
-        Debug.WriteLine($"Expected: ");
+        Debug.WriteLine("Expected: ");
         foreach (var value in expected)
         {
             Debug.WriteLine(value);
         }
 
         // Print actual
-        Debug.WriteLine($"Actual: ");
+        Debug.WriteLine("Actual: ");
         foreach (var value in actual)
         {
             Debug.WriteLine(value);
@@ -688,18 +688,18 @@ public sealed class Statistics_Test
     [TestMethod]
     public void LowerCumulativeDistribution_GroupSuccessCountLessThan1()
     {
-        var expected = new List<BinomialOutcome> { new BinomialOutcome(0, 1) };
+        var expected = new List<BinomialOutcome> { new(0, 1) };
         var actual = Statistics.GetCumulativeDistribution(3, 0.5, 0);
 
         // Print expected
-        Debug.WriteLine($"Expected: ");
+        Debug.WriteLine("Expected: ");
         foreach (var value in expected)
         {
             Debug.WriteLine(value);
         }
 
         // Print actual
-        Debug.WriteLine($"Actual: ");
+        Debug.WriteLine("Actual: ");
         foreach (var value in actual)
         {
             Debug.WriteLine(value);
@@ -714,18 +714,18 @@ public sealed class Statistics_Test
     [TestMethod]
     public void LowerCumulativeDistribution_GroupSuccessCountGreaterThanNumberOfTrials()
     {
-        var expected = new List<BinomialOutcome> { new BinomialOutcome(0, 1) };
+        var expected = new List<BinomialOutcome> { new(0, 1) };
         var actual = Statistics.GetCumulativeDistribution(3, 0.5, 5);
 
         // Print expected
-        Debug.WriteLine($"Expected: ");
+        Debug.WriteLine("Expected: ");
         foreach (var value in expected)
         {
             Debug.WriteLine(value);
         }
 
         // Print actual
-        Debug.WriteLine($"Actual: ");
+        Debug.WriteLine("Actual: ");
         foreach (var value in actual)
         {
             Debug.WriteLine(value);
@@ -740,9 +740,9 @@ public sealed class Statistics_Test
     [TestMethod]
     public void CumulativeDistribution_VariableTrials()
     {
-        var minNumberOfTrials = 1;
-        var maxNumberOfTrials = 3;
-        var probability = 0.5;
+        const int minNumberOfTrials = 1;
+        const int maxNumberOfTrials = 3;
+        const double probability = 0.5;
         var expected = new List<BinomialOutcome>()
         {
             new(0, 0.2917),
@@ -754,14 +754,14 @@ public sealed class Statistics_Test
         var actual = Statistics.GetCumulativeDistribution(minNumberOfTrials, maxNumberOfTrials, probability);
 
         // Print expected
-        Debug.WriteLine($"Expected: ");
+        Debug.WriteLine("Expected: ");
         foreach (var value in expected)
         {
             Debug.WriteLine(value);
         }
 
         // Print actual
-        Debug.WriteLine($"Actual: ");
+        Debug.WriteLine("Actual: ");
         foreach (var value in actual)
         {
             Debug.WriteLine(value);
@@ -784,14 +784,14 @@ public sealed class Statistics_Test
         var actual = Statistics.GetSurvivorDistribution(0, 0.5);
 
         // Print expected
-        Debug.WriteLine($"Expected: ");
+        Debug.WriteLine("Expected: ");
         foreach (var value in expected)
         {
             Debug.WriteLine(value);
         }
 
         // Print actual
-        Debug.WriteLine($"Actual: ");
+        Debug.WriteLine("Actual: ");
         foreach (var value in actual)
         {
             Debug.WriteLine(value);
@@ -810,14 +810,14 @@ public sealed class Statistics_Test
         var actual = Statistics.GetSurvivorDistribution(0, 1, 0.5);
 
         // Print expected
-        Debug.WriteLine($"Expected: ");
+        Debug.WriteLine("Expected: ");
         foreach (var value in expected)
         {
             Debug.WriteLine(value);
         }
 
         // Print actual
-        Debug.WriteLine($"Actual: ");
+        Debug.WriteLine("Actual: ");
         foreach (var value in actual)
         {
             Debug.WriteLine(value);
@@ -836,14 +836,14 @@ public sealed class Statistics_Test
         var actual = Statistics.GetSurvivorDistribution(1, 0, 0.5);
 
         // Print expected
-        Debug.WriteLine($"Expected: ");
+        Debug.WriteLine("Expected: ");
         foreach (var value in expected)
         {
             Debug.WriteLine(value);
         }
 
         // Print actual
-        Debug.WriteLine($"Actual: ");
+        Debug.WriteLine("Actual: ");
         foreach (var value in actual)
         {
             Debug.WriteLine(value);
@@ -869,14 +869,14 @@ public sealed class Statistics_Test
         var actual = Statistics.GetSurvivorDistribution(3, -1);
 
         // Print expected
-        Debug.WriteLine($"Expected: ");
+        Debug.WriteLine("Expected: ");
         foreach (var value in expected)
         {
             Debug.WriteLine(value);
         }
 
         // Print actual
-        Debug.WriteLine($"Actual: ");
+        Debug.WriteLine("Actual: ");
         foreach (var value in actual)
         {
             Debug.WriteLine(value);
@@ -902,14 +902,14 @@ public sealed class Statistics_Test
         var actual = Statistics.GetSurvivorDistribution(3, 1);
 
         // Print expected
-        Debug.WriteLine($"Expected: ");
+        Debug.WriteLine("Expected: ");
         foreach (var value in expected)
         {
             Debug.WriteLine(value);
         }
 
         // Print actual
-        Debug.WriteLine($"Actual: ");
+        Debug.WriteLine("Actual: ");
         foreach (var value in actual)
         {
             Debug.WriteLine(value);
@@ -924,18 +924,18 @@ public sealed class Statistics_Test
     [TestMethod]
     public void SurvivorDistribution_GroupSuccessCountLessThan1()
     {
-        var expected = new List<BinomialOutcome> { new BinomialOutcome(0, 1) };
+        var expected = new List<BinomialOutcome> { new(0, 1) };
         var actual = Statistics.GetSurvivorDistribution(3, 0.5, 0);
 
         // Print expected
-        Debug.WriteLine($"Expected: ");
+        Debug.WriteLine("Expected: ");
         foreach (var value in expected)
         {
             Debug.WriteLine(value);
         }
 
         // Print actual
-        Debug.WriteLine($"Actual: ");
+        Debug.WriteLine("Actual: ");
         foreach (var value in actual)
         {
             Debug.WriteLine(value);
@@ -950,18 +950,18 @@ public sealed class Statistics_Test
     [TestMethod]
     public void SurvivorDistribution_GroupSuccessCountGreaterThanNumberOfTrials()
     {
-        var expected = new List<BinomialOutcome> { new BinomialOutcome(0, 1) };
+        var expected = new List<BinomialOutcome> { new(0, 1) };
         var actual = Statistics.GetSurvivorDistribution(3, 0.5, 5);
 
         // Print expected
-        Debug.WriteLine($"Expected: ");
+        Debug.WriteLine("Expected: ");
         foreach (var value in expected)
         {
             Debug.WriteLine(value);
         }
 
         // Print actual
-        Debug.WriteLine($"Actual: ");
+        Debug.WriteLine("Actual: ");
         foreach (var value in actual)
         {
             Debug.WriteLine(value);
@@ -976,9 +976,9 @@ public sealed class Statistics_Test
     [TestMethod]
     public void SurvivorDistribution_VariableTrials()
     {
-        var minNumberOfTrials = 1;
-        var maxNumberOfTrials = 3;
-        var probability = 0.5;
+        const int minNumberOfTrials = 1;
+        const int maxNumberOfTrials = 3;
+        const double probability = 0.5;
         var expected = new List<BinomialOutcome>()
         {
             new(0, 1),
@@ -990,14 +990,14 @@ public sealed class Statistics_Test
         var actual = Statistics.GetSurvivorDistribution(minNumberOfTrials, maxNumberOfTrials, probability);
 
         // Print expected
-        Debug.WriteLine($"Expected: ");
+        Debug.WriteLine("Expected: ");
         foreach (var value in expected)
         {
             Debug.WriteLine(value);
         }
 
         // Print actual
-        Debug.WriteLine($"Actual: ");
+        Debug.WriteLine("Actual: ");
         foreach (var value in actual)
         {
             Debug.WriteLine(value);
@@ -1017,7 +1017,7 @@ public sealed class Statistics_Test
     public void CumulativeDistribution_Simple_MaxValueIsOne()
     {
         var dist = Statistics.GetCumulativeDistribution(10, 0.5);
-        var lastProb = dist[dist.Count - 1].Probability;
+        var lastProb = dist[^1].Probability;
         Assert.AreEqual(1.0, lastProb, 0.0001, $"Last probability was {lastProb}, expected 1.0");
     }
 
@@ -1028,7 +1028,7 @@ public sealed class Statistics_Test
     public void CumulativeDistribution_VariableTrials_MaxValueIsOne()
     {
         var dist = Statistics.GetCumulativeDistribution(1, 10, 0.5);
-        var lastProb = dist[dist.Count - 1].Probability;
+        var lastProb = dist[^1].Probability;
         Assert.AreEqual(1.0, lastProb, 0.0001, $"Last probability was {lastProb}, expected 1.0");
     }
 
@@ -1039,7 +1039,7 @@ public sealed class Statistics_Test
     public void CumulativeDistribution_VariableGroupSuccess_MaxValueIsOne()
     {
         var dist = Statistics.GetCumulativeDistribution(10, 0.5, 2, 3);
-        var lastProb = dist[dist.Count - 1].Probability;
+        var lastProb = dist[^1].Probability;
         Assert.AreEqual(1.0, lastProb, 0.0001, $"Last probability was {lastProb}, expected 1.0");
     }
 
@@ -1050,7 +1050,7 @@ public sealed class Statistics_Test
     public void CumulativeDistribution_VariableTrialsAndGroup_MaxValueIsOne()
     {
         var dist = Statistics.GetCumulativeDistribution(1, 10, 0.5, 2, 3);
-        var lastProb = dist[dist.Count - 1].Probability;
+        var lastProb = dist[^1].Probability;
         Assert.AreEqual(1.0, lastProb, 0.0001, $"Last probability was {lastProb}, expected 1.0");
     }
 
@@ -1149,7 +1149,7 @@ public sealed class Statistics_Test
     public void CumulativeDistribution_SingleGroupSuccessGreaterThan1_MaxValueIsOne()
     {
         var dist = Statistics.GetCumulativeDistribution(10, 0.5, 2);
-        var lastProb = dist[dist.Count - 1].Probability;
+        var lastProb = dist[^1].Probability;
         Assert.AreEqual(1.0, lastProb, 0.0001, $"Last probability was {lastProb}, expected 1.0");
     }
 

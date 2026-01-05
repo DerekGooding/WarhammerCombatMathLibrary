@@ -41,7 +41,7 @@ public static class Statistics
     {
         if (distribution == null || distribution.Count == 0)
         {
-            return distribution ?? new List<BinomialOutcome>();
+            return distribution ?? [];
         }
 
         // Calculate the sum of all probabilities
@@ -54,11 +54,11 @@ public static class Statistics
         }
 
         // Normalize each probability
-        return distribution.Select(outcome => new BinomialOutcome
+        return distribution.ConvertAll(outcome => new BinomialOutcome
         {
             Successes = outcome.Successes,
             Probability = outcome.Probability / totalProbability
-        }).ToList();
+        });
     }
 
     /// <summary>
@@ -106,8 +106,7 @@ public static class Statistics
             cumulative += distribution[i].Probability;
 
             // For the first element (i == 0), set to exactly 1.0 if it's within tolerance to handle floating point precision
-            double probability;
-            probability = (i == 0 && Math.Abs(cumulative - 1.0) < PROBABILITY_TOLERANCE)
+            var probability = (i == 0 && Math.Abs(cumulative - 1.0) < PROBABILITY_TOLERANCE)
                 ? 1.0
                 : Math.Min(cumulative, 1.0);
 
@@ -415,19 +414,19 @@ public static class Statistics
         // Validate parameters
         if (numberOfPossibleResults <= 0)
         {
-            Debug.WriteLine($"ProbabilityOfSuccess() | Number of possible results is less than or equal to 0. Returning 0 ...");
+            Debug.WriteLine("ProbabilityOfSuccess() | Number of possible results is less than or equal to 0. Returning 0 ...");
             return 0;
         }
 
         if (numberOfSuccessfulResults < 1)
         {
-            Debug.WriteLine($"ProbabilityOfSuccess() | Number of successful results is less than 1. Returning 0 ...");
+            Debug.WriteLine("ProbabilityOfSuccess() | Number of successful results is less than 1. Returning 0 ...");
             return 0;
         }
 
         if (numberOfSuccessfulResults > numberOfPossibleResults)
         {
-            Debug.WriteLine($"ProbabilityOfSuccess() | Number of successful results is greater than the number of possible results. Returning 1 ...");
+            Debug.WriteLine("ProbabilityOfSuccess() | Number of successful results is greater than the number of possible results. Returning 1 ...");
             return 1;
         }
 
@@ -450,10 +449,9 @@ public static class Statistics
 
         // Use formula for adding natural numbers from 1 to n
         var sum = (double)(numberOfPossibleResults * (numberOfPossibleResults + 1)) / 2;
-        var average = (int)Math.Round(((double)sum / numberOfPossibleResults));
 
         // Calcualte average
-        return average;
+        return (int)Math.Round((double)sum / numberOfPossibleResults);
 
     }
 
@@ -496,13 +494,13 @@ public static class Statistics
         // Validate parameters
         if (population < 0)
         {
-            Debug.WriteLine($"BinomialCoefficient() | Population is less than 0. Returning 0 ...");
+            Debug.WriteLine("BinomialCoefficient() | Population is less than 0. Returning 0 ...");
             return 0;
         }
 
         if (combinationSize < 0)
         {
-            Debug.WriteLine($"BinomialCoefficient() | Combination size is less than 0. Returning 0 ...");
+            Debug.WriteLine("BinomialCoefficient() | Combination size is less than 0. Returning 0 ...");
             return 0;
         }
 
@@ -516,7 +514,7 @@ public static class Statistics
         var factorialTotal = MathUtilities.Factorial(population);
         var factorialCombination = MathUtilities.Factorial(combinationSize);
         var factorialDifference = MathUtilities.Factorial(population - combinationSize);
-        return (factorialTotal / (factorialCombination * factorialDifference));
+        return factorialTotal / (factorialCombination * factorialDifference);
     }
 
     /// <summary>
@@ -531,19 +529,19 @@ public static class Statistics
         // Validate parameters
         if (probability <= 0)
         {
-            Debug.WriteLine($"ProbabilityOfMultipleSuccesses() | Probability is less than or equal to 0. Returning 0 ...");
+            Debug.WriteLine("ProbabilityOfMultipleSuccesses() | Probability is less than or equal to 0. Returning 0 ...");
             return 0;
         }
 
         if (probability >= 1)
         {
-            Debug.WriteLine($"ProbabilityOfMultipleSuccesses() | Probability is greater than or equal to 1. Returning 1 ...");
+            Debug.WriteLine("ProbabilityOfMultipleSuccesses() | Probability is greater than or equal to 1. Returning 1 ...");
             return 1;
         }
 
         if (numberOfSuccesses < 0)
         {
-            Debug.WriteLine($"ProbabilityOfMultipleSuccesses() | Number of successes is less than 0. Returning 0 ...");
+            Debug.WriteLine("ProbabilityOfMultipleSuccesses() | Number of successes is less than 0. Returning 0 ...");
             return 0;
         }
 
@@ -612,13 +610,13 @@ public static class Statistics
         // Validate parameters
         if (numberOfTrials <= 0)
         {
-            Debug.WriteLine($"BinomialDistribution() | Number of trials is less than 1.");
+            Debug.WriteLine("BinomialDistribution() | Number of trials is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (probability <= 0)
         {
-            Debug.WriteLine($"BinomialDistribution() | Probability is less than or equal to 0.");
+            Debug.WriteLine("BinomialDistribution() | Probability is less than or equal to 0.");
 
             // The probability of 0 successes should be 1, all other probabilities should be 0.
             var adjustedDistribution = new List<BinomialOutcome>
@@ -636,13 +634,13 @@ public static class Statistics
 
         if (groupSuccessCount <= 0)
         {
-            Debug.WriteLine($"BinomialDistribution() | Group success count is less than 1.");
+            Debug.WriteLine("BinomialDistribution() | Group success count is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (groupSuccessCount > numberOfTrials)
         {
-            Debug.WriteLine($"BinomialDistribution() | Group success count is greater than the total number of trials.");
+            Debug.WriteLine("BinomialDistribution() | Group success count is greater than the total number of trials.");
             return [new BinomialOutcome(0, 1)];
         }
 
@@ -663,13 +661,13 @@ public static class Statistics
         // Validate parameters
         if (numberOfTrials <= 0)
         {
-            Debug.WriteLine($"BinomialDistribution() | Number of trials is less than 1.");
+            Debug.WriteLine("BinomialDistribution() | Number of trials is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (probability <= 0)
         {
-            Debug.WriteLine($"BinomialDistributionVariableTrials() | Probability is less than or equal to 0.");
+            Debug.WriteLine("BinomialDistributionVariableTrials() | Probability is less than or equal to 0.");
 
             // The probability of 0 successes should be 1, all other probabilities should be 0.
             var adjustedDistribution = new List<BinomialOutcome>
@@ -687,25 +685,25 @@ public static class Statistics
 
         if (minGroupSuccessCount <= 0)
         {
-            Debug.WriteLine($"BinomialDistributionVariableTrials() | Minimum group success count is less than 1.");
+            Debug.WriteLine("BinomialDistributionVariableTrials() | Minimum group success count is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (maxGroupSuccessCount <= 0)
         {
-            Debug.WriteLine($"BinomialDistributionVariableTrials() | Maximum group success count is less than 1.");
+            Debug.WriteLine("BinomialDistributionVariableTrials() | Maximum group success count is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (minGroupSuccessCount > maxGroupSuccessCount)
         {
-            Debug.WriteLine($"BinomialDistributionVariableTrials() | Minimum group success count is greater than maximum group success count.");
+            Debug.WriteLine("BinomialDistributionVariableTrials() | Minimum group success count is greater than maximum group success count.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (minGroupSuccessCount > numberOfTrials)
         {
-            Debug.WriteLine($"BinomialDistributionVariableTrials() | Minimum group success count is greater than the total number of trials.");
+            Debug.WriteLine("BinomialDistributionVariableTrials() | Minimum group success count is greater than the total number of trials.");
             return [new BinomialOutcome(0, 1)];
         }
 
@@ -730,19 +728,19 @@ public static class Statistics
         // Validate parameters
         if (minNumberOfTrials <= 0)
         {
-            Debug.WriteLine($"BinomialDistribution() | Min number of trials is less than 1.");
+            Debug.WriteLine("BinomialDistribution() | Min number of trials is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (maxNumberOfTrials <= 0)
         {
-            Debug.WriteLine($"BinomialDistribution() | Max number of trials is less than 1.");
+            Debug.WriteLine("BinomialDistribution() | Max number of trials is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (probability <= 0)
         {
-            Debug.WriteLine($"BinomialDistribution() | Probability is less than or equal to 0.");
+            Debug.WriteLine("BinomialDistribution() | Probability is less than or equal to 0.");
 
             // The probability of 0 successes should be 1, all other probabilities should be 0.
             var adjustedDistribution = new List<BinomialOutcome>
@@ -760,13 +758,13 @@ public static class Statistics
 
         if (groupSuccessCount <= 0)
         {
-            Debug.WriteLine($"BinomialDistribution() | Group success count is less than 1.");
+            Debug.WriteLine("BinomialDistribution() | Group success count is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (groupSuccessCount > maxNumberOfTrials)
         {
-            Debug.WriteLine($"BinomialDistributionVariableTrials() | Group success count is greater than the total number of trials.");
+            Debug.WriteLine("BinomialDistributionVariableTrials() | Group success count is greater than the total number of trials.");
             return [new BinomialOutcome(0, 1)];
         }
 
@@ -788,25 +786,25 @@ public static class Statistics
         // Validate parameters
         if (minNumberOfTrials <= 0)
         {
-            Debug.WriteLine($"CreateDistribution() | Min number of trials is less than 1.");
+            Debug.WriteLine("CreateDistribution() | Min number of trials is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (maxNumberOfTrials <= 0)
         {
-            Debug.WriteLine($"CreateDistribution() | Max number of trials is less than 1.");
+            Debug.WriteLine("CreateDistribution() | Max number of trials is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (minNumberOfTrials > maxNumberOfTrials)
         {
-            Debug.WriteLine($"CreateDistribution() | Min number of trials is greater than max number of trials.");
+            Debug.WriteLine("CreateDistribution() | Min number of trials is greater than max number of trials.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (probability <= 0)
         {
-            Debug.WriteLine($"BinomialDistribution() | Probability is less than or equal to 0.");
+            Debug.WriteLine("BinomialDistribution() | Probability is less than or equal to 0.");
 
             // The probability of 0 successes should be 1, all other probabilities should be 0.
             var adjustedDistribution = new List<BinomialOutcome>
@@ -824,25 +822,25 @@ public static class Statistics
 
         if (minGroupSuccessCount <= 0)
         {
-            Debug.WriteLine($"BinomialDistributionVariableTrials() | Minimum group success count is less than 1.");
+            Debug.WriteLine("BinomialDistributionVariableTrials() | Minimum group success count is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (maxGroupSuccessCount <= 0)
         {
-            Debug.WriteLine($"BinomialDistributionVariableTrials() | Maximum group success count is less than 1.");
+            Debug.WriteLine("BinomialDistributionVariableTrials() | Maximum group success count is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (minGroupSuccessCount > maxGroupSuccessCount)
         {
-            Debug.WriteLine($"BinomialDistributionVariableTrials() | Minimum group success count is greater than maximum group success count.");
+            Debug.WriteLine("BinomialDistributionVariableTrials() | Minimum group success count is greater than maximum group success count.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (minGroupSuccessCount > maxNumberOfTrials)
         {
-            Debug.WriteLine($"BinomialDistributionVariableTrials() | Minimum group success count is greater than the total number of trials.");
+            Debug.WriteLine("BinomialDistributionVariableTrials() | Minimum group success count is greater than the total number of trials.");
             return [new BinomialOutcome(0, 1)];
         }
 
@@ -867,13 +865,13 @@ public static class Statistics
         // Validate parameters
         if (numberOfTrials <= 0)
         {
-            Debug.WriteLine($"CumulativeDistribution() | Number of trials is less than 1.");
+            Debug.WriteLine("CumulativeDistribution() | Number of trials is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (probability <= 0)
         {
-            Debug.WriteLine($"CumulativeDistribution() | Probability is less than or equal to 0.");
+            Debug.WriteLine("CumulativeDistribution() | Probability is less than or equal to 0.");
 
             // The probability of 0 successes should be 1, all other probabilities should be 0.
             // So the lower cumulative probability for all entries should be 1.
@@ -892,7 +890,7 @@ public static class Statistics
 
         if (probability >= 1)
         {
-            Debug.WriteLine($"CumulativeDistribution() | Probability is greater than or equal to 1.");
+            Debug.WriteLine("CumulativeDistribution() | Probability is greater than or equal to 1.");
 
             // All probabilities should be 0, except the probability of all successes should be 1.
             var adjustedDistribution = new List<BinomialOutcome>();
@@ -909,13 +907,13 @@ public static class Statistics
 
         if (groupSuccessCount <= 0)
         {
-            Debug.WriteLine($"CumulativeDistribution() | Group success count is less than 1.");
+            Debug.WriteLine("CumulativeDistribution() | Group success count is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (groupSuccessCount > numberOfTrials)
         {
-            Debug.WriteLine($"CumulativeDistribution() | Group success count is greater than the total number of trials.");
+            Debug.WriteLine("CumulativeDistribution() | Group success count is greater than the total number of trials.");
             return [new BinomialOutcome(0, 1)];
         }
 
@@ -936,13 +934,13 @@ public static class Statistics
         // Validate parameters
         if (numberOfTrials <= 0)
         {
-            Debug.WriteLine($"LowerCumulativeDistribution() | Number of trials is less than 1.");
+            Debug.WriteLine("LowerCumulativeDistribution() | Number of trials is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (probability <= 0)
         {
-            Debug.WriteLine($"LowerCumulativeDistribution() | Probability is less than or equal to 0.");
+            Debug.WriteLine("LowerCumulativeDistribution() | Probability is less than or equal to 0.");
 
             // The probability of 0 successes should be 1, all other probabilities should be 0.
             // So the lower cumulative probability for all entries should be 1.
@@ -961,7 +959,7 @@ public static class Statistics
 
         if (probability >= 1)
         {
-            Debug.WriteLine($"LowerCumulativeDistribution() | Probability is greater than or equal to 1.");
+            Debug.WriteLine("LowerCumulativeDistribution() | Probability is greater than or equal to 1.");
 
             // All probabilities should be 0, except the probability of all successes should be 1.
             var adjustedDistribution = new List<BinomialOutcome>();
@@ -978,25 +976,25 @@ public static class Statistics
 
         if (minGroupSuccessCount <= 0)
         {
-            Debug.WriteLine($"LowerCumulativeDistribution() | Minimum group success count is less than 1.");
+            Debug.WriteLine("LowerCumulativeDistribution() | Minimum group success count is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (maxGroupSuccessCount <= 0)
         {
-            Debug.WriteLine($"LowerCumulativeDistribution() | Maximum group success count is less than 1.");
+            Debug.WriteLine("LowerCumulativeDistribution() | Maximum group success count is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (minGroupSuccessCount > maxGroupSuccessCount)
         {
-            Debug.WriteLine($"LowerCumulativeDistribution() | Minimum group success count is greater than maximum group success count.");
+            Debug.WriteLine("LowerCumulativeDistribution() | Minimum group success count is greater than maximum group success count.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (minGroupSuccessCount > numberOfTrials)
         {
-            Debug.WriteLine($"LowerCumulativeDistribution() | Minimum group success count is greater than the total number of trials.");
+            Debug.WriteLine("LowerCumulativeDistribution() | Minimum group success count is greater than the total number of trials.");
             return [new BinomialOutcome(0, 1)];
         }
 
@@ -1021,25 +1019,25 @@ public static class Statistics
         // Validate parameters
         if (minNumberOfTrials <= 0)
         {
-            Debug.WriteLine($"LowerCumulativeDistribution() | Minimum number of trials is less than 1.");
+            Debug.WriteLine("LowerCumulativeDistribution() | Minimum number of trials is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (maxNumberOfTrials <= 0)
         {
-            Debug.WriteLine($"LowerCumulativeDistribution() | Maximum number of trials is less than 1.");
+            Debug.WriteLine("LowerCumulativeDistribution() | Maximum number of trials is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (minNumberOfTrials > maxNumberOfTrials)
         {
-            Debug.WriteLine($"LowerCumulativeDistribution() | Min number of trials is greater than max number of trials.");
+            Debug.WriteLine("LowerCumulativeDistribution() | Min number of trials is greater than max number of trials.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (probability <= 0)
         {
-            Debug.WriteLine($"LowerCumulativeDistribution() | Probability is less than or equal to 0.");
+            Debug.WriteLine("LowerCumulativeDistribution() | Probability is less than or equal to 0.");
 
             // The probability of 0 successes should be 1, all other probabilities should be 0.
             // So the lower cumulative probability for all entries should be 1.
@@ -1058,7 +1056,7 @@ public static class Statistics
 
         if (probability >= 1)
         {
-            Debug.WriteLine($"LowerCumulativeDistribution() | Probability is greater than or equal to 1.");
+            Debug.WriteLine("LowerCumulativeDistribution() | Probability is greater than or equal to 1.");
 
             // All probabilities should be 0, except the probability of all successes should be 1.
             var adjustedDistribution = new List<BinomialOutcome>();
@@ -1075,13 +1073,13 @@ public static class Statistics
 
         if (groupSuccessCount <= 0)
         {
-            Debug.WriteLine($"LowerCumulativeDistribution() | Group success count is less than 1.");
+            Debug.WriteLine("LowerCumulativeDistribution() | Group success count is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (groupSuccessCount > maxNumberOfTrials)
         {
-            Debug.WriteLine($"LowerCumulativeDistribution() | Group success count is greater than the total number of trials.");
+            Debug.WriteLine("LowerCumulativeDistribution() | Group success count is greater than the total number of trials.");
             return [new BinomialOutcome(0, 1)];
         }
 
@@ -1103,25 +1101,25 @@ public static class Statistics
         // Validate parameters
         if (minNumberOfTrials <= 0)
         {
-            Debug.WriteLine($"LowerCumulativeDistribution() | Minimum number of trials is less than 1.");
+            Debug.WriteLine("LowerCumulativeDistribution() | Minimum number of trials is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (maxNumberOfTrials <= 0)
         {
-            Debug.WriteLine($"LowerCumulativeDistribution() | Maximum number of trials is less than 1.");
+            Debug.WriteLine("LowerCumulativeDistribution() | Maximum number of trials is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (minNumberOfTrials > maxNumberOfTrials)
         {
-            Debug.WriteLine($"LowerCumulativeDistribution() | Min number of trials is greater than max number of trials.");
+            Debug.WriteLine("LowerCumulativeDistribution() | Min number of trials is greater than max number of trials.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (probability <= 0)
         {
-            Debug.WriteLine($"LowerCumulativeDistribution() | Probability is less than or equal to 0.");
+            Debug.WriteLine("LowerCumulativeDistribution() | Probability is less than or equal to 0.");
 
             // The probability of 0 successes should be 1, all other probabilities should be 0.
             // So the lower cumulative probability for all entries should be 1.
@@ -1140,7 +1138,7 @@ public static class Statistics
 
         if (probability >= 1)
         {
-            Debug.WriteLine($"LowerCumulativeDistribution() | Probability is greater than or equal to 1.");
+            Debug.WriteLine("LowerCumulativeDistribution() | Probability is greater than or equal to 1.");
 
             // All probabilities should be 0, except the probability of all successes should be 1.
             var adjustedDistribution = new List<BinomialOutcome>();
@@ -1157,25 +1155,25 @@ public static class Statistics
 
         if (minGroupSuccessCount <= 0)
         {
-            Debug.WriteLine($"LowerCumulativeDistribution() | Minimum group success count is less than 1.");
+            Debug.WriteLine("LowerCumulativeDistribution() | Minimum group success count is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (maxGroupSuccessCount <= 0)
         {
-            Debug.WriteLine($"LowerCumulativeDistribution() | Maximum group success count is less than 1.");
+            Debug.WriteLine("LowerCumulativeDistribution() | Maximum group success count is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (minGroupSuccessCount > maxGroupSuccessCount)
         {
-            Debug.WriteLine($"LowerCumulativeDistribution() | Minimum group success count is greater than maximum group success count.");
+            Debug.WriteLine("LowerCumulativeDistribution() | Minimum group success count is greater than maximum group success count.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (minGroupSuccessCount > maxNumberOfTrials)
         {
-            Debug.WriteLine($"LowerCumulativeDistribution() | Minimum group success count is greater than the total number of trials.");
+            Debug.WriteLine("LowerCumulativeDistribution() | Minimum group success count is greater than the total number of trials.");
             return [new BinomialOutcome(0, 1)];
         }
 
@@ -1199,81 +1197,13 @@ public static class Statistics
         // Validate parameters
         if (numberOfTrials < 1)
         {
-            Debug.WriteLine($"SurvivorDistribution() | Number of trials is less than 1.");
-            return new List<BinomialOutcome> { new BinomialOutcome(0, 1) };
-        }
-
-        if (probability <= 0)
-        {
-            Debug.WriteLine($"SurvivorDistribution() | Probability is less than or equal to 0.");
-
-            // The probability of getting greater than 0 is 0%
-            var adjustedDistribution = new List<BinomialOutcome>();
-
-            // If including k=0, the probability should be 1.
-            adjustedDistribution.Add(new BinomialOutcome(0, 1));
-
-            // Probabilities for all other values of k should be 0.
-            for (var k = 1; k <= numberOfTrials; k++)
-            {
-                adjustedDistribution.Add(new BinomialOutcome(k, 0));
-            }
-
-            return adjustedDistribution;
-        }
-
-        if (probability >= 1)
-        {
-            Debug.WriteLine($"SurvivorDistribution() | Probability is greater than or equal to 1.");
-
-            // All probabilities should be 0, except the probability of all successes should be 1.
-            // So the upper cumulative distribution should all be ones.
-            var adjustedDistribution = new List<BinomialOutcome>();
-
-            for (var k = 0; k <= numberOfTrials; k++)
-            {
-                adjustedDistribution.Add(new BinomialOutcome(k, 1));
-            }
-
-            return adjustedDistribution;
-        }
-
-        if (groupSuccessCount < 1)
-        {
-            Debug.WriteLine($"SurvivorDistribution() | Group success count is less than 1.");
-            return new List<BinomialOutcome> { new BinomialOutcome(0, 1) };
-        }
-
-        if (groupSuccessCount > numberOfTrials)
-        {
-            Debug.WriteLine($"SurvivorDistribution() | Group success count is greater than the total number of trials.");
-            return new List<BinomialOutcome> { new BinomialOutcome(0, 1) };
-        }
-
-        // Create distribution
-        return CreateDistribution(DistributionTypes.Survivor, numberOfTrials, probability, groupSuccessCount);
-    }
-
-    /// <summary>
-    /// Gets the survivor function distribution P(X≥k) of trial data using a variable group success count
-    /// </summary>
-    /// <param name="numberOfTrials"></param>
-    /// <param name="probability"></param>
-    /// <param name="minGroupSuccessCount">The minimum number of grouped trial successes that count as a success.</param>
-    /// <param name="maxGroupSuccessCount">The maximum number of grouped trial successes that count as a success.</param>
-    /// <returns>A survivor function distribution P(X≥k) of trial results and their respective probabilities.</returns>
-    public static List<BinomialOutcome> GetSurvivorDistribution(int numberOfTrials, double probability, int minGroupSuccessCount, int maxGroupSuccessCount)
-    {
-        // Validate parameters
-        if (numberOfTrials <= 0)
-        {
-            Debug.WriteLine($"SurvivorDistribution() | Number of trials is less than 1.");
+            Debug.WriteLine("SurvivorDistribution() | Number of trials is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (probability <= 0)
         {
-            Debug.WriteLine($"SurvivorDistribution() | Probability is less than or equal to 0.");
+            Debug.WriteLine("SurvivorDistribution() | Probability is less than or equal to 0.");
 
             // The probability of getting greater than 0 is 0%
             var adjustedDistribution = new List<BinomialOutcome>
@@ -1293,7 +1223,76 @@ public static class Statistics
 
         if (probability >= 1)
         {
-            Debug.WriteLine($"SurvivorDistribution() | Probability is greater than or equal to 1.");
+            Debug.WriteLine("SurvivorDistribution() | Probability is greater than or equal to 1.");
+
+            // All probabilities should be 0, except the probability of all successes should be 1.
+            // So the upper cumulative distribution should all be ones.
+            var adjustedDistribution = new List<BinomialOutcome>();
+
+            for (var k = 0; k <= numberOfTrials; k++)
+            {
+                adjustedDistribution.Add(new BinomialOutcome(k, 1));
+            }
+
+            return adjustedDistribution;
+        }
+
+        if (groupSuccessCount < 1)
+        {
+            Debug.WriteLine("SurvivorDistribution() | Group success count is less than 1.");
+            return [new BinomialOutcome(0, 1)];
+        }
+
+        if (groupSuccessCount > numberOfTrials)
+        {
+            Debug.WriteLine("SurvivorDistribution() | Group success count is greater than the total number of trials.");
+            return [new BinomialOutcome(0, 1)];
+        }
+
+        // Create distribution
+        return CreateDistribution(DistributionTypes.Survivor, numberOfTrials, probability, groupSuccessCount);
+    }
+
+    /// <summary>
+    /// Gets the survivor function distribution P(X≥k) of trial data using a variable group success count
+    /// </summary>
+    /// <param name="numberOfTrials"></param>
+    /// <param name="probability"></param>
+    /// <param name="minGroupSuccessCount">The minimum number of grouped trial successes that count as a success.</param>
+    /// <param name="maxGroupSuccessCount">The maximum number of grouped trial successes that count as a success.</param>
+    /// <returns>A survivor function distribution P(X≥k) of trial results and their respective probabilities.</returns>
+    public static List<BinomialOutcome> GetSurvivorDistribution(int numberOfTrials, double probability, int minGroupSuccessCount, int maxGroupSuccessCount)
+    {
+        // Validate parameters
+        if (numberOfTrials <= 0)
+        {
+            Debug.WriteLine("SurvivorDistribution() | Number of trials is less than 1.");
+            return [new BinomialOutcome(0, 1)];
+        }
+
+        if (probability <= 0)
+        {
+            Debug.WriteLine("SurvivorDistribution() | Probability is less than or equal to 0.");
+
+            // The probability of getting greater than 0 is 0%
+            var adjustedDistribution = new List<BinomialOutcome>
+            {
+                // If including k=0, the probability should be 1.
+                new(0, 1)
+            };
+
+            // Probabilities for all other values of k should be 0.
+            for (var k = 1; k <= numberOfTrials; k++)
+            {
+                adjustedDistribution.Add(new BinomialOutcome(k, 0));
+            }
+
+            return adjustedDistribution;
+        }
+
+        if (probability >= 1)
+        {
+            Debug.WriteLine("SurvivorDistribution() | Probability is greater than or equal to 1.");
 
             // All probabilities should be 0, except the probability of all successes should be 1.
             // So the upper cumulative distribution should all be ones.
@@ -1309,25 +1308,25 @@ public static class Statistics
 
         if (minGroupSuccessCount <= 0)
         {
-            Debug.WriteLine($"SurvivorDistribution() | Minimum group success count is less than 1.");
+            Debug.WriteLine("SurvivorDistribution() | Minimum group success count is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (maxGroupSuccessCount <= 0)
         {
-            Debug.WriteLine($"SurvivorDistribution() | Maximum group success count is less than 1.");
+            Debug.WriteLine("SurvivorDistribution() | Maximum group success count is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (minGroupSuccessCount > maxGroupSuccessCount)
         {
-            Debug.WriteLine($"SurvivorDistribution() | Minimum group success count is greater than maximum group success count.");
+            Debug.WriteLine("SurvivorDistribution() | Minimum group success count is greater than maximum group success count.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (minGroupSuccessCount > numberOfTrials)
         {
-            Debug.WriteLine($"SurvivorDistribution() | Minimum group success count is greater than the total number of trials.");
+            Debug.WriteLine("SurvivorDistribution() | Minimum group success count is greater than the total number of trials.");
             return [new BinomialOutcome(0, 1)];
         }
 
@@ -1352,31 +1351,32 @@ public static class Statistics
         // Validate parameters
         if (minNumberOfTrials <= 0)
         {
-            Debug.WriteLine($"SurvivorDistribution() | Minimum number of trials is less than 1.");
+            Debug.WriteLine("SurvivorDistribution() | Minimum number of trials is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (maxNumberOfTrials <= 0)
         {
-            Debug.WriteLine($"SurvivorDistribution() | Maximum number of trials is less than 1.");
+            Debug.WriteLine("SurvivorDistribution() | Maximum number of trials is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (minNumberOfTrials > maxNumberOfTrials)
         {
-            Debug.WriteLine($"SurvivorDistribution() | Min number of trials is greater than max number of trials.");
+            Debug.WriteLine("SurvivorDistribution() | Min number of trials is greater than max number of trials.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (probability <= 0)
         {
-            Debug.WriteLine($"SurvivorDistribution() | Probability is less than or equal to 0.");
+            Debug.WriteLine("SurvivorDistribution() | Probability is less than or equal to 0.");
 
             // The probability of getting greater than 0 is 0%
-            var adjustedDistribution = new List<BinomialOutcome>();
-
-            // If including k=0, the probability should be 1.
-            adjustedDistribution.Add(new BinomialOutcome(0, 1));
+            var adjustedDistribution = new List<BinomialOutcome>
+            {
+                // If including k=0, the probability should be 1.
+                new(0, 1)
+            };
 
             // Probabilities for all other values of k should be 0.
             for (var k = 1; k <= maxNumberOfTrials; k++)
@@ -1389,7 +1389,7 @@ public static class Statistics
 
         if (probability >= 1)
         {
-            Debug.WriteLine($"SurvivorDistribution() | Probability is greater than or equal to 1.");
+            Debug.WriteLine("SurvivorDistribution() | Probability is greater than or equal to 1.");
 
             // All probabilities should be 0, except the probability of all successes should be 1.
             // So the upper cumulative distribution should all be ones.
@@ -1405,13 +1405,13 @@ public static class Statistics
 
         if (groupSuccessCount < 1)
         {
-            Debug.WriteLine($"SurvivorDistribution() | Group success count is less than 1.");
+            Debug.WriteLine("SurvivorDistribution() | Group success count is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (groupSuccessCount > maxNumberOfTrials)
         {
-            Debug.WriteLine($"SurvivorDistribution() | Group success count is greater than the total number of trials.");
+            Debug.WriteLine("SurvivorDistribution() | Group success count is greater than the total number of trials.");
             return [new BinomialOutcome(0, 1)];
         }
 
@@ -1433,31 +1433,32 @@ public static class Statistics
         // Validate parameters
         if (minNumberOfTrials <= 0)
         {
-            Debug.WriteLine($"SurvivorDistribution() | Minimum number of trials is less than 1.");
+            Debug.WriteLine("SurvivorDistribution() | Minimum number of trials is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (maxNumberOfTrials <= 0)
         {
-            Debug.WriteLine($"SurvivorDistribution() | Maximum number of trials is less than 1.");
+            Debug.WriteLine("SurvivorDistribution() | Maximum number of trials is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (minNumberOfTrials > maxNumberOfTrials)
         {
-            Debug.WriteLine($"SurvivorDistribution() | Min number of trials is greater than max number of trials.");
+            Debug.WriteLine("SurvivorDistribution() | Min number of trials is greater than max number of trials.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (probability <= 0)
         {
-            Debug.WriteLine($"SurvivorDistribution() | Probability is less than or equal to 0.");
+            Debug.WriteLine("SurvivorDistribution() | Probability is less than or equal to 0.");
 
             // The probability of getting greater than 0 is 0%
-            var adjustedDistribution = new List<BinomialOutcome>();
-
-            // If including k=0, the probability should be 1.
-            adjustedDistribution.Add(new BinomialOutcome(0, 1));
+            var adjustedDistribution = new List<BinomialOutcome>
+            {
+                // If including k=0, the probability should be 1.
+                new(0, 1)
+            };
 
             // Probabilities for all other values of k should be 0.
             for (var k = 1; k <= maxNumberOfTrials; k++)
@@ -1470,7 +1471,7 @@ public static class Statistics
 
         if (probability >= 1)
         {
-            Debug.WriteLine($"SurvivorDistribution() | Probability is greater than or equal to 1.");
+            Debug.WriteLine("SurvivorDistribution() | Probability is greater than or equal to 1.");
 
             // All probabilities should be 0, except the probability of all successes should be 1.
             // So the upper cumulative distribution should all be ones.
@@ -1486,25 +1487,25 @@ public static class Statistics
 
         if (minGroupSuccessCount <= 0)
         {
-            Debug.WriteLine($"SurvivorDistribution() | Minimum group success count is less than 1.");
+            Debug.WriteLine("SurvivorDistribution() | Minimum group success count is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (maxGroupSuccessCount <= 0)
         {
-            Debug.WriteLine($"SurvivorDistribution() | Maximum group success count is less than 1.");
+            Debug.WriteLine("SurvivorDistribution() | Maximum group success count is less than 1.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (minGroupSuccessCount > maxGroupSuccessCount)
         {
-            Debug.WriteLine($"SurvivorDistribution() | Minimum group success count is greater than maximum group success count.");
+            Debug.WriteLine("SurvivorDistribution() | Minimum group success count is greater than maximum group success count.");
             return [new BinomialOutcome(0, 1)];
         }
 
         if (minGroupSuccessCount > maxNumberOfTrials)
         {
-            Debug.WriteLine($"SurvivorDistribution() | Minimum group success count is greater than the total number of trials.");
+            Debug.WriteLine("SurvivorDistribution() | Minimum group success count is greater than the total number of trials.");
             return [new BinomialOutcome(0, 1)];
         }
 
@@ -1522,13 +1523,13 @@ public static class Statistics
     {
         if (numberOfTrials < 1)
         {
-            Debug.WriteLine($"GetMean() | Number of trials is less than 1. Returning 0 ...");
+            Debug.WriteLine("GetMean() | Number of trials is less than 1. Returning 0 ...");
             return 0;
         }
 
         if (probability <= 0)
         {
-            Debug.WriteLine($"GetMean() | Probability is less or equal to 0. Returning 0 ...");
+            Debug.WriteLine("GetMean() | Probability is less or equal to 0. Returning 0 ...");
             return 0;
         }
 
@@ -1545,19 +1546,19 @@ public static class Statistics
     {
         if (numberOfTrials < 0)
         {
-            Debug.WriteLine($"GetStandardDeviation() | Number of trials is less than 0. Returning 0 ...");
+            Debug.WriteLine("GetStandardDeviation() | Number of trials is less than 0. Returning 0 ...");
             return 0;
         }
 
         if (probability < 0)
         {
-            Debug.WriteLine($"GetStandardDeviation() | Probability is less than 0. Returning 0 ...");
+            Debug.WriteLine("GetStandardDeviation() | Probability is less than 0. Returning 0 ...");
             return 0;
         }
 
         if (probability == 1)
         {
-            Debug.WriteLine($"GetStandardDeviation() | Probability is 1. Returning 0 ...");
+            Debug.WriteLine("GetStandardDeviation() | Probability is 1. Returning 0 ...");
             return 0;
         }
 
@@ -1570,7 +1571,8 @@ public static class Statistics
     /// <param name="numberOfTrials"></param>
     /// <param name="probability"></param>
     /// <returns>A double value containing hte standard deviation of a distribution</returns>
-    public static double GetStandardDeviationOfDistribution(int numberOfTrials, double probability) => Math.Sqrt(GetVarianceOfDistribution(numberOfTrials, probability));
+    public static double GetStandardDeviationOfDistribution(int numberOfTrials, double probability)
+        => Math.Sqrt(GetVarianceOfDistribution(numberOfTrials, probability));
 
     /// <summary>
     /// Calculates the variance in the number of successes when the number of trials is also variable
@@ -1580,7 +1582,11 @@ public static class Statistics
     /// <param name="varianceOfNumberOfTrials"></param>
     /// <param name="probability"></param>
     /// <returns>A double value contining the combined variance of successes</returns>
-    public static double GetCombinedVarianceOfDistribution(int expectedNumberOfTrials, double varianceOfNumberOfTrials, double probability) => expectedNumberOfTrials * probability * (1 - probability) + varianceOfNumberOfTrials * Math.Pow(probability, 2);
+    public static double GetCombinedVarianceOfDistribution(
+        int expectedNumberOfTrials,
+        double varianceOfNumberOfTrials,
+        double probability)
+        => (expectedNumberOfTrials * probability * (1 - probability)) + (varianceOfNumberOfTrials * Math.Pow(probability, 2));
 
     /// <summary>
     /// Calculates the standard deviation of the number of successes when the number of trials is also variable
@@ -1589,7 +1595,14 @@ public static class Statistics
     /// <param name="varianceOfNumberOfTrials"></param>
     /// <param name="probability"></param>
     /// <returns>A double value contining the combined standard deviation of successes</returns>
-    public static double GetCombinedStandardDeviationOfDistribution(int expectedNumberOfTrials, double varianceOfNumberOfTrials, double probability) => Math.Sqrt(GetCombinedVarianceOfDistribution(expectedNumberOfTrials, varianceOfNumberOfTrials, probability));
+    public static double GetCombinedStandardDeviationOfDistribution(
+        int expectedNumberOfTrials,
+        double varianceOfNumberOfTrials,
+        double probability)
+        => Math.Sqrt(GetCombinedVarianceOfDistribution(
+            expectedNumberOfTrials,
+            varianceOfNumberOfTrials,
+            probability));
 
     #endregion
 }

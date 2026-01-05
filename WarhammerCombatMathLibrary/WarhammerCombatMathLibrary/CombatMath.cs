@@ -79,7 +79,7 @@ public static class CombatMath
         // If the success threshold is less than or equal to 0, then there are no successful results
         if (successThreshold <= 0)
         {
-            Debug.WriteLine($"GetNumberOfSuccessfulResults() | Success threshold is less than or equal to 0, returning 0 ...");
+            Debug.WriteLine("GetNumberOfSuccessfulResults() | Success threshold is less than or equal to 0, returning 0 ...");
             return 0;
         }
 
@@ -100,22 +100,21 @@ public static class CombatMath
         // If either the number of models or the weapon attacks is less than 1, return 0.
         if (attacker.NumberOfModels < 1)
         {
-            Debug.WriteLine($"GetAverageAttacks() | Number of models is less than 1, returning 0 ...");
+            Debug.WriteLine("GetAverageAttacks() | Number of models is less than 1, returning 0 ...");
             return 0;
         }
 
         // If both the variable scalar and the flat value of attacks are less than or equal to 0, then there are no attacks.
         if (attacker.WeaponNumberOfAttackDice <= 0 && attacker.WeaponFlatAttacks <= 0)
         {
-            Debug.WriteLine($"GetAverageAttacks() | Attacker has no attacks value, returning 0 ...");
+            Debug.WriteLine("GetAverageAttacks() | Attacker has no attacks value, returning 0 ...");
             return 0;
         }
 
         var averageAttackDieResult = Statistics.GetMeanResult((int)attacker.WeaponAttackDiceType);
         var averageVariableAttacksPerModel = attacker.WeaponNumberOfAttackDice * averageAttackDieResult;
         var totalAverageAttacksPerModel = averageVariableAttacksPerModel + attacker.WeaponFlatAttacks;
-        var totalAverageAttacks = totalAverageAttacksPerModel * attacker.NumberOfModels;
-        return totalAverageAttacks;
+        return totalAverageAttacksPerModel * attacker.NumberOfModels;
     }
 
     /// <summary>
@@ -128,20 +127,19 @@ public static class CombatMath
         // If either the number of models or the weapon attacks is less than 1, return 0.
         if (attacker.NumberOfModels < 1)
         {
-            Debug.WriteLine($"GetMinimumAttacks() | Number of models is less than 1, returning 0 ...");
+            Debug.WriteLine("GetMinimumAttacks() | Number of models is less than 1, returning 0 ...");
             return 0;
         }
 
         // If both the variable salar and the flat value of attacks are less than or equal to 0, then there are no attacks.
         if (attacker.WeaponNumberOfAttackDice <= 0 && attacker.WeaponFlatAttacks <= 0)
         {
-            Debug.WriteLine($"GetMinimumAttacks() | Attacker has no attacks value, returning 0 ...");
+            Debug.WriteLine("GetMinimumAttacks() | Attacker has no attacks value, returning 0 ...");
             return 0;
         }
 
         var minimumAttacksPerModel = attacker.WeaponNumberOfAttackDice + attacker.WeaponFlatAttacks;
-        var totalMinimumAttacks = minimumAttacksPerModel * attacker.NumberOfModels;
-        return totalMinimumAttacks;
+        return minimumAttacksPerModel * attacker.NumberOfModels;
     }
 
     /// <summary>
@@ -154,22 +152,21 @@ public static class CombatMath
         // If either the number of models or the weapon attacks is less than 1, return 0.
         if (attacker.NumberOfModels < 1)
         {
-            Debug.WriteLine($"GetMaximumAttacks() | Number of models is less than 1, returning 0 ...");
+            Debug.WriteLine("GetMaximumAttacks() | Number of models is less than 1, returning 0 ...");
             return 0;
         }
 
         // If both the variable salar and the flat value of attacks are less than or equal to 0, then there are no attacks.
         if (attacker.WeaponNumberOfAttackDice <= 0 && attacker.WeaponFlatAttacks <= 0)
         {
-            Debug.WriteLine($"GetMaximumAttacks() | Attacker has no attacks value, returning 0 ...");
+            Debug.WriteLine("GetMaximumAttacks() | Attacker has no attacks value, returning 0 ...");
             return 0;
         }
 
         var maximumAttackRollValue = (int)attacker.WeaponAttackDiceType;
         var maximumVariableAttacksPerModel = (attacker.WeaponNumberOfAttackDice * maximumAttackRollValue);
         var totalMaximumAttacksPerModel = maximumVariableAttacksPerModel + attacker.WeaponFlatAttacks;
-        var totalMaximumAttacks = totalMaximumAttacksPerModel * attacker.NumberOfModels;
-        return totalMaximumAttacks;
+        return totalMaximumAttacksPerModel * attacker.NumberOfModels;
     }
 
     /// <summary>
@@ -184,7 +181,7 @@ public static class CombatMath
         // Validate inputs
         if (attacker.WeaponSkill <= 0)
         {
-            Debug.WriteLine($"GetBaseProbabilityOfHit() | Attacker weapon skill is less than or equal to 0, returning 0 ...");
+            Debug.WriteLine("GetBaseProbabilityOfHit() | Attacker weapon skill is less than or equal to 0, returning 0 ...");
             return 0;
         }
 
@@ -207,7 +204,7 @@ public static class CombatMath
     private static double GetProbabilityOfCriticalHit(AttackerDTO attacker)
     {
         // If critical hit threshold is out of bounds, return base result
-        if (attacker.CriticalHitThreshold <= 1 || attacker.CriticalHitThreshold >= 7)
+        if (attacker.CriticalHitThreshold is <= 1 or >= 7)
         {
             return Statistics.GetProbabilityOfSuccess(POSSIBLE_RESULTS_SIX_SIDED_DIE, 1);
         }
@@ -283,7 +280,7 @@ public static class CombatMath
     /// </summary>
     /// <param name="threshold">The threshold value to validate</param>
     /// <returns>True if the threshold is valid, false otherwise</returns>
-    private static bool IsValidThreshold(int threshold) => threshold >= 2 && threshold <= 6;
+    private static bool IsValidThreshold(int threshold) => threshold is >= 2 and <= 6;
 
     /// <summary>
     /// Gets the probability of a critical wound.
@@ -389,29 +386,28 @@ public static class CombatMath
         // Validate inputs
         if (attacker == null)
         {
-            Debug.WriteLine($"GetAverageDamagePerAttack() | Attacker is null, returning 0 ...");
+            Debug.WriteLine("GetAverageDamagePerAttack() | Attacker is null, returning 0 ...");
             return 0;
         }
 
         // If both the variable scalar and the flat number of attacks are less than or equal to 0, then there are no attacks.
         if (attacker.WeaponNumberOfAttackDice <= 0 && attacker.WeaponFlatAttacks <= 0)
         {
-            Debug.WriteLine($"GetAverageDamagePerAttack() | Attacker has no attacks value, returning 0 ...");
+            Debug.WriteLine("GetAverageDamagePerAttack() | Attacker has no attacks value, returning 0 ...");
             return 0;
         }
 
         // If both the variable scalar and the flat value of damage are less than or equal to 0, then there is no damage.
         if (attacker.WeaponNumberOfDamageDice <= 0 && attacker.WeaponFlatDamage <= 0)
         {
-            Debug.WriteLine($"GetAverageDamagePerAttack() | Attacker has no damage value, returning 0 ...");
+            Debug.WriteLine("GetAverageDamagePerAttack() | Attacker has no damage value, returning 0 ...");
             return 0;
         }
 
         var numberOfDamageDieRolls = attacker.WeaponNumberOfDamageDice;
         var averageDamagePerDieRoll = Statistics.GetMeanResult((int)attacker.WeaponDamageDiceType);
         var flatDamage = attacker.WeaponFlatDamage;
-        var averageDamagePerAttack = (numberOfDamageDieRolls * averageDamagePerDieRoll) + flatDamage;
-        return averageDamagePerAttack;
+        return (numberOfDamageDieRolls * averageDamagePerDieRoll) + flatDamage;
     }
 
     /// <summary>
@@ -424,29 +420,28 @@ public static class CombatMath
         // Validate inputs
         if (attacker == null)
         {
-            Debug.WriteLine($"GetMinimumDamagePerAttack() | Attacker is null, returning 0 ...");
+            Debug.WriteLine("GetMinimumDamagePerAttack() | Attacker is null, returning 0 ...");
             return 0;
         }
 
         // If both the variable scalar and the flat number of attacks are less than or equal to 0, then there are no attacks.
         if (attacker.WeaponNumberOfAttackDice <= 0 && attacker.WeaponFlatAttacks <= 0)
         {
-            Debug.WriteLine($"GetMinimumDamagePerAttack() | Attacker has no attacks value, returning 0 ...");
+            Debug.WriteLine("GetMinimumDamagePerAttack() | Attacker has no attacks value, returning 0 ...");
             return 0;
         }
 
         // If both the variable scalar and the flat value of damage are less than or equal to 0, then there is no damage.
         if (attacker.WeaponNumberOfDamageDice <= 0 && attacker.WeaponFlatDamage <= 0)
         {
-            Debug.WriteLine($"GetMinimumDamagePerAttack() | Attacker has no damage value, returning 0 ...");
+            Debug.WriteLine("GetMinimumDamagePerAttack() | Attacker has no damage value, returning 0 ...");
             return 0;
         }
 
         var numberOfDamageDieRolls = attacker.WeaponNumberOfDamageDice;
-        var minimumDamagePerDieRoll = 1;
+        const int minimumDamagePerDieRoll = 1;
         var flatDamage = attacker.WeaponFlatDamage;
-        var minimumDamagePerAttack = (numberOfDamageDieRolls * minimumDamagePerDieRoll) + flatDamage;
-        return minimumDamagePerAttack;
+        return (numberOfDamageDieRolls * minimumDamagePerDieRoll) + flatDamage;
     }
 
     /// <summary>
@@ -459,29 +454,28 @@ public static class CombatMath
         // Validate inputs
         if (attacker == null)
         {
-            Debug.WriteLine($"GetMaximumDamagePerAttack() | Attacker is null, returning 0 ...");
+            Debug.WriteLine("GetMaximumDamagePerAttack() | Attacker is null, returning 0 ...");
             return 0;
         }
 
         // If both the variable scalar and the flat number of attacks are less than or equal to 0, then there are no attacks.
         if (attacker.WeaponNumberOfAttackDice <= 0 && attacker.WeaponFlatAttacks <= 0)
         {
-            Debug.WriteLine($"GetMaximumDamagePerAttack() | Attacker has no attacks value, returning 0 ...");
+            Debug.WriteLine("GetMaximumDamagePerAttack() | Attacker has no attacks value, returning 0 ...");
             return 0;
         }
 
         // If both the variable scalar and the flat value of damage are less than or equal to 0, then there is no damage.
         if (attacker.WeaponNumberOfDamageDice <= 0 && attacker.WeaponFlatDamage <= 0)
         {
-            Debug.WriteLine($"GetMaximumDamagePerAttack() | Attacker has no damage value, returning 0 ...");
+            Debug.WriteLine("GetMaximumDamagePerAttack() | Attacker has no damage value, returning 0 ...");
             return 0;
         }
 
         var numberOfDamageDieRolls = attacker.WeaponNumberOfDamageDice;
         var maximumDamagePerDieRoll = (int)attacker.WeaponDamageDiceType;
         var flatDamage = attacker.WeaponFlatDamage;
-        var maximumDamagePerAttack = (numberOfDamageDieRolls * maximumDamagePerDieRoll) + flatDamage;
-        return maximumDamagePerAttack;
+        return (numberOfDamageDieRolls * maximumDamagePerDieRoll) + flatDamage;
     }
 
     /// <summary>
@@ -495,13 +489,13 @@ public static class CombatMath
         // Validate inputs
         if (damagePerAttack <= 0)
         {
-            Debug.WriteLine($"GetAverageAdjustedDamagePerAttack() | Input damage is less than or equal to 0. Returning 0 ...");
+            Debug.WriteLine("GetAverageAdjustedDamagePerAttack() | Input damage is less than or equal to 0. Returning 0 ...");
             return 0;
         }
 
         if (defender == null)
         {
-            Debug.WriteLine($"GetAverageAdjustedDamagePerAttack() | Defender is null. Returning 0 ...");
+            Debug.WriteLine("GetAverageAdjustedDamagePerAttack() | Defender is null. Returning 0 ...");
             return 0;
         }
 
@@ -510,9 +504,7 @@ public static class CombatMath
 
         // Account for feel no pains
         var feelNoPainSuccessProbability = Statistics.GetProbabilityOfSuccess(POSSIBLE_RESULTS_SIX_SIDED_DIE, GetNumberOfSuccessfulResults(defender.FeelNoPain));
-        var averageDamageAfterFeelNoPain = damageAfterReduction * (1 - feelNoPainSuccessProbability);
-
-        return averageDamageAfterFeelNoPain;
+        return damageAfterReduction * (1 - feelNoPainSuccessProbability);
     }
 
     /// <summary>
@@ -526,13 +518,13 @@ public static class CombatMath
         // Validate inputs
         if (damagePerAttack <= 0)
         {
-            Debug.WriteLine($"GetMinimumAdjustedDamagePerAttack() | Input damage is less than or equal to 0. Returning 0 ...");
+            Debug.WriteLine("GetMinimumAdjustedDamagePerAttack() | Input damage is less than or equal to 0. Returning 0 ...");
             return 0;
         }
 
         if (defender == null)
         {
-            Debug.WriteLine($"GetMinimumAdjustedDamagePerAttack() | Defender is null. Returning 0 ...");
+            Debug.WriteLine("GetMinimumAdjustedDamagePerAttack() | Defender is null. Returning 0 ...");
             return 0;
         }
 
@@ -540,9 +532,9 @@ public static class CombatMath
         var damageAfterReduction = Math.Max(0, damagePerAttack - defender.DamageReduction);
 
         // If the defender has feel no pains, then the minimum amount of damage is 0, since it is possible for the defender to succeed in all of their feel no pain rolls.
-        if (defender.FeelNoPain >= 2 && defender.FeelNoPain <= 6)
+        if (defender.FeelNoPain is >= 2 and <= 6)
         {
-            Debug.WriteLine($"GetMinimumAdjustedDamagePerAttack() | Defender has feel no pains. Returning 0 ...");
+            Debug.WriteLine("GetMinimumAdjustedDamagePerAttack() | Defender has feel no pains. Returning 0 ...");
             return 0;
         }
 
@@ -560,13 +552,13 @@ public static class CombatMath
         // Validate inputs
         if (damagePerAttack <= 0)
         {
-            Debug.WriteLine($"GetMaximumAdjustedDamagePerAttack() | Input damage is less than or equal to 0. Returning 0 ...");
+            Debug.WriteLine("GetMaximumAdjustedDamagePerAttack() | Input damage is less than or equal to 0. Returning 0 ...");
             return 0;
         }
 
         if (defender == null)
         {
-            Debug.WriteLine($"GetMaximumAdjustedDamagePerAttack() | Defender is null. Returning 0 ...");
+            Debug.WriteLine("GetMaximumAdjustedDamagePerAttack() | Defender is null. Returning 0 ...");
             return 0;
         }
 
@@ -587,19 +579,19 @@ public static class CombatMath
         // Validate inputs
         if (numberOfAttacks <= 0)
         {
-            Debug.WriteLine($"GetModelsDestroyed() | Number of attacks is less than or equal to 0. Returning 0 ...");
+            Debug.WriteLine("GetModelsDestroyed() | Number of attacks is less than or equal to 0. Returning 0 ...");
             return 0;
         }
 
         if (damagePerAttack <= 0)
         {
-            Debug.WriteLine($"GetModelsDestroyed() | Attacker's weapon damage is less than or equal to 0. Returning 0 ...");
+            Debug.WriteLine("GetModelsDestroyed() | Attacker's weapon damage is less than or equal to 0. Returning 0 ...");
             return 0;
         }
 
         if (defender == null)
         {
-            Debug.WriteLine($"GetModelsDestroyed() | Defender is null. Returning 0 ...");
+            Debug.WriteLine("GetModelsDestroyed() | Defender is null. Returning 0 ...");
             return 0;
         }
 
@@ -626,13 +618,13 @@ public static class CombatMath
     {
         if (defender == null)
         {
-            Debug.WriteLine($"GetAttacksRequiredToDestroyOneModel() | Defender is null. Returning 0 ...");
+            Debug.WriteLine("GetAttacksRequiredToDestroyOneModel() | Defender is null. Returning 0 ...");
             return 0;
         }
 
         if (damagePerAttack <= 0)
         {
-            Debug.WriteLine($"GetAttacksRequiredToDestroyOneModel() | Attacker weapon damage is less than or equal to 0. Returning 0 ...");
+            Debug.WriteLine("GetAttacksRequiredToDestroyOneModel() | Attacker weapon damage is less than or equal to 0. Returning 0 ...");
             return 0;
         }
 
@@ -656,7 +648,7 @@ public static class CombatMath
         // Validate inputs
         if (attacker == null)
         {
-            Debug.WriteLine($"GetProbabilityOfHit() | Attacker is null, returning 0 ...");
+            Debug.WriteLine("GetProbabilityOfHit() | Attacker is null, returning 0 ...");
             return 0;
         }
 
@@ -697,7 +689,7 @@ public static class CombatMath
     {
         if (attacker == null)
         {
-            Debug.WriteLine($"GetMeanHits() | Attacker is null, returning 0 ...");
+            Debug.WriteLine("GetMeanHits() | Attacker is null, returning 0 ...");
             return 0;
         }
 
@@ -723,7 +715,7 @@ public static class CombatMath
     {
         if (attacker == null)
         {
-            Debug.WriteLine($"GetStandardDeviationHits() | Attacker is null. Returning 0 ...");
+            Debug.WriteLine("GetStandardDeviationHits() | Attacker is null. Returning 0 ...");
             return 0;
         }
 
@@ -733,12 +725,9 @@ public static class CombatMath
 
         // If the attacker has Torrent, all attacks will hit.
         // Any variance comes from the number of attacks.
-        if (attacker.WeaponHasTorrent)
-        {
-            return Math.Sqrt(varianceAttacks);
-        }
-
-        return Statistics.GetCombinedStandardDeviationOfDistribution(averageAttacks, varianceAttacks, probabilityOfHit);
+        return attacker.WeaponHasTorrent
+            ? Math.Sqrt(varianceAttacks)
+            : Statistics.GetCombinedStandardDeviationOfDistribution(averageAttacks, varianceAttacks, probabilityOfHit);
     }
 
     /// <summary>
@@ -751,7 +740,7 @@ public static class CombatMath
     {
         if (attacker == null)
         {
-            Debug.WriteLine($"GetBinomialDistributionOfHits() | Attacker is null. Returning empty list ...");
+            Debug.WriteLine("GetBinomialDistributionOfHits() | Attacker is null. Returning empty list ...");
             return [];
         }
 
@@ -778,45 +767,26 @@ public static class CombatMath
     {
         if (attackerWeaponStrength <= 0)
         {
-            Debug.WriteLine($"GetSuccessThresholdOfWound() | Attacker strength is less than or equal to 0. Returning 6+ ...");
+            Debug.WriteLine("GetSuccessThresholdOfWound() | Attacker strength is less than or equal to 0. Returning 6+ ...");
             return 6;
         }
 
         if (defenderToughness <= 0)
         {
-            Debug.WriteLine($"GetSuccessThresholdOfWound() | Defender toughness is less than or equal to 0. Returning 2+ ...");
+            Debug.WriteLine("GetSuccessThresholdOfWound() | Defender toughness is less than or equal to 0. Returning 2+ ...");
             return 2;
         }
 
         // The attacker's weapon Strength is greater than or equal to double the defender's Toughness.
-        if (attackerWeaponStrength >= 2 * defenderToughness)
-        {
-            return 2;
-        }
-
+        return attackerWeaponStrength >= 2 * defenderToughness ? 2
         // The attacker's weapon Strength is greater than, but less than double, the defender's Toughness.
-        else if (attackerWeaponStrength > defenderToughness)
-        {
-            return 3;
-        }
-
+        : attackerWeaponStrength > defenderToughness ? 3
         // The attacker's weapon Strength is equal to the defender's Toughness.
-        else if (attackerWeaponStrength == defenderToughness)
-        {
-            return 4;
-        }
-
+        : attackerWeaponStrength == defenderToughness ? 4
         // The attacker's weapon Strength is less than, but more than half, the defender's Toughness.
-        else if (attackerWeaponStrength > defenderToughness / 2)
-        {
-            return 5;
-        }
-
+        : attackerWeaponStrength > defenderToughness / 2 ? 5
         // The attacker's weapon Strength is less than or equal to half the defender's Toughness.
-        else
-        {
-            return 6;
-        }
+        : 6;
     }
 
     /// <summary>
@@ -829,13 +799,13 @@ public static class CombatMath
     {
         if (attacker == null)
         {
-            Debug.WriteLine($"GetProbabilityOfHitAndWound() | Attacker is null. Returning 0 ...");
+            Debug.WriteLine("GetProbabilityOfHitAndWound() | Attacker is null. Returning 0 ...");
             return 0;
         }
 
         if (defender == null)
         {
-            Debug.WriteLine($"GetProbabilityOfHitAndWound() | Defender is null. Returning 0 ...");
+            Debug.WriteLine("GetProbabilityOfHitAndWound() | Defender is null. Returning 0 ...");
             return 0;
         }
 
@@ -877,9 +847,7 @@ public static class CombatMath
         var totalWoundProbability = baseWoundProbability + totalWoundModifiers;
 
         // Calculate combined hit and wound probability
-        var totalHitAndWoundProbability = hitProbability * totalWoundProbability;
-
-        return totalHitAndWoundProbability;
+        return hitProbability * totalWoundProbability;
     }
 
     /// <summary>
@@ -892,13 +860,13 @@ public static class CombatMath
     {
         if (attacker == null)
         {
-            Debug.WriteLine($"GetMeanWounds() | Attacker is null. Returning 0 ...");
+            Debug.WriteLine("GetMeanWounds() | Attacker is null. Returning 0 ...");
             return 0;
         }
 
         if (defender == null)
         {
-            Debug.WriteLine($"GetMeanWounds() | Defender is null. Returning 0 ...");
+            Debug.WriteLine("GetMeanWounds() | Defender is null. Returning 0 ...");
             return 0;
         }
 
@@ -924,13 +892,13 @@ public static class CombatMath
     {
         if (attacker == null)
         {
-            Debug.WriteLine($"GetStandardDeviationWounds() | Attacker is null. Returning 0 ...");
+            Debug.WriteLine("GetStandardDeviationWounds() | Attacker is null. Returning 0 ...");
             return 0;
         }
 
         if (defender == null)
         {
-            Debug.WriteLine($"GetStandardDeviationWounds() | Defender is null. Returning 0 ...");
+            Debug.WriteLine("GetStandardDeviationWounds() | Defender is null. Returning 0 ...");
             return 0;
         }
 
@@ -951,13 +919,13 @@ public static class CombatMath
     {
         if (attacker == null)
         {
-            Debug.WriteLine($"GetBinomialDistributionWounds() | Attacker is null. Returning empty list ...");
+            Debug.WriteLine("GetBinomialDistributionWounds() | Attacker is null. Returning empty list ...");
             return [];
         }
 
         if (defender == null)
         {
-            Debug.WriteLine($"GetBinomialDistributionWounds() | Defender is null. Returning empty list ...");
+            Debug.WriteLine("GetBinomialDistributionWounds() | Defender is null. Returning empty list ...");
             return [];
         }
 
@@ -987,14 +955,14 @@ public static class CombatMath
             || (defender.ArmorSave >= 7 && defender.InvulnerableSave <= 0)
             || (defender.ArmorSave >= 7 && defender.InvulnerableSave >= 7))
         {
-            Debug.WriteLine($"GetAdjustedArmorSaveThreshold() | Defender has invalid armor save and invulnverable save values. Returning adjusted save value of 7+ ...");
+            Debug.WriteLine("GetAdjustedArmorSaveThreshold() | Defender has invalid armor save and invulnverable save values. Returning adjusted save value of 7+ ...");
             return 6;
         }
 
         // If the defender has an invulnerable save, and the invulnerable save is lower than the regular save after applying armor pierce,
         // then use the invulnerable save.
         // Compare against minimum armor save to guard against negative armor pierce values.
-        var minimumArmorSave = 2;
+        const int minimumArmorSave = 2;
         var effectiveInvulnerableSave = defender.InvulnerableSave <= 0 ? 7 : defender.InvulnerableSave;
         var piercedArmorSaveThreshold = defender.ArmorSave + attacker.WeaponArmorPierce;
         var adjustedArmorSave = Math.Min(piercedArmorSaveThreshold, effectiveInvulnerableSave);
@@ -1012,13 +980,13 @@ public static class CombatMath
         // Validate inputs
         if (attacker == null)
         {
-            Debug.WriteLine($"GetProbabilityOfFailedSave() | Attacker is null, returning 0 ...");
+            Debug.WriteLine("GetProbabilityOfFailedSave() | Attacker is null, returning 0 ...");
             return 0;
         }
 
         if (defender == null)
         {
-            Debug.WriteLine($"GetProbabilityOfFailedSave() | Defender is null, returning 0 ...");
+            Debug.WriteLine("GetProbabilityOfFailedSave() | Defender is null, returning 0 ...");
             return 0;
         }
 
@@ -1054,13 +1022,13 @@ public static class CombatMath
     {
         if (attacker == null)
         {
-            Debug.WriteLine($"GetMeanFailedSaves() | Attacker is null, returning 0 ...");
+            Debug.WriteLine("GetMeanFailedSaves() | Attacker is null, returning 0 ...");
             return 0;
         }
 
         if (defender == null)
         {
-            Debug.WriteLine($"GetMeanFailedSaves() | Defender is null, returning 0 ...");
+            Debug.WriteLine("GetMeanFailedSaves() | Defender is null, returning 0 ...");
             return 0;
         }
 
@@ -1086,13 +1054,13 @@ public static class CombatMath
     {
         if (attacker == null)
         {
-            Debug.WriteLine($"GetStandardDeviationFailedSaves() | Attacker is null, returning 0 ...");
+            Debug.WriteLine("GetStandardDeviationFailedSaves() | Attacker is null, returning 0 ...");
             return 0;
         }
 
         if (defender == null)
         {
-            Debug.WriteLine($"GetStandardDeviationFailedSaves() | Defender is null, returning 0 ...");
+            Debug.WriteLine("GetStandardDeviationFailedSaves() | Defender is null, returning 0 ...");
             return 0;
         }
 
@@ -1113,13 +1081,13 @@ public static class CombatMath
     {
         if (attacker == null)
         {
-            Debug.WriteLine($"GetBinomialDistributionFailedSaves() | Attacker is null. Returning empty list ...");
+            Debug.WriteLine("GetBinomialDistributionFailedSaves() | Attacker is null. Returning empty list ...");
             return [];
         }
 
         if (defender == null)
         {
-            Debug.WriteLine($"GetBinomialDistributionFailedSaves() | Defender is null. Returning empty list ...");
+            Debug.WriteLine("GetBinomialDistributionFailedSaves() | Defender is null. Returning empty list ...");
             return [];
         }
 
@@ -1147,21 +1115,19 @@ public static class CombatMath
     {
         if (attacker == null)
         {
-            Debug.WriteLine($"GetMeanDamageNet() | Attacker is null. Returning 0 ...");
+            Debug.WriteLine("GetMeanDamageNet() | Attacker is null. Returning 0 ...");
             return 0;
         }
 
         if (defender == null)
         {
-            Debug.WriteLine($"GetMeanDamageNet() | Defender is null. Returning 0 ...");
+            Debug.WriteLine("GetMeanDamageNet() | Defender is null. Returning 0 ...");
             return 0;
         }
 
         var meanFailedSaves = GetMeanFailedSaves(attacker, defender);
         var averageDamagePerAttack = GetAverageDamagePerAttack(attacker);
-        var averageTotalDamage = meanFailedSaves * averageDamagePerAttack;
-
-        return averageTotalDamage;
+        return meanFailedSaves * averageDamagePerAttack;
     }
 
     /// <summary>
@@ -1183,13 +1149,13 @@ public static class CombatMath
     {
         if (attacker == null)
         {
-            Debug.WriteLine($"GetStandardDeviationDamageNet() | Attacker is null. Returning 0 ...");
+            Debug.WriteLine("GetStandardDeviationDamageNet() | Attacker is null. Returning 0 ...");
             return 0;
         }
 
         if (defender == null)
         {
-            Debug.WriteLine($"GetStandardDeviationDamageNet() | Defender is null. Returning 0 ...");
+            Debug.WriteLine("GetStandardDeviationDamageNet() | Defender is null. Returning 0 ...");
             return 0;
         }
 
@@ -1211,22 +1177,20 @@ public static class CombatMath
     {
         if (attacker == null)
         {
-            Debug.WriteLine($"GetMeanDestroyedModels() | Attacker is null. Returning 0 ...");
+            Debug.WriteLine("GetMeanDestroyedModels() | Attacker is null. Returning 0 ...");
             return 0;
         }
 
         if (defender == null)
         {
-            Debug.WriteLine($"GetMeanDestroyedModels() | Defender is null. Returning 0 ...");
+            Debug.WriteLine("GetMeanDestroyedModels() | Defender is null. Returning 0 ...");
             return 0;
         }
 
         var meanFailedSaves = GetMeanFailedSaves(attacker, defender);
         var averageDamagePerAttack = GetAverageDamagePerAttack(attacker);
         var adjustedDamagePerAttack = GetAverageAdjustedDamagePerAttack(averageDamagePerAttack, defender);
-        var averageModelsDestroyed = GetModelsDestroyed(meanFailedSaves, adjustedDamagePerAttack, defender);
-
-        return averageModelsDestroyed;
+        return GetModelsDestroyed(meanFailedSaves, adjustedDamagePerAttack, defender);
     }
 
     /// <summary>
@@ -1249,13 +1213,13 @@ public static class CombatMath
     {
         if (attacker == null)
         {
-            Debug.WriteLine($"GetStandardDeviationDestroyedModels() | Attacker is null. Returning 0 ...");
+            Debug.WriteLine("GetStandardDeviationDestroyedModels() | Attacker is null. Returning 0 ...");
             return 0;
         }
 
         if (defender == null)
         {
-            Debug.WriteLine($"GetStandardDeviationDestroyedModels() | Defender is null. Returning 0 ...");
+            Debug.WriteLine("GetStandardDeviationDestroyedModels() | Defender is null. Returning 0 ...");
             return 0;
         }
 
@@ -1284,13 +1248,13 @@ public static class CombatMath
     {
         if (attacker == null)
         {
-            Debug.WriteLine($"GetBinomialDistributionDestroyedModels() | Attacker is null. Returning empty list ...");
+            Debug.WriteLine("GetBinomialDistributionDestroyedModels() | Attacker is null. Returning empty list ...");
             return [];
         }
 
         if (defender == null)
         {
-            Debug.WriteLine($"GetBinomialDistributionDestroyedModels() | Defender is null. Returning empty list ...");
+            Debug.WriteLine("GetBinomialDistributionDestroyedModels() | Defender is null. Returning empty list ...");
             return [];
         }
 
@@ -1304,8 +1268,7 @@ public static class CombatMath
         // Get lower bound of group success count
         var maximumDamagePerAttack = GetMaximumDamagePerAttack(attacker);
         var maximumAdjustedDamagePerAttack = GetMaximumAdjustedDamagePerAttack(maximumDamagePerAttack, defender);
-        var minimumAttacksRequiredToDestroyOneModel = GetAttacksRequiredToDestroyOneModel(maximumAdjustedDamagePerAttack, defender);
-        var minGroupSuccessCount = minimumAttacksRequiredToDestroyOneModel;
+        var minGroupSuccessCount = GetAttacksRequiredToDestroyOneModel(maximumAdjustedDamagePerAttack, defender);
 
         // Get upper bound of group success count
         var minimumDamagePerAttack = GetMinimumDamagePerAttack(attacker);

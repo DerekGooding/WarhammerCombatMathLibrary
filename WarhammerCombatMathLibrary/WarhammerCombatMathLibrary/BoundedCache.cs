@@ -1,4 +1,5 @@
-﻿namespace WarhammerCombatMathLibrary;
+﻿
+namespace WarhammerCombatMathLibrary;
 
 /// <summary>
 /// A helper class that implements a bounded cache object.
@@ -14,7 +15,7 @@ public class BoundedCache<TKey, TValue>(int capacity) where TKey : notnull
     private readonly int _capacity = capacity;
     private readonly Dictionary<TKey, LinkedListNode<(TKey Key, TValue Value)>> _cacheMap = [];
     private readonly LinkedList<(TKey Key, TValue Value)> _leastRecentlyUsedList = [];
-    private readonly object _lock = new();
+    private readonly Lock _lock = new();
 
     #endregion
 

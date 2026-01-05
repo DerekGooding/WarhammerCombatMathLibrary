@@ -50,14 +50,9 @@ public class BinomialOutcome
 
     /// <inheritdoc/>
     public override bool Equals(object? obj)
-    {
-        if (obj is BinomialOutcome other)
-        {
-            return Successes == other.Successes && Math.Round(Probability, 4) == Math.Round(other.Probability, 4);
-        }
-
-        return false;
-    }
+        => obj is BinomialOutcome other
+            && Successes == other.Successes
+            && Math.Round(Probability, 4) == Math.Round(other.Probability, 4);
 
     /// <inheritdoc/>
     public override int GetHashCode() => HashCode.Combine(Successes, Probability);
