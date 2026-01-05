@@ -1,122 +1,121 @@
-﻿namespace WarhammerCombatMathLibrary.Data
+﻿namespace WarhammerCombatMathLibrary.Data;
+
+/// <summary>
+/// A data transfer object representing the defender in a combat scenario.
+/// </summary>
+public class DefenderDTO : IEquatable<DefenderDTO>
 {
+    #region Properties
+
     /// <summary>
-    /// A data transfer object representing the defender in a combat scenario.
+    /// The name of the defending unit.
     /// </summary>
-    public class DefenderDTO : IEquatable<DefenderDTO>
+    public string? Name { get; set; }
+
+    /// <summary>
+    /// The number of models in the defender's unit.
+    /// </summary>
+    public int NumberOfModels { get; set; }
+
+    /// <summary>
+    /// The toughness stat of the defender.
+    /// </summary>
+    public int Toughness { get; set; }
+
+    /// <summary>
+    /// The armor save stat of the defender.
+    /// </summary>
+    public int ArmorSave { get; set; }
+
+    /// <summary>
+    /// The invulnerable save stat of the defender.
+    /// </summary>
+    public int InvulnerableSave { get; set; }
+
+    /// <summary>
+    /// The feel no pain stat of the defender.
+    /// </summary>
+    public int FeelNoPain { get; set; }
+
+    /// <summary>
+    /// The damage reduction value of the defender. This reduces the damage of each attack by the specified amount (minimum 0).
+    /// </summary>
+    public int DamageReduction { get; set; }
+
+    /// <summary>
+    /// The number of wounds the defender has.
+    /// </summary>
+    public int Wounds { get; set; }
+
+    /// <summary>
+    /// Hit modifier that affects attacks against this defender. Positive values make the defender easier to hit (debuff),
+    /// negative values make the defender harder to hit (buff). Combined with the attacker's hit modifier, the total is capped at +/- 1.
+    /// </summary>
+    public int HitModifier { get; set; }
+
+    /// <summary>
+    /// Wound modifier that affects wound rolls against this defender. Positive values make the defender easier to wound (debuff),
+    /// negative values make the defender harder to wound (buff). Combined with the attacker's wound modifier, the total is capped at +/- 1.
+    /// </summary>
+    public int WoundModifier { get; set; }
+
+    #endregion
+
+    #region Public Methods
+
+    /// <inheritdoc/>
+    public override string ToString()
     {
-        #region Properties
-
-        /// <summary>
-        /// The name of the defending unit.
-        /// </summary>
-        public string? Name { get; set; }
-
-        /// <summary>
-        /// The number of models in the defender's unit.
-        /// </summary>
-        public int NumberOfModels { get; set; }
-
-        /// <summary>
-        /// The toughness stat of the defender.
-        /// </summary>
-        public int Toughness { get; set; }
-
-        /// <summary>
-        /// The armor save stat of the defender.
-        /// </summary>
-        public int ArmorSave { get; set; }
-
-        /// <summary>
-        /// The invulnerable save stat of the defender.
-        /// </summary>
-        public int InvulnerableSave { get; set; }
-
-        /// <summary>
-        /// The feel no pain stat of the defender.
-        /// </summary>
-        public int FeelNoPain { get; set; }
-
-        /// <summary>
-        /// The damage reduction value of the defender. This reduces the damage of each attack by the specified amount (minimum 0).
-        /// </summary>
-        public int DamageReduction { get; set; }
-
-        /// <summary>
-        /// The number of wounds the defender has.
-        /// </summary>
-        public int Wounds { get; set; }
-
-        /// <summary>
-        /// Hit modifier that affects attacks against this defender. Positive values make the defender easier to hit (debuff),
-        /// negative values make the defender harder to hit (buff). Combined with the attacker's hit modifier, the total is capped at +/- 1.
-        /// </summary>
-        public int HitModifier { get; set; }
-
-        /// <summary>
-        /// Wound modifier that affects wound rolls against this defender. Positive values make the defender easier to wound (debuff),
-        /// negative values make the defender harder to wound (buff). Combined with the attacker's wound modifier, the total is capped at +/- 1.
-        /// </summary>
-        public int WoundModifier { get; set; }
-
-        #endregion
-
-        #region Public Methods
-
-        /// <inheritdoc/>
-        public override string ToString()
-        {
-            return $"Defender: [NumberOfModels: {NumberOfModels}, " +
-            $"Toughness: {Toughness}, " +
-            $"ArmorSave: {ArmorSave}, " +
-            $"InvulnerableSave: {InvulnerableSave}, " +
-            $"FeelNoPain: {FeelNoPain}, " +
-            $"DamageReduction: {DamageReduction}, " +
-            $"Wounds: {Wounds}, " +
-            $"HitModifier: {HitModifier}, " +
-            $"WoundModifier: {WoundModifier}]";
-        }
-
-        /// <inheritdoc/>
-        public override bool Equals(object? obj)
-        {
-            return Equals(obj as DefenderDTO);
-        }
-
-        /// <summary>
-        /// Checks if the given DefenderDTO object is equal to this one.
-        /// </summary>
-        /// <param name="other"></param>
-        /// <returns>A boolean value. True if the objects are the same, False otherwise.</returns>
-        public bool Equals(DefenderDTO? other)
-        {
-            return other != null
-                   && string.Equals(Name, other.Name, StringComparison.OrdinalIgnoreCase)
-                   && NumberOfModels == other.NumberOfModels
-                   && Toughness == other.Toughness
-                   && ArmorSave == other.ArmorSave
-                   && InvulnerableSave == other.InvulnerableSave
-                   && FeelNoPain == other.FeelNoPain
-                   && DamageReduction == other.DamageReduction
-                   && Wounds == other.Wounds
-                   && HitModifier == other.HitModifier
-                   && WoundModifier == other.WoundModifier;
-        }
-
-        /// <inheritdoc/>
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(Name,
-                                    NumberOfModels,
-                                    Toughness,
-                                    ArmorSave,
-                                    InvulnerableSave,
-                                    FeelNoPain,
-                                    DamageReduction,
-                                    HashCode.Combine(Wounds, HitModifier, WoundModifier));
-        }
-
-
-        #endregion
+        return $"Defender: [NumberOfModels: {NumberOfModels}, " +
+        $"Toughness: {Toughness}, " +
+        $"ArmorSave: {ArmorSave}, " +
+        $"InvulnerableSave: {InvulnerableSave}, " +
+        $"FeelNoPain: {FeelNoPain}, " +
+        $"DamageReduction: {DamageReduction}, " +
+        $"Wounds: {Wounds}, " +
+        $"HitModifier: {HitModifier}, " +
+        $"WoundModifier: {WoundModifier}]";
     }
+
+    /// <inheritdoc/>
+    public override bool Equals(object? obj)
+    {
+        return Equals(obj as DefenderDTO);
+    }
+
+    /// <summary>
+    /// Checks if the given DefenderDTO object is equal to this one.
+    /// </summary>
+    /// <param name="other"></param>
+    /// <returns>A boolean value. True if the objects are the same, False otherwise.</returns>
+    public bool Equals(DefenderDTO? other)
+    {
+        return other != null
+               && string.Equals(Name, other.Name, StringComparison.OrdinalIgnoreCase)
+               && NumberOfModels == other.NumberOfModels
+               && Toughness == other.Toughness
+               && ArmorSave == other.ArmorSave
+               && InvulnerableSave == other.InvulnerableSave
+               && FeelNoPain == other.FeelNoPain
+               && DamageReduction == other.DamageReduction
+               && Wounds == other.Wounds
+               && HitModifier == other.HitModifier
+               && WoundModifier == other.WoundModifier;
+    }
+
+    /// <inheritdoc/>
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Name,
+                                NumberOfModels,
+                                Toughness,
+                                ArmorSave,
+                                InvulnerableSave,
+                                FeelNoPain,
+                                DamageReduction,
+                                HashCode.Combine(Wounds, HitModifier, WoundModifier));
+    }
+
+
+    #endregion
 }

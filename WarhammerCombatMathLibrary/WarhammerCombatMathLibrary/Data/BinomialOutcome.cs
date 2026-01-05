@@ -1,73 +1,72 @@
-﻿namespace WarhammerCombatMathLibrary.Data
+﻿namespace WarhammerCombatMathLibrary.Data;
+
+/// <summary>
+/// Data object for binomial data.
+/// </summary>
+public class BinomialOutcome
 {
+    #region Properties
+
     /// <summary>
-    /// Data object for binomial data.
+    /// The number of successful trials.
     /// </summary>
-    public class BinomialOutcome
+    public int Successes { get; set; }
+
+    /// <summary>
+    /// The probability of getting the number of successful trials.
+    /// </summary>
+    public double Probability { get; set; }
+
+    #endregion
+
+    #region Constructors
+
+    /// <summary>
+    /// Parameterless constructor. Sets properties to default values.
+    /// </summary>
+    public BinomialOutcome()
     {
-        #region Properties
-
-        /// <summary>
-        /// The number of successful trials.
-        /// </summary>
-        public int Successes { get; set; }
-
-        /// <summary>
-        /// The probability of getting the number of successful trials.
-        /// </summary>
-        public double Probability { get; set; }
-
-        #endregion
-
-        #region Constructors
-
-        /// <summary>
-        /// Parameterless constructor. Sets properties to default values.
-        /// </summary>
-        public BinomialOutcome()
-        {
-            Successes = 0;
-            Probability = 0;
-        }
-
-        /// <summary>
-        /// Constructs binomial data with given property values.
-        /// </summary>
-        /// <param name="successes"></param>
-        /// <param name="probability"></param>
-        public BinomialOutcome(int successes, double probability)
-        {
-            Successes = successes;
-            Probability = probability;
-        }
-
-        #endregion
-
-        #region Public Methods
-
-        /// <inheritdoc/>
-        public override string ToString()
-        {
-            return $"P({Successes}) = {Probability:F4}";
-        }
-
-        /// <inheritdoc/>
-        public override bool Equals(object? obj)
-        {
-            if (obj is BinomialOutcome other)
-            {
-                return Successes == other.Successes && Math.Round(Probability, 4) == Math.Round(other.Probability, 4);
-            }
-
-            return false;
-        }
-
-        /// <inheritdoc/>
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(Successes, Probability);
-        }
-
-        #endregion
+        Successes = 0;
+        Probability = 0;
     }
+
+    /// <summary>
+    /// Constructs binomial data with given property values.
+    /// </summary>
+    /// <param name="successes"></param>
+    /// <param name="probability"></param>
+    public BinomialOutcome(int successes, double probability)
+    {
+        Successes = successes;
+        Probability = probability;
+    }
+
+    #endregion
+
+    #region Public Methods
+
+    /// <inheritdoc/>
+    public override string ToString()
+    {
+        return $"P({Successes}) = {Probability:F4}";
+    }
+
+    /// <inheritdoc/>
+    public override bool Equals(object? obj)
+    {
+        if (obj is BinomialOutcome other)
+        {
+            return Successes == other.Successes && Math.Round(Probability, 4) == Math.Round(other.Probability, 4);
+        }
+
+        return false;
+    }
+
+    /// <inheritdoc/>
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Successes, Probability);
+    }
+
+    #endregion
 }
