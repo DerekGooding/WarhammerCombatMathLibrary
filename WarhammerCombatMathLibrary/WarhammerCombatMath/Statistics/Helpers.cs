@@ -16,11 +16,8 @@ internal static class Helpers
             return distribution;
         }
 
-        return distribution.ConvertAll(outcome => new BinomialOutcome
-        {
-            Successes = outcome.Successes,
-            Probability = outcome.Probability / totalProbability
-        });
+        return distribution.ConvertAll(outcome
+            => new BinomialOutcome(outcome.Successes, outcome.Probability / totalProbability));
     }
 
     internal static List<BinomialOutcome> ApplyCumulativeFunction(List<BinomialOutcome> distribution)
@@ -36,11 +33,7 @@ internal static class Helpers
                 ? 1.0
                 : Math.Min(cumulative, 1.0);
 
-            cumulativeDistribution.Add(new BinomialOutcome
-            {
-                Successes = distribution[i].Successes,
-                Probability = probability
-            });
+            cumulativeDistribution.Add(new BinomialOutcome(distribution[i].Successes, probability));
         }
 
         return cumulativeDistribution;
@@ -59,11 +52,7 @@ internal static class Helpers
                 ? 1.0
                 : Math.Min(cumulative, 1.0);
 
-            survivorDistribution.Insert(0, new BinomialOutcome
-            {
-                Successes = distribution[i].Successes,
-                Probability = probability
-            });
+            survivorDistribution.Insert(0, new BinomialOutcome(distribution[i].Successes,probability));
         }
 
         return survivorDistribution;
@@ -80,11 +69,7 @@ internal static class Helpers
             var groupedSuccesses = k * groupSuccessCount;
             var discreteProbability = ProbabilityMassFunction(numberOfTrials, groupedSuccesses, probability);
 
-            baseDistribution.Add(new BinomialOutcome
-            {
-                Successes = k,
-                Probability = discreteProbability
-            });
+            baseDistribution.Add(new BinomialOutcome(k, discreteProbability));
         }
 
         if (groupSuccessCount > 1)
@@ -132,11 +117,7 @@ internal static class Helpers
         }
 
         var baseDistribution = probabilitySums
-             .Select(pair => new BinomialOutcome
-             {
-                 Successes = pair.Key,
-                 Probability = pair.Value / probabilityWeights[pair.Key]
-             })
+             .Select(pair => new BinomialOutcome(pair.Key, pair.Value / probabilityWeights[pair.Key]))
              .OrderBy(outcome => outcome.Successes)
              .ToList();
 
@@ -187,11 +168,7 @@ internal static class Helpers
         }
 
         var baseDistribution = probabilitySums
-         .Select(pair => new BinomialOutcome
-         {
-             Successes = pair.Key,
-             Probability = pair.Value
-         })
+         .Select(pair => new BinomialOutcome(pair.Key, pair.Value))
          .OrderBy(outcome => outcome.Successes)
          .ToList();
 
@@ -253,11 +230,7 @@ internal static class Helpers
         }
 
         var baseDistribution = probabilitySums
-         .Select(pair => new BinomialOutcome
-         {
-             Successes = pair.Key,
-             Probability = pair.Value / probabilityWeights[pair.Key]
-         })
+         .Select(pair => new BinomialOutcome(pair.Key, pair.Value / probabilityWeights[pair.Key]))
          .OrderBy(outcome => outcome.Successes)
          .ToList();
 
