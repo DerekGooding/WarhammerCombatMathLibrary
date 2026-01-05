@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using WarhammerCombatMathLibrary;
 using WarhammerCombatMathLibrary.Data;
 
 namespace UnitTests;
@@ -368,7 +367,7 @@ public sealed class CombatMath_Test
     /// Tests the case where the attacker is null
     /// </summary>
     [TestMethod]
-    public void GetProbabilityOfHit_NullAttacker() => Assert.AreEqual(0, CombatMath.GetProbabilityOfHit(null));
+    public void GetProbabilityOfHit_NullAttacker() => Assert.AreEqual(0, GetProbabilityOfHit(null));
 
     /// <summary>
     /// Tests the case where the attacker has 0 weapon skill.
@@ -381,7 +380,7 @@ public sealed class CombatMath_Test
             WeaponSkill = 0
         };
 
-        Assert.AreEqual(0, CombatMath.GetProbabilityOfHit(attacker));
+        Assert.AreEqual(0, GetProbabilityOfHit(attacker));
     }
 
     /// <summary>
@@ -396,7 +395,7 @@ public sealed class CombatMath_Test
             WeaponSkill = -1
         };
 
-        var actual = CombatMath.GetProbabilityOfHit(attacker);
+        var actual = GetProbabilityOfHit(attacker);
 
         Assert.AreEqual(expected, actual);
     }
@@ -414,7 +413,7 @@ public sealed class CombatMath_Test
             WeaponSkill = 1
         };
 
-        var actual = Math.Round(CombatMath.GetProbabilityOfHit(attacker), 4);
+        var actual = Math.Round(GetProbabilityOfHit(attacker), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -426,7 +425,7 @@ public sealed class CombatMath_Test
     public void GetProbabilityOfHit_VariableAttacks()
     {
         const double expected = 0.6667;
-        var actual = Math.Round(CombatMath.GetProbabilityOfHit(ATTACKER_SINGLE_MODEL_VARIABLE_D3_ATTACKS), 4);
+        var actual = Math.Round(GetProbabilityOfHit(ATTACKER_SINGLE_MODEL_VARIABLE_D3_ATTACKS), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -438,7 +437,7 @@ public sealed class CombatMath_Test
     public void GetProbabilityOfHit_WeaponHasTorrent()
     {
         const int expected = 1;
-        var actual = Math.Round(CombatMath.GetProbabilityOfHit(ATTACKER_MULTI_MODEL_VARIABLE_D6_ATTACKS_TORRENT), 4);
+        var actual = Math.Round(GetProbabilityOfHit(ATTACKER_MULTI_MODEL_VARIABLE_D6_ATTACKS_TORRENT), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -449,7 +448,7 @@ public sealed class CombatMath_Test
     public void GetProbabilityOfHit_RerollHits()
     {
         const double expected = 0.8889;
-        var actual = Math.Round(CombatMath.GetProbabilityOfHit(ATTACKER_MULTI_MODEL_REROLL_HITS), 4);
+        var actual = Math.Round(GetProbabilityOfHit(ATTACKER_MULTI_MODEL_REROLL_HITS), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -461,7 +460,7 @@ public sealed class CombatMath_Test
     public void GetProbabilityOfHit_RerollHitsOf1()
     {
         const double expected = 0.7778;
-        var actual = Math.Round(CombatMath.GetProbabilityOfHit(ATTACKER_MULTI_MODEL_REROLL_HITS_OF_1), 4);
+        var actual = Math.Round(GetProbabilityOfHit(ATTACKER_MULTI_MODEL_REROLL_HITS_OF_1), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -480,7 +479,7 @@ public sealed class CombatMath_Test
             HitModifier = 2
         };
 
-        var actual = Math.Round(CombatMath.GetProbabilityOfHit(attacker), 4);
+        var actual = Math.Round(GetProbabilityOfHit(attacker), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -499,7 +498,7 @@ public sealed class CombatMath_Test
             HitModifier = -2
         };
 
-        var actual = Math.Round(CombatMath.GetProbabilityOfHit(attacker), 4);
+        var actual = Math.Round(GetProbabilityOfHit(attacker), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -522,7 +521,7 @@ public sealed class CombatMath_Test
             HitModifier = -1
         };
 
-        var actual = Math.Round(CombatMath.GetProbabilityOfHit(attacker, defender), 4);
+        var actual = Math.Round(GetProbabilityOfHit(attacker, defender), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -541,7 +540,7 @@ public sealed class CombatMath_Test
             HitModifier = 1
         };
 
-        var actual = Math.Round(CombatMath.GetProbabilityOfHit(attacker), 4);
+        var actual = Math.Round(GetProbabilityOfHit(attacker), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -563,7 +562,7 @@ public sealed class CombatMath_Test
             HitModifier = -1
         };
 
-        var actual = Math.Round(CombatMath.GetProbabilityOfHit(attacker, defender), 4);
+        var actual = Math.Round(GetProbabilityOfHit(attacker, defender), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -587,7 +586,7 @@ public sealed class CombatMath_Test
             HitModifier = 1
         };
 
-        var actual = Math.Round(CombatMath.GetProbabilityOfHit(attacker, defender), 4);
+        var actual = Math.Round(GetProbabilityOfHit(attacker, defender), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -611,7 +610,7 @@ public sealed class CombatMath_Test
             HitModifier = -1
         };
 
-        var actual = Math.Round(CombatMath.GetProbabilityOfHit(attacker, defender), 4);
+        var actual = Math.Round(GetProbabilityOfHit(attacker, defender), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -630,7 +629,7 @@ public sealed class CombatMath_Test
             HitModifier = 1
         };
 
-        var actual = Math.Round(CombatMath.GetProbabilityOfHit(attacker), 4);
+        var actual = Math.Round(GetProbabilityOfHit(attacker), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -649,7 +648,7 @@ public sealed class CombatMath_Test
             HitModifier = -1
         };
 
-        var actual = Math.Round(CombatMath.GetProbabilityOfHit(attacker), 4);
+        var actual = Math.Round(GetProbabilityOfHit(attacker), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -680,7 +679,7 @@ public sealed class CombatMath_Test
             Toughness = 4
         };
 
-        var actual = Math.Round(CombatMath.GetProbabilityOfHitAndWound(attacker, defender), 4);
+        var actual = Math.Round(GetProbabilityOfHitAndWound(attacker, defender), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -707,7 +706,7 @@ public sealed class CombatMath_Test
             Toughness = 4
         };
 
-        var actual = Math.Round(CombatMath.GetProbabilityOfHitAndWound(attacker, defender), 4);
+        var actual = Math.Round(GetProbabilityOfHitAndWound(attacker, defender), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -735,7 +734,7 @@ public sealed class CombatMath_Test
             WoundModifier = -1
         };
 
-        var actual = Math.Round(CombatMath.GetProbabilityOfHitAndWound(attacker, defender), 4);
+        var actual = Math.Round(GetProbabilityOfHitAndWound(attacker, defender), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -762,7 +761,7 @@ public sealed class CombatMath_Test
             Toughness = 4
         };
 
-        var actual = Math.Round(CombatMath.GetProbabilityOfHitAndWound(attacker, defender), 4);
+        var actual = Math.Round(GetProbabilityOfHitAndWound(attacker, defender), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -789,7 +788,7 @@ public sealed class CombatMath_Test
             WoundModifier = -1
         };
 
-        var actual = Math.Round(CombatMath.GetProbabilityOfHitAndWound(attacker, defender), 4);
+        var actual = Math.Round(GetProbabilityOfHitAndWound(attacker, defender), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -818,7 +817,7 @@ public sealed class CombatMath_Test
             WoundModifier = 1
         };
 
-        var actual = Math.Round(CombatMath.GetProbabilityOfHitAndWound(attacker, defender), 4);
+        var actual = Math.Round(GetProbabilityOfHitAndWound(attacker, defender), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -847,7 +846,7 @@ public sealed class CombatMath_Test
             WoundModifier = -1
         };
 
-        var actual = Math.Round(CombatMath.GetProbabilityOfHitAndWound(attacker, defender), 4);
+        var actual = Math.Round(GetProbabilityOfHitAndWound(attacker, defender), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -874,7 +873,7 @@ public sealed class CombatMath_Test
             Toughness = 4
         };
 
-        var actual = Math.Round(CombatMath.GetProbabilityOfHitAndWound(attacker, defender), 4);
+        var actual = Math.Round(GetProbabilityOfHitAndWound(attacker, defender), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -901,7 +900,7 @@ public sealed class CombatMath_Test
             Toughness = 8
         };
 
-        var actual = Math.Round(CombatMath.GetProbabilityOfHitAndWound(attacker, defender), 4);
+        var actual = Math.Round(GetProbabilityOfHitAndWound(attacker, defender), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -928,7 +927,7 @@ public sealed class CombatMath_Test
             Toughness = 4
         };
 
-        var actual = Math.Round(CombatMath.GetProbabilityOfHitAndWound(attacker, defender), 4);
+        var actual = Math.Round(GetProbabilityOfHitAndWound(attacker, defender), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -959,7 +958,7 @@ public sealed class CombatMath_Test
             Toughness = 4
         };
 
-        var actual = Math.Round(CombatMath.GetProbabilityOfHitAndWound(attacker, defender), 4);
+        var actual = Math.Round(GetProbabilityOfHitAndWound(attacker, defender), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -972,7 +971,7 @@ public sealed class CombatMath_Test
     /// Tests the case where the attacker parameter is null.
     /// </summary>
     [TestMethod]
-    public void GetMeanHits_AttackerIsNull() => Assert.AreEqual(0, CombatMath.GetMeanHits(null));
+    public void GetMeanHits_AttackerIsNull() => Assert.AreEqual(0, GetMeanHits(null));
 
     /// <summary>
     /// Tests the case where the attacker is a single model with no abilities
@@ -981,7 +980,7 @@ public sealed class CombatMath_Test
     public void GetMeanHits_SingleModelAttacker()
     {
         const double expected = 6.6667;
-        var actual = Math.Round(CombatMath.GetMeanHits(ATTACKER_SINGLE_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetMeanHits(ATTACKER_SINGLE_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -992,7 +991,7 @@ public sealed class CombatMath_Test
     public void GetMeanHits_MultiModelAttacker()
     {
         const double expected = 13.3333;
-        var actual = Math.Round(CombatMath.GetMeanHits(ATTACKER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetMeanHits(ATTACKER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1003,7 +1002,7 @@ public sealed class CombatMath_Test
     public void GetMeanHits_VariableAttacks()
     {
         const int expected = 4;
-        var actual = Math.Round(CombatMath.GetMeanHits(ATTACKER_SINGLE_MODEL_VARIABLE_D3_ATTACKS), 4);
+        var actual = Math.Round(GetMeanHits(ATTACKER_SINGLE_MODEL_VARIABLE_D3_ATTACKS), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1014,7 +1013,7 @@ public sealed class CombatMath_Test
     public void GetMeanHits_Torrent()
     {
         const int expected = 20;
-        var actual = Math.Round(CombatMath.GetMeanHits(ATTACKER_MULTI_MODEL_VARIABLE_D6_ATTACKS_TORRENT), 4);
+        var actual = Math.Round(GetMeanHits(ATTACKER_MULTI_MODEL_VARIABLE_D6_ATTACKS_TORRENT), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1025,7 +1024,7 @@ public sealed class CombatMath_Test
     public void GetMeanHits_RerollHits()
     {
         const double expected = 13.3333;
-        var actual = Math.Round(CombatMath.GetMeanHits(ATTACKER_MULTI_MODEL_REROLL_HITS), 4);
+        var actual = Math.Round(GetMeanHits(ATTACKER_MULTI_MODEL_REROLL_HITS), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1036,7 +1035,7 @@ public sealed class CombatMath_Test
     public void GetMeanHits_RerollHitsOf1()
     {
         const double expected = 11.6667;
-        var actual = Math.Round(CombatMath.GetMeanHits(ATTACKER_MULTI_MODEL_REROLL_HITS_OF_1), 4);
+        var actual = Math.Round(GetMeanHits(ATTACKER_MULTI_MODEL_REROLL_HITS_OF_1), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1048,7 +1047,7 @@ public sealed class CombatMath_Test
     /// Tests the case where the attacker parameter is null.
     /// </summary>
     [TestMethod]
-    public void GetStandardDeviationHits_AttackerIsNull() => Assert.AreEqual(0, CombatMath.GetStandardDeviationHits(null));
+    public void GetStandardDeviationHits_AttackerIsNull() => Assert.AreEqual(0, GetStandardDeviationHits(null));
 
     /// <summary>
     /// Tests the case where the attacker is a single model with no abilities
@@ -1057,7 +1056,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationHits_SingleModelAttacker()
     {
         const double expected = 1.0541;
-        var actual = Math.Round(CombatMath.GetStandardDeviationHits(ATTACKER_SINGLE_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetStandardDeviationHits(ATTACKER_SINGLE_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1068,7 +1067,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationHits_MultiModelAttacker()
     {
         const double expected = 2.1082;
-        var actual = Math.Round(CombatMath.GetStandardDeviationHits(ATTACKER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetStandardDeviationHits(ATTACKER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1079,7 +1078,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationHits_VariableAttacks()
     {
         const double expected = 1.4907;
-        var actual = Math.Round(CombatMath.GetStandardDeviationHits(ATTACKER_SINGLE_MODEL_VARIABLE_D3_ATTACKS), 4);
+        var actual = Math.Round(GetStandardDeviationHits(ATTACKER_SINGLE_MODEL_VARIABLE_D3_ATTACKS), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1090,7 +1089,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationHits_Torrent()
     {
         const double expected = 1.7078;
-        var actual = Math.Round(CombatMath.GetStandardDeviationHits(ATTACKER_MULTI_MODEL_VARIABLE_D6_ATTACKS_TORRENT), 4);
+        var actual = Math.Round(GetStandardDeviationHits(ATTACKER_MULTI_MODEL_VARIABLE_D6_ATTACKS_TORRENT), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1101,7 +1100,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationHits_RerollHits()
     {
         const double expected = 1.2172;
-        var actual = Math.Round(CombatMath.GetStandardDeviationHits(ATTACKER_MULTI_MODEL_REROLL_HITS), 4);
+        var actual = Math.Round(GetStandardDeviationHits(ATTACKER_MULTI_MODEL_REROLL_HITS), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1112,7 +1111,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationHits_RerollHitsOf1()
     {
         const double expected = 1.6102;
-        var actual = Math.Round(CombatMath.GetStandardDeviationHits(ATTACKER_MULTI_MODEL_REROLL_HITS_OF_1), 4);
+        var actual = Math.Round(GetStandardDeviationHits(ATTACKER_MULTI_MODEL_REROLL_HITS_OF_1), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1127,7 +1126,7 @@ public sealed class CombatMath_Test
     public void GetDistributionHits_AttackerIsNull()
     {
         var expected = new List<BinomialOutcome>();
-        var actual = CombatMath.GetDistributionHits(null);
+        var actual = GetDistributionHits(null);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -1165,7 +1164,7 @@ public sealed class CombatMath_Test
             new(8, 0.2326)
         };
 
-        var actual = CombatMath.GetDistributionHits(ATTACKER_SINGLE_MODEL_NO_ABILITIES);
+        var actual = GetDistributionHits(ATTACKER_SINGLE_MODEL_NO_ABILITIES);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -1203,7 +1202,7 @@ public sealed class CombatMath_Test
             new(8, 1)
         };
 
-        var actual = CombatMath.GetDistributionHits(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DistributionTypes.Cumulative);
+        var actual = GetDistributionHits(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DistributionTypes.Cumulative);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -1241,7 +1240,7 @@ public sealed class CombatMath_Test
             new(8, 0.2326)
         };
 
-        var actual = CombatMath.GetDistributionHits(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DistributionTypes.Survivor);
+        var actual = GetDistributionHits(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DistributionTypes.Survivor);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -1291,7 +1290,7 @@ public sealed class CombatMath_Test
             new(20, 0.0003)
         };
 
-        var actual = CombatMath.GetDistributionHits(ATTACKER_MULTI_MODEL_NO_ABILITIES);
+        var actual = GetDistributionHits(ATTACKER_MULTI_MODEL_NO_ABILITIES);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -1330,7 +1329,7 @@ public sealed class CombatMath_Test
             new(9, 0.0029)
         };
 
-        var actual = CombatMath.GetDistributionHits(ATTACKER_SINGLE_MODEL_VARIABLE_D3_ATTACKS);
+        var actual = GetDistributionHits(ATTACKER_SINGLE_MODEL_VARIABLE_D3_ATTACKS);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -1390,7 +1389,7 @@ public sealed class CombatMath_Test
             new(30, 0.0333)
         };
 
-        var actual = CombatMath.GetDistributionHits(ATTACKER_MULTI_MODEL_VARIABLE_D6_ATTACKS_TORRENT);
+        var actual = GetDistributionHits(ATTACKER_MULTI_MODEL_VARIABLE_D6_ATTACKS_TORRENT);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -1435,7 +1434,7 @@ public sealed class CombatMath_Test
             new(15, 0.1709)
         };
 
-        var actual = CombatMath.GetDistributionHits(ATTACKER_MULTI_MODEL_REROLL_HITS);
+        var actual = GetDistributionHits(ATTACKER_MULTI_MODEL_REROLL_HITS);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -1480,7 +1479,7 @@ public sealed class CombatMath_Test
             new(15, 0.0231)
         };
 
-        var actual = CombatMath.GetDistributionHits(ATTACKER_MULTI_MODEL_REROLL_HITS_OF_1);
+        var actual = GetDistributionHits(ATTACKER_MULTI_MODEL_REROLL_HITS_OF_1);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -1511,7 +1510,7 @@ public sealed class CombatMath_Test
     {
         const int expected = 0;
         var defender = new DefenderDTO();
-        var actual = CombatMath.GetProbabilityOfHitAndWound(null, defender);
+        var actual = GetProbabilityOfHitAndWound(null, defender);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1523,7 +1522,7 @@ public sealed class CombatMath_Test
     {
         const int expected = 0;
         var attacker = new AttackerDTO();
-        var actual = CombatMath.GetProbabilityOfHitAndWound(attacker, null);
+        var actual = GetProbabilityOfHitAndWound(attacker, null);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1534,7 +1533,7 @@ public sealed class CombatMath_Test
     public void GetProbabilityOfHitAndWound_HigherStrength()
     {
         const double expected = 0.5556;
-        var actual = Math.Round(CombatMath.GetProbabilityOfHitAndWound(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetProbabilityOfHitAndWound(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1545,7 +1544,7 @@ public sealed class CombatMath_Test
     public void GetProbabilityOfHitAndWound_EqualStrengthAndToughness()
     {
         const double expected = 0.3333;
-        var actual = Math.Round(CombatMath.GetProbabilityOfHitAndWound(ATTACKER_MULTI_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetProbabilityOfHitAndWound(ATTACKER_MULTI_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1556,7 +1555,7 @@ public sealed class CombatMath_Test
     public void GetProbabilityOfHitAndWound_HigherToughness()
     {
         const double expected = 0.2222;
-        var actual = Math.Round(CombatMath.GetProbabilityOfHitAndWound(ATTACKER_MULTI_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_INVULNERABLE_SAVE), 4);
+        var actual = Math.Round(GetProbabilityOfHitAndWound(ATTACKER_MULTI_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_INVULNERABLE_SAVE), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1567,7 +1566,7 @@ public sealed class CombatMath_Test
     public void GetProbabilityOfHitAndWound_VariableAttacks_WeaponHasTorrent()
     {
         const double expected = 0.6667;
-        var actual = Math.Round(CombatMath.GetProbabilityOfHitAndWound(ATTACKER_MULTI_MODEL_VARIABLE_D6_ATTACKS_TORRENT, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetProbabilityOfHitAndWound(ATTACKER_MULTI_MODEL_VARIABLE_D6_ATTACKS_TORRENT, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1578,7 +1577,7 @@ public sealed class CombatMath_Test
     public void GetProbabilityOfHitAndWound_LethalHits()
     {
         const double expected = 0.5556;
-        var actual = Math.Round(CombatMath.GetProbabilityOfHitAndWound(ATTACKER_SINGLE_MODEL_LETHAL_HITS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetProbabilityOfHitAndWound(ATTACKER_SINGLE_MODEL_LETHAL_HITS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1589,7 +1588,7 @@ public sealed class CombatMath_Test
     public void GetProbabilityOfHitAndWound_SustainedHits1()
     {
         const double expected = 0.6481;
-        var actual = Math.Round(CombatMath.GetProbabilityOfHitAndWound(ATTACKER_SINGLE_MODEL_SUSTAINED_HITS_1, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetProbabilityOfHitAndWound(ATTACKER_SINGLE_MODEL_SUSTAINED_HITS_1, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1600,7 +1599,7 @@ public sealed class CombatMath_Test
     public void GetProbabilityOfHitAndWound_SustainedHits2()
     {
         const double expected = 0.7407;
-        var actual = Math.Round(CombatMath.GetProbabilityOfHitAndWound(ATTACKER_SINGLE_MODEL_SUSTAINED_HITS_2, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetProbabilityOfHitAndWound(ATTACKER_SINGLE_MODEL_SUSTAINED_HITS_2, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1611,7 +1610,7 @@ public sealed class CombatMath_Test
     public void GetProbabilityOfHitAndWound_LethalHitsAndSustainedHits1()
     {
         const double expected = 0.6296;
-        var actual = Math.Round(CombatMath.GetProbabilityOfHitAndWound(ATTACKER_SINGLE_MODEL_LETHAL_HITS_SUSTAINED_HITS_1, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetProbabilityOfHitAndWound(ATTACKER_SINGLE_MODEL_LETHAL_HITS_SUSTAINED_HITS_1, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1622,7 +1621,7 @@ public sealed class CombatMath_Test
     public void GetProbabilityOfHitAndWound_RerollWounds()
     {
         const double expected = 0.7099;
-        var actual = Math.Round(CombatMath.GetProbabilityOfHitAndWound(ATTACKER_SINGLE_MODEL_REROLL_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetProbabilityOfHitAndWound(ATTACKER_SINGLE_MODEL_REROLL_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1633,7 +1632,7 @@ public sealed class CombatMath_Test
     public void GetProbabilityOfHitAndWound_RerollWoundsOf1()
     {
         const double expected = 0.6327;
-        var actual = Math.Round(CombatMath.GetProbabilityOfHitAndWound(ATTACKER_SINGLE_MODEL_REROLL_WOUNDS_OF_1, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetProbabilityOfHitAndWound(ATTACKER_SINGLE_MODEL_REROLL_WOUNDS_OF_1, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1650,7 +1649,7 @@ public sealed class CombatMath_Test
         const int expected = 0;
 
         var defender = new DefenderDTO();
-        var actual = CombatMath.GetMeanWounds(null, defender);
+        var actual = GetMeanWounds(null, defender);
 
         Assert.AreEqual(expected, actual);
     }
@@ -1664,7 +1663,7 @@ public sealed class CombatMath_Test
         const int expected = 0;
 
         var attacker = new AttackerDTO();
-        var actual = CombatMath.GetMeanWounds(attacker, null);
+        var actual = GetMeanWounds(attacker, null);
 
         Assert.AreEqual(expected, actual);
     }
@@ -1676,7 +1675,7 @@ public sealed class CombatMath_Test
     public void GetMeanWounds_HigherStrength()
     {
         const double expected = 4.4444;
-        var actual = Math.Round(CombatMath.GetMeanWounds(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetMeanWounds(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1687,7 +1686,7 @@ public sealed class CombatMath_Test
     public void GetMeanWounds_EqualStrengthAndToughness()
     {
         const double expected = 6.6667;
-        var actual = Math.Round(CombatMath.GetMeanWounds(ATTACKER_MULTI_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetMeanWounds(ATTACKER_MULTI_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1698,7 +1697,7 @@ public sealed class CombatMath_Test
     public void GetMeanWounds_HigherToughness()
     {
         const double expected = 4.4444;
-        var actual = Math.Round(CombatMath.GetMeanWounds(ATTACKER_MULTI_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_INVULNERABLE_SAVE), 4);
+        var actual = Math.Round(GetMeanWounds(ATTACKER_MULTI_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_INVULNERABLE_SAVE), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1709,7 +1708,7 @@ public sealed class CombatMath_Test
     public void GetMeanWounds_VariableAttacks_WeaponHasTorrent()
     {
         const double expected = 13.3333;
-        var actual = Math.Round(CombatMath.GetMeanWounds(ATTACKER_MULTI_MODEL_VARIABLE_D6_ATTACKS_TORRENT, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetMeanWounds(ATTACKER_MULTI_MODEL_VARIABLE_D6_ATTACKS_TORRENT, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1720,7 +1719,7 @@ public sealed class CombatMath_Test
     public void GetMeanWounds_LethalHits()
     {
         const double expected = 2.7778;
-        var actual = Math.Round(CombatMath.GetMeanWounds(ATTACKER_SINGLE_MODEL_LETHAL_HITS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetMeanWounds(ATTACKER_SINGLE_MODEL_LETHAL_HITS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1731,7 +1730,7 @@ public sealed class CombatMath_Test
     public void GetMeanWounds_SustainedHits1()
     {
         const double expected = 3.2407;
-        var actual = Math.Round(CombatMath.GetMeanWounds(ATTACKER_SINGLE_MODEL_SUSTAINED_HITS_1, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetMeanWounds(ATTACKER_SINGLE_MODEL_SUSTAINED_HITS_1, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1742,7 +1741,7 @@ public sealed class CombatMath_Test
     public void GetMeanWounds_SustainedHits2()
     {
         const double expected = 3.7037;
-        var actual = Math.Round(CombatMath.GetMeanWounds(ATTACKER_SINGLE_MODEL_SUSTAINED_HITS_2, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetMeanWounds(ATTACKER_SINGLE_MODEL_SUSTAINED_HITS_2, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1753,7 +1752,7 @@ public sealed class CombatMath_Test
     public void GetMeanWounds_LethalHitsAndSustainedHits1()
     {
         const double expected = 3.1481;
-        var actual = Math.Round(CombatMath.GetMeanWounds(ATTACKER_SINGLE_MODEL_LETHAL_HITS_SUSTAINED_HITS_1, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetMeanWounds(ATTACKER_SINGLE_MODEL_LETHAL_HITS_SUSTAINED_HITS_1, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1764,7 +1763,7 @@ public sealed class CombatMath_Test
     public void GetMeanWounds_RerollWounds()
     {
         const double expected = 3.5494;
-        var actual = Math.Round(CombatMath.GetMeanWounds(ATTACKER_SINGLE_MODEL_REROLL_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetMeanWounds(ATTACKER_SINGLE_MODEL_REROLL_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1775,7 +1774,7 @@ public sealed class CombatMath_Test
     public void GetMeanWounds_RerollWoundsOf1()
     {
         const double expected = 3.1636;
-        var actual = Math.Round(CombatMath.GetMeanWounds(ATTACKER_SINGLE_MODEL_REROLL_WOUNDS_OF_1, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetMeanWounds(ATTACKER_SINGLE_MODEL_REROLL_WOUNDS_OF_1, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1790,7 +1789,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationWounds_AttackerIsNull()
     {
         const int expected = 0;
-        var actual = CombatMath.GetStandardDeviationWounds(null, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var actual = GetStandardDeviationWounds(null, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         Assert.AreEqual(expected, actual);
     }
@@ -1802,7 +1801,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationWounds_DefenderIsNull()
     {
         const int expected = 0;
-        var actual = CombatMath.GetStandardDeviationWounds(ATTACKER_SINGLE_MODEL_NO_ABILITIES, null);
+        var actual = GetStandardDeviationWounds(ATTACKER_SINGLE_MODEL_NO_ABILITIES, null);
 
         Assert.AreEqual(expected, actual);
     }
@@ -1814,7 +1813,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationWounds_HigherStrength()
     {
         const double expected = 1.4055;
-        var actual = Math.Round(CombatMath.GetStandardDeviationWounds(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetStandardDeviationWounds(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1825,7 +1824,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationWounds_EqualStrengthAndToughness()
     {
         const double expected = 2.1082;
-        var actual = Math.Round(CombatMath.GetStandardDeviationWounds(ATTACKER_MULTI_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetStandardDeviationWounds(ATTACKER_MULTI_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1836,7 +1835,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationWounds_HigherToughness()
     {
         const double expected = 1.8592;
-        var actual = Math.Round(CombatMath.GetStandardDeviationWounds(ATTACKER_MULTI_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_INVULNERABLE_SAVE), 4);
+        var actual = Math.Round(GetStandardDeviationWounds(ATTACKER_MULTI_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_INVULNERABLE_SAVE), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1847,7 +1846,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationWounds_VariableAttacks_WeaponHasTorrent()
     {
         const double expected = 2.396;
-        var actual = Math.Round(CombatMath.GetStandardDeviationWounds(ATTACKER_MULTI_MODEL_VARIABLE_D6_ATTACKS_TORRENT, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetStandardDeviationWounds(ATTACKER_MULTI_MODEL_VARIABLE_D6_ATTACKS_TORRENT, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1858,7 +1857,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationWounds_LethalHits()
     {
         const double expected = 1.1111;
-        var actual = Math.Round(CombatMath.GetStandardDeviationWounds(ATTACKER_SINGLE_MODEL_LETHAL_HITS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetStandardDeviationWounds(ATTACKER_SINGLE_MODEL_LETHAL_HITS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1869,7 +1868,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationWounds_SustainedHits1()
     {
         const double expected = 1.0678;
-        var actual = Math.Round(CombatMath.GetStandardDeviationWounds(ATTACKER_SINGLE_MODEL_SUSTAINED_HITS_1, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetStandardDeviationWounds(ATTACKER_SINGLE_MODEL_SUSTAINED_HITS_1, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1880,7 +1879,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationWounds_SustainedHits2()
     {
         const double expected = 0.9799;
-        var actual = Math.Round(CombatMath.GetStandardDeviationWounds(ATTACKER_SINGLE_MODEL_SUSTAINED_HITS_2, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetStandardDeviationWounds(ATTACKER_SINGLE_MODEL_SUSTAINED_HITS_2, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1891,7 +1890,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationWounds_LethalHitsAndSustainedHits1()
     {
         const double expected = 1.0798;
-        var actual = Math.Round(CombatMath.GetStandardDeviationWounds(ATTACKER_SINGLE_MODEL_LETHAL_HITS_SUSTAINED_HITS_1, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetStandardDeviationWounds(ATTACKER_SINGLE_MODEL_LETHAL_HITS_SUSTAINED_HITS_1, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1902,7 +1901,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationWounds_RerollWounds()
     {
         const double expected = 1.0148;
-        var actual = Math.Round(CombatMath.GetStandardDeviationWounds(ATTACKER_SINGLE_MODEL_REROLL_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetStandardDeviationWounds(ATTACKER_SINGLE_MODEL_REROLL_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1913,7 +1912,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationWounds_RerollWoundsOf1()
     {
         const double expected = 1.0779;
-        var actual = Math.Round(CombatMath.GetStandardDeviationWounds(ATTACKER_SINGLE_MODEL_REROLL_WOUNDS_OF_1, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetStandardDeviationWounds(ATTACKER_SINGLE_MODEL_REROLL_WOUNDS_OF_1, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -1928,7 +1927,7 @@ public sealed class CombatMath_Test
     public void GetDistributionWounds_AttackerIsNull()
     {
         var expected = new List<BinomialOutcome>();
-        var actual = CombatMath.GetDistributionWounds(null, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var actual = GetDistributionWounds(null, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -1954,7 +1953,7 @@ public sealed class CombatMath_Test
     public void GetDistributionWounds_DefenderIsNull()
     {
         var expected = new List<BinomialOutcome>();
-        var actual = CombatMath.GetDistributionWounds(ATTACKER_SINGLE_MODEL_NO_ABILITIES, null);
+        var actual = GetDistributionWounds(ATTACKER_SINGLE_MODEL_NO_ABILITIES, null);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -1992,7 +1991,7 @@ public sealed class CombatMath_Test
             new(8, 0.0091)
         };
 
-        var actual = CombatMath.GetDistributionWounds(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var actual = GetDistributionWounds(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -2042,7 +2041,7 @@ public sealed class CombatMath_Test
             new(20, 0)
         };
 
-        var actual = CombatMath.GetDistributionWounds(ATTACKER_MULTI_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var actual = GetDistributionWounds(ATTACKER_MULTI_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -2092,7 +2091,7 @@ public sealed class CombatMath_Test
             new(20, 0)
         };
 
-        var actual = CombatMath.GetDistributionWounds(ATTACKER_MULTI_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_INVULNERABLE_SAVE);
+        var actual = GetDistributionWounds(ATTACKER_MULTI_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_INVULNERABLE_SAVE);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -2152,7 +2151,7 @@ public sealed class CombatMath_Test
             new(30, 0)
         };
 
-        var actual = CombatMath.GetDistributionWounds(ATTACKER_MULTI_MODEL_VARIABLE_D6_ATTACKS_TORRENT, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var actual = GetDistributionWounds(ATTACKER_MULTI_MODEL_VARIABLE_D6_ATTACKS_TORRENT, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -2187,7 +2186,7 @@ public sealed class CombatMath_Test
             new(5, 0.0529)
         };
 
-        var actual = CombatMath.GetDistributionWounds(ATTACKER_SINGLE_MODEL_LETHAL_HITS, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var actual = GetDistributionWounds(ATTACKER_SINGLE_MODEL_LETHAL_HITS, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -2222,7 +2221,7 @@ public sealed class CombatMath_Test
             new(5, 0.1144)
         };
 
-        var actual = CombatMath.GetDistributionWounds(ATTACKER_SINGLE_MODEL_SUSTAINED_HITS_1, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var actual = GetDistributionWounds(ATTACKER_SINGLE_MODEL_SUSTAINED_HITS_1, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -2257,7 +2256,7 @@ public sealed class CombatMath_Test
             new(5, 0.2230)
         };
 
-        var actual = CombatMath.GetDistributionWounds(ATTACKER_SINGLE_MODEL_SUSTAINED_HITS_2, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var actual = GetDistributionWounds(ATTACKER_SINGLE_MODEL_SUSTAINED_HITS_2, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -2292,7 +2291,7 @@ public sealed class CombatMath_Test
             new(5, 0.0990)
         };
 
-        var actual = CombatMath.GetDistributionWounds(ATTACKER_SINGLE_MODEL_LETHAL_HITS_SUSTAINED_HITS_1, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var actual = GetDistributionWounds(ATTACKER_SINGLE_MODEL_LETHAL_HITS_SUSTAINED_HITS_1, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -2327,7 +2326,7 @@ public sealed class CombatMath_Test
             new(5, 0.1803)
         };
 
-        var actual = CombatMath.GetDistributionWounds(ATTACKER_SINGLE_MODEL_REROLL_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var actual = GetDistributionWounds(ATTACKER_SINGLE_MODEL_REROLL_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -2362,7 +2361,7 @@ public sealed class CombatMath_Test
             new(5, 0.1014)
         };
 
-        var actual = CombatMath.GetDistributionWounds(ATTACKER_SINGLE_MODEL_REROLL_WOUNDS_OF_1, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var actual = GetDistributionWounds(ATTACKER_SINGLE_MODEL_REROLL_WOUNDS_OF_1, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -2392,7 +2391,7 @@ public sealed class CombatMath_Test
     public void GetProbabilityOfHitAndWoundAndFailedSave_AttackerIsNull()
     {
         const int expected = 0;
-        var actual = CombatMath.GetProbabilityOfHitAndWoundAndFailedSave(null, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var actual = GetProbabilityOfHitAndWoundAndFailedSave(null, DEFENDER_MULTI_MODEL_NO_ABILITIES);
         Assert.AreEqual(expected, actual);
     }
 
@@ -2403,7 +2402,7 @@ public sealed class CombatMath_Test
     public void GetProbabilityOfHitAndWoundAndFailedSave_DefenderIsNull()
     {
         const int expected = 0;
-        var actual = CombatMath.GetProbabilityOfHitAndWoundAndFailedSave(ATTACKER_SINGLE_MODEL_NO_ABILITIES, null);
+        var actual = GetProbabilityOfHitAndWoundAndFailedSave(ATTACKER_SINGLE_MODEL_NO_ABILITIES, null);
         Assert.AreEqual(expected, actual);
     }
 
@@ -2414,7 +2413,7 @@ public sealed class CombatMath_Test
     public void GetProbabilityOfHitAndWoundAndFailedSave_DevastatingWounds()
     {
         const double expected = 0.2963;
-        var actual = Math.Round(CombatMath.GetProbabilityOfHitAndWoundAndFailedSave(ATTACKER_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetProbabilityOfHitAndWoundAndFailedSave(ATTACKER_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -2426,7 +2425,7 @@ public sealed class CombatMath_Test
     public void GetProbabilityOfHitAndWoundAndFailedSave_LethalHitsAndDevastatingWounds()
     {
         const double expected = 0.2778;
-        var actual = Math.Round(CombatMath.GetProbabilityOfHitAndWoundAndFailedSave(ATTACKER_LETHAL_HITS_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetProbabilityOfHitAndWoundAndFailedSave(ATTACKER_LETHAL_HITS_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -2442,7 +2441,7 @@ public sealed class CombatMath_Test
     public void GetMeanFailedSaves_NullAttacker()
     {
         const int expected = 0;
-        var actual = CombatMath.GetMeanFailedSaves(null, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var actual = GetMeanFailedSaves(null, DEFENDER_MULTI_MODEL_NO_ABILITIES);
         Assert.AreEqual(expected, actual);
     }
 
@@ -2453,7 +2452,7 @@ public sealed class CombatMath_Test
     public void GetMeanFailedSaves_NullDefender()
     {
         const int expected = 0;
-        var actual = CombatMath.GetMeanFailedSaves(ATTACKER_SINGLE_MODEL_NO_ABILITIES, null);
+        var actual = GetMeanFailedSaves(ATTACKER_SINGLE_MODEL_NO_ABILITIES, null);
         Assert.AreEqual(expected, actual);
     }
 
@@ -2464,7 +2463,7 @@ public sealed class CombatMath_Test
     public void GetMeanFailedSaves_WeaponHasDevastatingWounds()
     {
         const double expected = 1.4815;
-        var actual = Math.Round(CombatMath.GetMeanFailedSaves(ATTACKER_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetMeanFailedSaves(ATTACKER_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -2476,7 +2475,7 @@ public sealed class CombatMath_Test
     public void GetMeanFailedSaves_WeaponHasLethalHitsAndDevastatingWounds()
     {
         const double expected = 1.3889;
-        var actual = Math.Round(CombatMath.GetMeanFailedSaves(ATTACKER_LETHAL_HITS_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetMeanFailedSaves(ATTACKER_LETHAL_HITS_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -2492,7 +2491,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationFailedSaves_NullAttacker()
     {
         const int expected = 0;
-        var actual = CombatMath.GetStandardDeviationFailedSaves(null, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var actual = GetStandardDeviationFailedSaves(null, DEFENDER_MULTI_MODEL_NO_ABILITIES);
         Assert.AreEqual(expected, actual);
     }
 
@@ -2503,7 +2502,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationFailedSaves_NullDefender()
     {
         const int expected = 0;
-        var actual = CombatMath.GetStandardDeviationFailedSaves(ATTACKER_SINGLE_MODEL_NO_ABILITIES, null);
+        var actual = GetStandardDeviationFailedSaves(ATTACKER_SINGLE_MODEL_NO_ABILITIES, null);
         Assert.AreEqual(expected, actual);
     }
 
@@ -2514,7 +2513,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationFailedSaves_WeaponHasDevastatingWounds()
     {
         const double expected = 1.021;
-        var actual = Math.Round(CombatMath.GetStandardDeviationFailedSaves(ATTACKER_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetStandardDeviationFailedSaves(ATTACKER_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -2526,7 +2525,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationFailedSaves_WeaponHasLethalHitsAndDevastatingWounds()
     {
         const double expected = 1.0015;
-        var actual = Math.Round(CombatMath.GetStandardDeviationFailedSaves(ATTACKER_LETHAL_HITS_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetStandardDeviationFailedSaves(ATTACKER_LETHAL_HITS_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -2542,7 +2541,7 @@ public sealed class CombatMath_Test
     public void GetDistributionFailedSaves_AttackerIsNull()
     {
         var expected = new List<BinomialOutcome>();
-        var actual = CombatMath.GetDistributionFailedSaves(null, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var actual = GetDistributionFailedSaves(null, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -2568,7 +2567,7 @@ public sealed class CombatMath_Test
     public void GetDistributionFailedSaves_DefenderIsNull()
     {
         var expected = new List<BinomialOutcome>();
-        var actual = CombatMath.GetDistributionFailedSaves(ATTACKER_SINGLE_MODEL_NO_ABILITIES, null);
+        var actual = GetDistributionFailedSaves(ATTACKER_SINGLE_MODEL_NO_ABILITIES, null);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -2603,7 +2602,7 @@ public sealed class CombatMath_Test
             new(5, 0.0023)
         };
 
-        var actual = CombatMath.GetDistributionFailedSaves(ATTACKER_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var actual = GetDistributionFailedSaves(ATTACKER_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -2638,7 +2637,7 @@ public sealed class CombatMath_Test
             new(5, 0.0017)
         };
 
-        var actual = CombatMath.GetDistributionFailedSaves(ATTACKER_LETHAL_HITS_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var actual = GetDistributionFailedSaves(ATTACKER_LETHAL_HITS_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -2668,7 +2667,7 @@ public sealed class CombatMath_Test
     public void GetMeanDamage_NullAttacker()
     {
         const int expected = 0;
-        var actual = CombatMath.GetMeanDamage(null, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var actual = GetMeanDamage(null, DEFENDER_MULTI_MODEL_NO_ABILITIES);
         Assert.AreEqual(expected, actual);
     }
 
@@ -2679,7 +2678,7 @@ public sealed class CombatMath_Test
     public void GetMeanDamage_NullDefender()
     {
         const int expected = 0;
-        var actual = CombatMath.GetMeanDamage(ATTACKER_SINGLE_MODEL_NO_ABILITIES, null);
+        var actual = GetMeanDamage(ATTACKER_SINGLE_MODEL_NO_ABILITIES, null);
         Assert.AreEqual(expected, actual);
     }
 
@@ -2690,7 +2689,7 @@ public sealed class CombatMath_Test
     public void GetMeanDamage_DefenderHasInvulnerableSave()
     {
         const double expected = 6.6667;
-        var actual = Math.Round(CombatMath.GetMeanDamage(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_INVULNERABLE_SAVE), 4);
+        var actual = Math.Round(GetMeanDamage(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_INVULNERABLE_SAVE), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -2701,7 +2700,7 @@ public sealed class CombatMath_Test
     public void GetMeanDamage_DefenderHasFeelNoPains()
     {
         const double expected = 8.8889;
-        var actual = Math.Round(CombatMath.GetMeanDamage(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_FEEL_NO_PAIN_5), 4);
+        var actual = Math.Round(GetMeanDamage(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_FEEL_NO_PAIN_5), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -2712,7 +2711,7 @@ public sealed class CombatMath_Test
     public void GetMeanDamage_VariableAttacks_MultiModelAttacker()
     {
         const double expected = 6.6667;
-        var actual = Math.Round(CombatMath.GetMeanDamage(ATTACKER_MULTI_MODEL_VARIABLE_D6_ATTACKS_TORRENT, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetMeanDamage(ATTACKER_MULTI_MODEL_VARIABLE_D6_ATTACKS_TORRENT, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -2724,7 +2723,7 @@ public sealed class CombatMath_Test
     public void GetMeanDamage_MultiModelAttacker_AttackerHasVariableDamage()
     {
         const double expected = 31.25;
-        var actual = Math.Round(CombatMath.GetMeanDamage(ATTACKER_MULTI_MODEL_VARIABLE_D6_DAMAGE, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetMeanDamage(ATTACKER_MULTI_MODEL_VARIABLE_D6_DAMAGE, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -2735,7 +2734,7 @@ public sealed class CombatMath_Test
     public void GetMeanDamage_WeaponHasLethalHits()
     {
         const double expected = 5.5556;
-        var actual = Math.Round(CombatMath.GetMeanDamage(ATTACKER_SINGLE_MODEL_LETHAL_HITS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetMeanDamage(ATTACKER_SINGLE_MODEL_LETHAL_HITS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -2747,7 +2746,7 @@ public sealed class CombatMath_Test
     public void GetMeanDamage_DevastatingWounds()
     {
         const double expected = 4.4444;
-        var actual = Math.Round(CombatMath.GetMeanDamage(ATTACKER_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetMeanDamage(ATTACKER_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -2759,7 +2758,7 @@ public sealed class CombatMath_Test
     public void GetMeanDamage_LethalHitsAndDevastatingWounds()
     {
         const double expected = 4.1667;
-        var actual = Math.Round(CombatMath.GetMeanDamage(ATTACKER_LETHAL_HITS_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetMeanDamage(ATTACKER_LETHAL_HITS_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -2775,7 +2774,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationDamage_NullAttacker()
     {
         const int expected = 0;
-        var actual = CombatMath.GetStandardDeviationDamage(null, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var actual = GetStandardDeviationDamage(null, DEFENDER_MULTI_MODEL_NO_ABILITIES);
         Assert.AreEqual(expected, actual);
     }
 
@@ -2786,7 +2785,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationDamage_NullDefender()
     {
         const int expected = 0;
-        var actual = CombatMath.GetStandardDeviationDamage(ATTACKER_SINGLE_MODEL_NO_ABILITIES, null);
+        var actual = GetStandardDeviationDamage(ATTACKER_SINGLE_MODEL_NO_ABILITIES, null);
         Assert.AreEqual(expected, actual);
     }
 
@@ -2797,7 +2796,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationDamage_DefenderHasInvulnerableSave()
     {
         const double expected = 3.8006;
-        var actual = Math.Round(CombatMath.GetStandardDeviationDamage(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_INVULNERABLE_SAVE), 4);
+        var actual = Math.Round(GetStandardDeviationDamage(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_INVULNERABLE_SAVE), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -2808,7 +2807,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationDamage_DefenderHasFeelNoPains()
     {
         const double expected = 4.0976;
-        var actual = Math.Round(CombatMath.GetStandardDeviationDamage(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_FEEL_NO_PAIN_5), 4);
+        var actual = Math.Round(GetStandardDeviationDamage(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_FEEL_NO_PAIN_5), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -2819,7 +2818,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationDamage_VariableAttacks_MultiModelAttacker()
     {
         const double expected = 2.1837;
-        var actual = Math.Round(CombatMath.GetStandardDeviationDamage(ATTACKER_MULTI_MODEL_VARIABLE_D6_ATTACKS_TORRENT, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetStandardDeviationDamage(ATTACKER_MULTI_MODEL_VARIABLE_D6_ATTACKS_TORRENT, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -2831,7 +2830,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationDamage_MultiModelAttacker_AttackerHasVariableDamage()
     {
         const double expected = 11.0633;
-        var actual = Math.Round(CombatMath.GetStandardDeviationDamage(ATTACKER_MULTI_MODEL_VARIABLE_D6_DAMAGE, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetStandardDeviationDamage(ATTACKER_MULTI_MODEL_VARIABLE_D6_DAMAGE, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -2842,7 +2841,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationDamage_WeaponHasLethalHits()
     {
         const double expected = 3.2394;
-        var actual = Math.Round(CombatMath.GetStandardDeviationDamage(ATTACKER_SINGLE_MODEL_LETHAL_HITS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetStandardDeviationDamage(ATTACKER_SINGLE_MODEL_LETHAL_HITS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -2854,7 +2853,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationDamage_DevastatingWounds()
     {
         const double expected = 3.0631;
-        var actual = Math.Round(CombatMath.GetStandardDeviationDamage(ATTACKER_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetStandardDeviationDamage(ATTACKER_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -2866,7 +2865,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationDamage_LethalHitsAndDevastatingWounds()
     {
         const double expected = 3.0046;
-        var actual = Math.Round(CombatMath.GetStandardDeviationDamage(ATTACKER_LETHAL_HITS_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetStandardDeviationDamage(ATTACKER_LETHAL_HITS_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -2882,7 +2881,7 @@ public sealed class CombatMath_Test
     public void GetMeanDestroyedModels_NullAttacker()
     {
         const int expected = 0;
-        var actual = CombatMath.GetMeanDestroyedModels(null, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var actual = GetMeanDestroyedModels(null, DEFENDER_MULTI_MODEL_NO_ABILITIES);
         Assert.AreEqual(expected, actual);
     }
 
@@ -2893,7 +2892,7 @@ public sealed class CombatMath_Test
     public void GetMeanDestroyedModels_NullDefender()
     {
         const int expected = 0;
-        var actual = CombatMath.GetMeanDestroyedModels(ATTACKER_SINGLE_MODEL_NO_ABILITIES, null);
+        var actual = GetMeanDestroyedModels(ATTACKER_SINGLE_MODEL_NO_ABILITIES, null);
         Assert.AreEqual(expected, actual);
     }
 
@@ -2904,7 +2903,7 @@ public sealed class CombatMath_Test
     public void GetMeanDestroyedModels_DefenderHasInvulnerableSave()
     {
         const double expected = 2.2222;
-        var actual = Math.Round(CombatMath.GetMeanDestroyedModels(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_INVULNERABLE_SAVE), 4);
+        var actual = Math.Round(GetMeanDestroyedModels(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_INVULNERABLE_SAVE), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -2915,7 +2914,7 @@ public sealed class CombatMath_Test
     public void GetMeanDestroyedModels_DefenderHasFeelNoPains()
     {
         const double expected = 1.9753;
-        var actual = Math.Round(CombatMath.GetMeanDestroyedModels(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_FEEL_NO_PAIN_5), 4);
+        var actual = Math.Round(GetMeanDestroyedModels(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_FEEL_NO_PAIN_5), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -2926,7 +2925,7 @@ public sealed class CombatMath_Test
     public void GetMeanDestroyedModels_VariableAttacks_MultiModelAttacker()
     {
         const double expected = 3.3333;
-        var actual = Math.Round(CombatMath.GetMeanDestroyedModels(ATTACKER_MULTI_MODEL_VARIABLE_D6_ATTACKS_TORRENT, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetMeanDestroyedModels(ATTACKER_MULTI_MODEL_VARIABLE_D6_ATTACKS_TORRENT, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -2938,7 +2937,7 @@ public sealed class CombatMath_Test
     public void GetMeanDestroyedModels_MultiModelAttacker_AttackerHasVariableDamage()
     {
         const double expected = 5.2083;
-        var actual = Math.Round(CombatMath.GetMeanDestroyedModels(ATTACKER_MULTI_MODEL_VARIABLE_D6_DAMAGE, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetMeanDestroyedModels(ATTACKER_MULTI_MODEL_VARIABLE_D6_DAMAGE, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -2949,7 +2948,7 @@ public sealed class CombatMath_Test
     public void GetMeanDestroyedModels_WeaponHasLethalHits()
     {
         const double expected = 1.8519;
-        var actual = Math.Round(CombatMath.GetMeanDestroyedModels(ATTACKER_SINGLE_MODEL_LETHAL_HITS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetMeanDestroyedModels(ATTACKER_SINGLE_MODEL_LETHAL_HITS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -2961,7 +2960,7 @@ public sealed class CombatMath_Test
     public void GetMeanDestroyedModels_DevastatingWounds()
     {
         const double expected = 1.4815;
-        var actual = Math.Round(CombatMath.GetMeanDestroyedModels(ATTACKER_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetMeanDestroyedModels(ATTACKER_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -2973,7 +2972,7 @@ public sealed class CombatMath_Test
     public void GetMeanDestroyedModels_LethalHitsAndDevastatingWounds()
     {
         const double expected = 1.3889;
-        var actual = Math.Round(CombatMath.GetMeanDestroyedModels(ATTACKER_LETHAL_HITS_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetMeanDestroyedModels(ATTACKER_LETHAL_HITS_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -2989,7 +2988,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationDestroyedModels_NullAttacker()
     {
         const int expected = 0;
-        var actual = CombatMath.GetStandardDeviationDestroyedModels(null, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var actual = GetStandardDeviationDestroyedModels(null, DEFENDER_MULTI_MODEL_NO_ABILITIES);
         Assert.AreEqual(expected, actual);
     }
 
@@ -3000,7 +2999,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationDestroyedModels_NullDefender()
     {
         const int expected = 0;
-        var actual = CombatMath.GetStandardDeviationDestroyedModels(ATTACKER_SINGLE_MODEL_NO_ABILITIES, null);
+        var actual = GetStandardDeviationDestroyedModels(ATTACKER_SINGLE_MODEL_NO_ABILITIES, null);
         Assert.AreEqual(expected, actual);
     }
 
@@ -3011,7 +3010,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationDestroyedModels_DefenderHasInvulnerableSave()
     {
         const double expected = 1.2669;
-        var actual = Math.Round(CombatMath.GetStandardDeviationDestroyedModels(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_INVULNERABLE_SAVE), 4);
+        var actual = Math.Round(GetStandardDeviationDestroyedModels(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_INVULNERABLE_SAVE), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -3022,7 +3021,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationDestroyedModels_DefenderHasFeelNoPains()
     {
         const double expected = 0.9106;
-        var actual = Math.Round(CombatMath.GetStandardDeviationDestroyedModels(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_FEEL_NO_PAIN_5), 4);
+        var actual = Math.Round(GetStandardDeviationDestroyedModels(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_FEEL_NO_PAIN_5), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -3033,7 +3032,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationDestroyedModels_VariableAttacks_MultiModelAttacker()
     {
         const double expected = 1.0918;
-        var actual = Math.Round(CombatMath.GetStandardDeviationDestroyedModels(ATTACKER_MULTI_MODEL_VARIABLE_D6_ATTACKS_TORRENT, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetStandardDeviationDestroyedModels(ATTACKER_MULTI_MODEL_VARIABLE_D6_ATTACKS_TORRENT, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -3045,7 +3044,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationDestroyedModels_MultiModelAttacker_AttackerHasVariableDamage()
     {
         const double expected = 1.8439;
-        var actual = Math.Round(CombatMath.GetStandardDeviationDestroyedModels(ATTACKER_MULTI_MODEL_VARIABLE_D6_DAMAGE, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetStandardDeviationDestroyedModels(ATTACKER_MULTI_MODEL_VARIABLE_D6_DAMAGE, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -3056,7 +3055,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationDestroyedModels_WeaponHasLethalHits()
     {
         const double expected = 1.0798;
-        var actual = Math.Round(CombatMath.GetStandardDeviationDestroyedModels(ATTACKER_SINGLE_MODEL_LETHAL_HITS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetStandardDeviationDestroyedModels(ATTACKER_SINGLE_MODEL_LETHAL_HITS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -3068,7 +3067,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationDestroyedModels_DevastatingWounds()
     {
         const double expected = 1.021;
-        var actual = Math.Round(CombatMath.GetStandardDeviationDestroyedModels(ATTACKER_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetStandardDeviationDestroyedModels(ATTACKER_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -3080,7 +3079,7 @@ public sealed class CombatMath_Test
     public void GetStandardDeviationDestroyedModels_LethalHitsAndDevastatingWounds()
     {
         const double expected = 1.0015;
-        var actual = Math.Round(CombatMath.GetStandardDeviationDestroyedModels(ATTACKER_LETHAL_HITS_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetStandardDeviationDestroyedModels(ATTACKER_LETHAL_HITS_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -3096,7 +3095,7 @@ public sealed class CombatMath_Test
     public void GetDistributionDestroyedModels_AttackerIsNull()
     {
         var expected = new List<BinomialOutcome>();
-        var actual = CombatMath.GetDistributionDestroyedModels(null, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var actual = GetDistributionDestroyedModels(null, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -3122,7 +3121,7 @@ public sealed class CombatMath_Test
     public void GetDistributionDestroyedModels_DefenderIsNull()
     {
         var expected = new List<BinomialOutcome>();
-        var actual = CombatMath.GetDistributionDestroyedModels(ATTACKER_SINGLE_MODEL_NO_ABILITIES, null);
+        var actual = GetDistributionDestroyedModels(ATTACKER_SINGLE_MODEL_NO_ABILITIES, null);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -3160,7 +3159,7 @@ public sealed class CombatMath_Test
             new(8, 0)
         };
 
-        var actual = CombatMath.GetDistributionDestroyedModels(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_INVULNERABLE_SAVE);
+        var actual = GetDistributionDestroyedModels(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_INVULNERABLE_SAVE);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -3198,7 +3197,7 @@ public sealed class CombatMath_Test
             new(8, 0.0002)
         };
 
-        var actual = CombatMath.GetDistributionDestroyedModels(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_FEEL_NO_PAIN_5);
+        var actual = GetDistributionDestroyedModels(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_FEEL_NO_PAIN_5);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -3243,7 +3242,7 @@ public sealed class CombatMath_Test
             new(15, 0)
         };
 
-        var actual = CombatMath.GetDistributionDestroyedModels(ATTACKER_MULTI_MODEL_VARIABLE_D6_ATTACKS_TORRENT, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var actual = GetDistributionDestroyedModels(ATTACKER_MULTI_MODEL_VARIABLE_D6_ATTACKS_TORRENT, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -3288,7 +3287,7 @@ public sealed class CombatMath_Test
             new(15, 0)
         };
 
-        var actual = CombatMath.GetDistributionDestroyedModels(ATTACKER_MULTI_MODEL_VARIABLE_D6_DAMAGE, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var actual = GetDistributionDestroyedModels(ATTACKER_MULTI_MODEL_VARIABLE_D6_DAMAGE, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -3323,7 +3322,7 @@ public sealed class CombatMath_Test
             new(5, 0.0070)
         };
 
-        var actual = CombatMath.GetDistributionDestroyedModels(ATTACKER_SINGLE_MODEL_LETHAL_HITS, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var actual = GetDistributionDestroyedModels(ATTACKER_SINGLE_MODEL_LETHAL_HITS, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -3358,7 +3357,7 @@ public sealed class CombatMath_Test
             new(5, 0.0017)
         };
 
-        var actual = CombatMath.GetDistributionDestroyedModels(ATTACKER_LETHAL_HITS_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var actual = GetDistributionDestroyedModels(ATTACKER_LETHAL_HITS_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -3393,7 +3392,7 @@ public sealed class CombatMath_Test
             new(5, 0.0017)
         };
 
-        var actual = CombatMath.GetDistributionDestroyedModels(ATTACKER_LETHAL_HITS_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var actual = GetDistributionDestroyedModels(ATTACKER_LETHAL_HITS_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         // Print expected
         Debug.WriteLine("Expected: ");
@@ -3432,7 +3431,7 @@ public sealed class CombatMath_Test
         // - Total damage: 2.963 * 2 = 5.9259
         // - Models destroyed: 5.9259 / max(2, 2) = 2.963
         const double expected = 2.963;
-        var actual = Math.Round(CombatMath.GetMeanDestroyedModels(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_DAMAGE_REDUCTION_1), 4);
+        var actual = Math.Round(GetMeanDestroyedModels(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_DAMAGE_REDUCTION_1), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -3452,7 +3451,7 @@ public sealed class CombatMath_Test
         // - Total damage: 2.963 * 1 = 2.963
         // - Models destroyed: 2.963 / max(2, 1) = 1.4815
         const double expected = 1.4815;
-        var actual = Math.Round(CombatMath.GetMeanDestroyedModels(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_DAMAGE_REDUCTION_2), 4);
+        var actual = Math.Round(GetMeanDestroyedModels(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_DAMAGE_REDUCTION_2), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -3475,7 +3474,7 @@ public sealed class CombatMath_Test
         // - Total damage: 2.963 * 1.3333 = 3.9507
         // - Models destroyed: 3.9507 / max(3, 1.3333) = 1.3169
         const double expected = 1.3169;
-        var actual = Math.Round(CombatMath.GetMeanDestroyedModels(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_DAMAGE_REDUCTION_1_FEEL_NO_PAIN_5), 4);
+        var actual = Math.Round(GetMeanDestroyedModels(ATTACKER_SINGLE_MODEL_NO_ABILITIES, DEFENDER_MULTI_MODEL_DAMAGE_REDUCTION_1_FEEL_NO_PAIN_5), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -3508,7 +3507,7 @@ public sealed class CombatMath_Test
         // With damage reduction 2 and weapon damage 1, damage is reduced to 0
         // Expected: 0 models destroyed
         const int expected = 0;
-        var actual = Math.Round(CombatMath.GetMeanDestroyedModels(attacker, defender), 4);
+        var actual = Math.Round(GetMeanDestroyedModels(attacker, defender), 4);
         Assert.AreEqual(expected, actual);
     }
 
@@ -3665,8 +3664,8 @@ public sealed class CombatMath_Test
             WeaponFlatDamage = 2
         };
 
-        var probWithoutAnti = CombatMath.GetProbabilityOfHitAndWound(withoutAnti, DEFENDER_MULTI_MODEL_NO_ABILITIES);
-        var probWithAnti = CombatMath.GetProbabilityOfHitAndWound(ATTACKER_ANTI_4_PLUS, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var probWithoutAnti = GetProbabilityOfHitAndWound(withoutAnti, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var probWithAnti = GetProbabilityOfHitAndWound(ATTACKER_ANTI_4_PLUS, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         // Probability should be the same (Anti only affects critical wounds, not total wounds)
         Assert.AreEqual(Math.Round(probWithoutAnti, 4), Math.Round(probWithAnti, 4));
@@ -3685,7 +3684,7 @@ public sealed class CombatMath_Test
         // S4 vs T4 means normal wounds on 4+ (S = T)
         // Anti 4+ means crits on 4+
         // The anti threshold matches the normal wound threshold
-        var probWithAnti = CombatMath.GetProbabilityOfHitAndWound(ATTACKER_ANTI_4_PLUS_SAME_THRESHOLD, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var probWithAnti = GetProbabilityOfHitAndWound(ATTACKER_ANTI_4_PLUS_SAME_THRESHOLD, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         // Create equivalent attacker without Anti for comparison
         var withoutAnti = new AttackerDTO()
@@ -3697,7 +3696,7 @@ public sealed class CombatMath_Test
             WeaponArmorPierce = 2,
             WeaponFlatDamage = 2
         };
-        var probWithoutAnti = CombatMath.GetProbabilityOfHitAndWound(withoutAnti, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var probWithoutAnti = GetProbabilityOfHitAndWound(withoutAnti, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         // When Anti threshold equals normal wound threshold, and there are no other critical wound abilities,
         // the overall wound probability should be the same (Anti only changes which wounds are critical, not the total)
@@ -3728,7 +3727,7 @@ public sealed class CombatMath_Test
             WeaponAntiThreshold = 5  // Anti 5+ (worse than normal 3+ wound)
         };
 
-        var probWithAnti = CombatMath.GetProbabilityOfHitAndWound(attackerWithAnti5, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var probWithAnti = GetProbabilityOfHitAndWound(attackerWithAnti5, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         // Create equivalent attacker without Anti for comparison
         var withoutAnti = new AttackerDTO()
@@ -3740,7 +3739,7 @@ public sealed class CombatMath_Test
             WeaponArmorPierce = 2,
             WeaponFlatDamage = 2
         };
-        var probWithoutAnti = CombatMath.GetProbabilityOfHitAndWound(withoutAnti, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var probWithoutAnti = GetProbabilityOfHitAndWound(withoutAnti, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         // When Anti threshold is greater than (worse than) normal wound threshold, and there are no other 
         // critical wound abilities, the overall wound probability should be the same
@@ -3766,7 +3765,7 @@ public sealed class CombatMath_Test
         // S4 vs T5 means normal wounds on 5+ (S < T), so probability without Anti = 2/6 wound * 4/6 hit = 8/36 ≈ 0.2222
         // Anti 3+ means all wound rolls of 3+ succeed as critical wounds (4/6 wound probability)
         // With Anti 3+, probability = 4/6 wound * 4/6 hit = 16/36 ≈ 0.4444
-        var probWithAnti = CombatMath.GetProbabilityOfHitAndWound(ATTACKER_ANTI_3_PLUS_BETTER_THRESHOLD, DEFENDER_MULTI_MODEL_INVULNERABLE_SAVE);
+        var probWithAnti = GetProbabilityOfHitAndWound(ATTACKER_ANTI_3_PLUS_BETTER_THRESHOLD, DEFENDER_MULTI_MODEL_INVULNERABLE_SAVE);
 
         // Create equivalent attacker without Anti for comparison
         var withoutAnti = new AttackerDTO()
@@ -3778,7 +3777,7 @@ public sealed class CombatMath_Test
             WeaponArmorPierce = 2,
             WeaponFlatDamage = 2
         };
-        var probWithoutAnti = CombatMath.GetProbabilityOfHitAndWound(withoutAnti, DEFENDER_MULTI_MODEL_INVULNERABLE_SAVE);
+        var probWithoutAnti = GetProbabilityOfHitAndWound(withoutAnti, DEFENDER_MULTI_MODEL_INVULNERABLE_SAVE);
 
         // With Anti X+ that is better than the normal wound threshold, wound probability should increase
         // Expected: With Anti = 0.4444, Without Anti = 0.2222
@@ -3801,7 +3800,7 @@ public sealed class CombatMath_Test
     {
         // With Anti 5+ and Devastating Wounds:
         // - Wound rolls of 5+ (33.33% of successful wounds) become critical wounds
-        var actual = CombatMath.GetProbabilityOfHitAndWoundAndFailedSave(ATTACKER_ANTI_5_PLUS_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var actual = GetProbabilityOfHitAndWoundAndFailedSave(ATTACKER_ANTI_5_PLUS_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         // Note: Due to the current implementation, Anti may not increase failed save probability
         // as expected with Devastating Wounds. The critical wound probability does increase,
@@ -3818,7 +3817,7 @@ public sealed class CombatMath_Test
     {
         // Anti affects wound rolls, Lethal Hits affects hit rolls
         // They should work independently
-        var actual = Math.Round(CombatMath.GetProbabilityOfHitAndWound(ATTACKER_ANTI_4_PLUS_LETHAL_HITS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
+        var actual = Math.Round(GetProbabilityOfHitAndWound(ATTACKER_ANTI_4_PLUS_LETHAL_HITS, DEFENDER_MULTI_MODEL_NO_ABILITIES), 4);
 
         // Just verify the calculation runs without error and produces a reasonable result
         Assert.IsTrue(actual is > 0 and <= 1, $"Probability should be between 0 and 1, got {actual}");
@@ -3848,7 +3847,7 @@ public sealed class CombatMath_Test
             WeaponHasDevastatingWounds = true
         };
 
-        var damageWithAnti = CombatMath.GetMeanDamage(attackerWithAntiAndDevWounds, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var damageWithAnti = GetMeanDamage(attackerWithAntiAndDevWounds, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         // Without Anti (but with Devastating Wounds), only 6s would be critical
         var attackerWithoutAnti = new AttackerDTO()
@@ -3862,7 +3861,7 @@ public sealed class CombatMath_Test
             WeaponHasDevastatingWounds = true
         };
 
-        var damageWithoutAnti = CombatMath.GetMeanDamage(attackerWithoutAnti, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var damageWithoutAnti = GetMeanDamage(attackerWithoutAnti, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         // With Anti 3+ and Devastating Wounds, damage should be significantly higher
         // because more wounds succeed (4/6 instead of 2/6) and they all bypass saves
@@ -3892,7 +3891,7 @@ damageWithAnti, $"Anti 3+ with Devastating Wounds should increase damage signifi
             WeaponHasDevastatingWounds = true
         };
 
-        var damageWithAnti = CombatMath.GetMeanDamage(attackerWithAntiAndDevWounds, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var damageWithAnti = GetMeanDamage(attackerWithAntiAndDevWounds, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         // Without Anti (but with Devastating Wounds), only 6s would be critical
         var attackerWithoutAnti = new AttackerDTO()
@@ -3906,7 +3905,7 @@ damageWithAnti, $"Anti 3+ with Devastating Wounds should increase damage signifi
             WeaponHasDevastatingWounds = true
         };
 
-        var damageWithoutAnti = CombatMath.GetMeanDamage(attackerWithoutAnti, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var damageWithoutAnti = GetMeanDamage(attackerWithoutAnti, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         // When Anti threshold >= normal wound threshold, damage increase should be minimal
         // (only rolls from 4-5 would become critical instead of just 6)
@@ -3946,8 +3945,8 @@ damageIncrease, $"Anti 4+ with Devastating Wounds should not decrease damage. Wi
         };
 
         // Should handle gracefully and use default behavior
-        var result1 = CombatMath.GetProbabilityOfHitAndWound(attackerAnti0, DEFENDER_MULTI_MODEL_NO_ABILITIES);
-        var result2 = CombatMath.GetProbabilityOfHitAndWound(attackerAnti7, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var result1 = GetProbabilityOfHitAndWound(attackerAnti0, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var result2 = GetProbabilityOfHitAndWound(attackerAnti7, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         Assert.IsTrue(result1 is >= 0 and <= 1);
         Assert.IsTrue(result2 is >= 0 and <= 1);
@@ -3959,7 +3958,7 @@ damageIncrease, $"Anti 4+ with Devastating Wounds should not decrease damage. Wi
     [TestMethod]
     public void GetMeanDestroyedModels_Anti4PlusDevastatingWounds()
     {
-        var actual = CombatMath.GetMeanDestroyedModels(ATTACKER_ANTI_4_PLUS_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES);
+        var actual = GetMeanDestroyedModels(ATTACKER_ANTI_4_PLUS_DEVASTATING_WOUNDS, DEFENDER_MULTI_MODEL_NO_ABILITIES);
 
         // Note: Due to the current implementation where GetProbabilityOfHitAndWoundAndFailedSave
         // may not fully utilize the increased critical wound probability from Anti,
@@ -4074,7 +4073,7 @@ damageIncrease, $"Anti 4+ with Devastating Wounds should not decrease damage. Wi
             Toughness = 4
         };
 
-        var actual = Math.Round(CombatMath.GetProbabilityOfHitAndWound(attacker, defender), 4);
+        var actual = Math.Round(GetProbabilityOfHitAndWound(attacker, defender), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -4107,7 +4106,7 @@ damageIncrease, $"Anti 4+ with Devastating Wounds should not decrease damage. Wi
             Toughness = 5
         };
 
-        var actual = Math.Round(CombatMath.GetProbabilityOfHitAndWound(attacker, defender), 4);
+        var actual = Math.Round(GetProbabilityOfHitAndWound(attacker, defender), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -4140,7 +4139,7 @@ damageIncrease, $"Anti 4+ with Devastating Wounds should not decrease damage. Wi
             Toughness = 5
         };
 
-        var actual = Math.Round(CombatMath.GetProbabilityOfHitAndWound(attacker, defender), 4);
+        var actual = Math.Round(GetProbabilityOfHitAndWound(attacker, defender), 4);
 
         Assert.AreEqual(expected, actual);
     }
@@ -4173,7 +4172,7 @@ damageIncrease, $"Anti 4+ with Devastating Wounds should not decrease damage. Wi
             Toughness = 4
         };
 
-        var actual = Math.Round(CombatMath.GetProbabilityOfHitAndWound(attacker, defender), 4);
+        var actual = Math.Round(GetProbabilityOfHitAndWound(attacker, defender), 4);
 
         Assert.AreEqual(expected, actual);
     }

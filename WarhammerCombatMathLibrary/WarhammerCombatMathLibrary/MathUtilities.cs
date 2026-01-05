@@ -7,8 +7,6 @@ namespace WarhammerCombatMathLibrary;
 /// </summary>
 public static class MathUtilities
 {
-    #region Public Methods
-
     /// <summary>
     /// Calculates the factorial of a positive integer.
     /// Factorials are denoted by the syntax "n!".
@@ -39,6 +37,4 @@ public static class MathUtilities
 
         return result;
     }
-
-    #endregion
 }

@@ -1,0 +1,3 @@
+﻿global using static WarhammerCombatMathLibrary.CombatMath.Utilities;
+global using static WarhammerCombatMathLibrary.CombatMath.Helpers;
+global using static WarhammerCombatMathLibrary.CombatMath.Constants;
