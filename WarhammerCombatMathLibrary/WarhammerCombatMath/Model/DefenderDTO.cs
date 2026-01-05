@@ -5,8 +5,6 @@
 /// </summary>
 public class DefenderDTO : IEquatable<DefenderDTO>
 {
-    #region Properties
-
     /// <summary>
     /// The name of the defending unit.
     /// </summary>
@@ -59,10 +57,6 @@ public class DefenderDTO : IEquatable<DefenderDTO>
     /// </summary>
     public int WoundModifier { get; set; }
 
-    #endregion
-
-    #region Public Methods
-
     /// <inheritdoc/>
     public override string ToString() => $"Defender: [NumberOfModels: {NumberOfModels}, " +
         $"Toughness: {Toughness}, " +
@@ -103,7 +97,4 @@ public class DefenderDTO : IEquatable<DefenderDTO>
                                 FeelNoPain,
                                 DamageReduction,
                                 HashCode.Combine(Wounds, HitModifier, WoundModifier));
-
-
-    #endregion
 }

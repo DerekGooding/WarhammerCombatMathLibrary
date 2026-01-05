@@ -3,10 +3,8 @@
 /// <summary>
 /// Data object for binomial data.
 /// </summary>
-public class BinomialOutcome
+public class BinomialOutcome : IEquatable<BinomialOutcome>
 {
-    #region Properties
-
     /// <summary>
     /// The number of successful trials.
     /// </summary>
@@ -16,10 +14,6 @@ public class BinomialOutcome
     /// The probability of getting the number of successful trials.
     /// </summary>
     public double Probability { get; set; }
-
-    #endregion
-
-    #region Constructors
 
     /// <summary>
     /// Parameterless constructor. Sets properties to default values.
@@ -41,21 +35,18 @@ public class BinomialOutcome
         Probability = probability;
     }
 
-    #endregion
-
-    #region Public Methods
-
     /// <inheritdoc/>
     public override string ToString() => $"P({Successes}) = {Probability:F4}";
 
+
     /// <inheritdoc/>
-    public override bool Equals(object? obj)
-        => obj is BinomialOutcome other
-            && Successes == other.Successes
-            && Math.Round(Probability, 4) == Math.Round(other.Probability, 4);
+    public override bool Equals(object? obj) => Equals(obj as BinomialOutcome);
 
     /// <inheritdoc/>
     public override int GetHashCode() => HashCode.Combine(Successes, Probability);
 
-    #endregion
+    public bool Equals(BinomialOutcome? other)
+        => other != null
+        && Successes == other.Successes
+        && Math.Round(Probability, 4) == Math.Round(other.Probability, 4);
 }

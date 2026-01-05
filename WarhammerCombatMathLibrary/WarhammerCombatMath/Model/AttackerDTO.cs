@@ -5,8 +5,6 @@
 /// </summary>
 public class AttackerDTO : IEquatable<AttackerDTO>
 {
-    #region Properties
-
     /// <summary>
     /// The number of models in the attacker's unit.
     /// </summary>
@@ -144,10 +142,6 @@ public class AttackerDTO : IEquatable<AttackerDTO>
     /// </summary>
     public int WoundModifier { get; set; }
 
-    #endregion
-
-    #region Public Methods
-
     /// <inheritdoc/>
     public override string ToString()
     => $"Attacker: [ NumberOfModels: {NumberOfModels}, "
@@ -244,6 +238,4 @@ public class AttackerDTO : IEquatable<AttackerDTO>
                                     HitModifier,
                                     WoundModifier));
     }
-
-    #endregion
 }
